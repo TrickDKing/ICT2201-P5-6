@@ -1,37 +1,55 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    // This session does not exists
+    header("Location: index.php");
+}
+?>
 
 <html lang="en">
     <head>
-        <title>Login</title>
+        <title>Sign In</title>
         <?php
         include "head.inc.php";
         ?>
-        <script>
-            $(document).ready(function () {
-
-                $('#pincode-input').pincodeInput({hidedigits: true, inputs: 4, placeholders: "0 0 0 1", change: function (input, value, inputnumber) {
-                        $("#pincode-callback2").html("onchange from input number " + inputnumber + ", current value: " + value);
-                    }
-                });
-                $('#pincode-input5').pincodeInput({hidedigits: true, inputs: 4, placeholders: "0 0 0 1", change: function (input, value, inputnumber) {
-                        $("#pincode-callback2").html("onchange from input number " + inputnumber + ", current value: " + value);
-                    }
-                });
-            });
-        </script> 
     </head>
+
     <body>
         <?php
-        include "nav.inc.php";
-        include "login.nav.inc.php";
+        if (!isset($_SESSION['username'])) {
+            // This session does not exists
+            include "nav.inc.php";
+        }
         ?>
-        <h4>4 hidden digits example with placeholders and onchange for every input</h4>
-        <br/>
-        <div style="width:300px">
-            <input type="text" id="pincode-input"  >
-        </div>
-        <span id="pincode-callback2"></span>
-        <br/>
-        <br/>
+        <main>
+            <div class="container login-container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-6 login-form">
+                        <h3>Login</h3>
+                        <form action="process_login.php" method="post"> 
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" required name="email" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Password</label>
+                                <input type="password" class="form-control" id="pwd" required name="pwd" placeholder="Enter password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                            <div class="form-group">
+                                <a href="forget_password.php" class="ForgetPwd">Forget Password?</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </main>
     </body>
 </html>
