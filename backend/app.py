@@ -7,10 +7,10 @@ import sys
 app = Flask(__name__)
 CORS(app)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'flask'
+app.config['MYSQL_HOST'] = '172.24.117.56'
+app.config['MYSQL_USER'] = 'monty'
+app.config['MYSQL_PASSWORD'] = 'Password123!'
+app.config['MYSQL_DB'] = 'SIT'
 
 mysql = MySQL(app)
 
@@ -19,7 +19,7 @@ mysql = MySQL(app)
 def articles():
 	if request.method == "GET":
 		cur = mysql.connection.cursor()
-		cur.execute("SELECT * FROM flask.articles")
+		cur.execute("SELECT * FROM SIT.users")
 		columns = cur.description 
 		result = [{columns[index][0]:column for index, column in enumerate(value)} for value in cur.fetchall()]
 		mysql.connection.commit()
