@@ -2,10 +2,10 @@ import mysql.connector
 
 # Database connection
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="ict2103project_database"
+    host="172.24.117.56",
+    user="monty",
+    password="Password123!",
+    database=""
 )
 
 # Things to do: create functions for the following SQL statements
