@@ -31,7 +31,7 @@ function setup() {
   shape1 = new Draggable(700, 100, 50, 50);
   /*httpPost(url, 'json', postData,  function(result) {console.log(result)}
   );*/
-  console.log("A");
+  
 }
 
 function windowResized() {
@@ -41,7 +41,7 @@ function windowResized() {
 function draw() {
   clear();
   background('white');
-  //print(mouseX, mouseY);
+  print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 1) {
     gameMenu.display();

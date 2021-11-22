@@ -4,21 +4,23 @@
 <head>
     {% block head %}
     <title>{% block title %} Game Page {% endblock title %}</title>
+    {% block javascript %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
     <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='sketch.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameMenu.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameState.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameScore.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameMap.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GamePlayer.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameCommands.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameData.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameHP.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='GameBlocks.js' ) }}></script>
-    <script type="text/javascript" src={{ url_for('send_static', path='draggable.js' ) }}></script>
 
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/sketch.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameMenu.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameState.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameScore.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameMap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GamePlayer.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameCommands.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameData.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameHP.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameBlocks.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/draggable.js') }}"></script>
+    {% endblock javascript %}
     {% endblock head %}
 </head>
 
@@ -26,7 +28,7 @@
     {% block content %}
     <div class="container">
         <!-- Wrapper text and other elements, for example -->
-        
+
         <!-- div element that will hold the canvas -->
         <div id="canvasHolder" align="center">
         </div>

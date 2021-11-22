@@ -1,15 +1,30 @@
 from apps.home import blueprint
-from flask import render_template, request
+from flask import render_template, request, jsonify
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
 from apps.home.dbfuncs import select_all_columns
+
 
 @blueprint.route('/index')
 @login_required
 def index():
 
     return render_template('home/index.html', segment='index')
+
+
+@blueprint.route('/game', methods=['GET', 'POST'])
+def game():
+    if request.method == "GET":
+        return render_template('game/game.html')
+    elif request.method == "POST":
+        if(request.is_json):
+            print(request.data)
+            some = request.get_json()
+            print(some)
+            return jsonify({"msg": "Success"}), 200
+        else:
+            return jsonify({"msg": "Missing JSON in request"}), 400
 
 
 @blueprint.route('/<template>')
@@ -20,7 +35,7 @@ def route_template(template):
 
         if not template.endswith('.html'):
             template += '.html'
-            
+
         if template == 'profile.html':
             data = select_all_columns("users")
 
