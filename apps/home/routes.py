@@ -27,6 +27,24 @@ def game():
             return jsonify({"msg": "Missing JSON in request"}), 400
 
 
+@blueprint.route('/gameData', methods=['GET', 'POST'])
+def gameLeaderboard():
+    if request.method == "GET":
+        str = [{"id": 1, "name": "Sloane", "email": "sloveridge0@aol.com", "score": 22},
+               {"id": 2, "name": "Orv Heskins", "slack_name": "Orv",
+                   "email": "oheskins1@fotki.com", "score": 2},
+               {"id": 3, "name": "Nadya McBeath", "slack_name": "Nadya",
+                   "email": "nmcbeath2@google.it", "score": 25},
+               {"id": 4, "name": "Nadya McBeath", "slack_name": "Nadya",
+                   "email": "nmcbeath2@google.it", "score": 25},
+
+               {"id": 5, "name": "Nadya McBeath", "slack_name": "Nadya",
+                   "email": "nmcbeath2@google.it", "score": 25}]
+        return jsonify(str), 200
+    elif request.method == "POST":
+        return jsonify({"msg": "Missing JSON in request"}), 400
+
+
 @blueprint.route('/<template>')
 @login_required
 def route_template(template):

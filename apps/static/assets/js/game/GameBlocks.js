@@ -7,8 +7,12 @@ class GameBlocks {
 
     }
 
-    executeCommands(){
-        return this.commands[0];
+    getArraySize(){
+        return this.commands.length;
+    }
+
+    getCommands(index){
+        return this.commands[index];
     }
 
     /*mouseClicked(){
@@ -20,6 +24,14 @@ class GameBlocks {
     }*/
     
     display() {
+
+        fill(0, 0, 0, 0);
+        //Set outline to black
+        stroke(0);
+        rect(520, 50, 600, 500);
+        //Defines text size
+        textSize(50)
+
         fill(0);
         text('COMMANDS ', 560, 100);
         let y = 150;
@@ -27,9 +39,13 @@ class GameBlocks {
             text((i+1) + " " + this.commands[i], 560, y);
             y+=50;
         }
+
         noFill();
-        rect(550, 500, 100, 20);
+        rect(540, 500, 114, 25);
         textSize(20);
+        fill(0);
         text('EXECUTE ', 550, 520);
+
+
     }
 }
