@@ -39,7 +39,7 @@ class GameLeaderboard {
 
         if (this.checkGetSuccess == 0) {
             this.getLeaderboard();
-            console.log(this.topGameScores);
+         
         }
 
         textSize(50)
