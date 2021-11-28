@@ -6,7 +6,7 @@ from flask_login import (
     current_user,
     login_required
 )
-from apps.home.dbfuncs import select_data, update_data
+from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 
@@ -43,6 +43,9 @@ def route_template(template):
             
         if template == 'profile.html':
             data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
+        
+        elif template == 'scoreboard.html':                    #MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
+            data = select_all_columns_with_condition("highScore","totalScore")
 
         # Detect the current page
         segment = get_segment(request)

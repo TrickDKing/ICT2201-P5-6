@@ -84,3 +84,15 @@ def update_data(table_name: str, data: dict, identifier: str, identifier_value: 
 
         mydb.commit()
         print(f"{table_name} table updated successfully.")
+
+
+# SQL = SELECT * FROM "table_name" order by "table_column"  EN DING PART
+def select_all_columns_with_condition(table_name,table_column):
+    print(table_name)
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM {} ORDER BY {} DESC".format(table_name,table_column))
+
+    myresult = mycursor.fetchall()
+
+    #print("selected all columns from {} table.".format(table_name))
+    return myresult
