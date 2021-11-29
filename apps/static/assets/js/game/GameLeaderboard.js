@@ -1,9 +1,13 @@
 class GameLeaderboard {
     constructor() {
 
-        this.topGameScores = [];
+        this.topGameScores;
         this.url = "http://127.0.0.1:5000/gameData";
         this.checkGetSuccess = 0;
+    }
+
+    getScore(){
+        return this.topGameScores;
     }
 
     getLeaderboard() {
@@ -12,8 +16,10 @@ class GameLeaderboard {
         httpGet(url, 'json', function (response) {
             // when the HTTP request completes
             console.log(typeof(response));
-            console.log(response);
-            this.topGameScores;
+            console.log(response[0].score);
+            console.log(typeof(response[0].score));
+            this.topGameScores = loadJSON(response);
+            console.log(this.topGameScores);
            // let id, name, score;
             /*for (let i = 0; i < response.length; i++) {
                 id = response[i].id;
@@ -37,6 +43,13 @@ class GameLeaderboard {
     }
 
     display() {
+        if(!this.topGameScores){
+            return;
+        }
+
+       /* if(!this.topGameScores){
+            this.getLeaderboard();
+        }*/
 
         if (this.checkGetSuccess == 0) {
             this.getLeaderboard();

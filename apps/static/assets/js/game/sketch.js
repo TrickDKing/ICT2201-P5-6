@@ -27,11 +27,10 @@ function setup() {
   gameCommands = new GameCommands();
   gameData = new GameData();
   gameHP = new GameHP();
-
   gamePauseMenu = new GamePauseMenu();
   gameLeaderboard = new GameLeaderboard();
   //shape1 = new Draggable(700, 100, 50, 50);
-
+  
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
   /*httpPost(url, 'json', postData,  function(result) {console.log(result)}
   );*/
