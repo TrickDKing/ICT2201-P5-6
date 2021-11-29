@@ -34,7 +34,7 @@ def get_segment(request):
 @login_required
 def index():
     if request.method == "GET":
-        return render_template('game/game.html', segment='index')
+        return render_template('home/index.html', segment='index')
     elif request.method == "POST":
         if(request.is_json):
             print(request.data)
