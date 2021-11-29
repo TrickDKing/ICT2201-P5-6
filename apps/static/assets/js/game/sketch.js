@@ -15,7 +15,7 @@ let pg;
 
 function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
-  createCanvas(1520, 700).parent('canvasHolder');
+  createCanvas(window.innerWidth, window.innerHeight).parent('canvasHolder');
   background('white');
   gameLeaderboard = new GameLeaderboard();
   gameBackground = new GameBackground();

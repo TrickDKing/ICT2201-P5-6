@@ -1,7 +1,9 @@
 {% extends "layouts/base.html" %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/assets/css/index.css"></link>
+{% endblock stylesheets %}
 
 <title>{% block title %} Game Page {% endblock title %}</title>
 <!-- Specific Page JS goes HERE  -->
@@ -48,7 +50,7 @@
                  
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-xl-4">
+                    <div class="col-md-4">
                         <div class="card bg-c-blue order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Orders Received</h6>
@@ -58,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-xl-4">
+                    <div class="col-md-4">
                         <div class="card bg-c-green order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Total Sales</h6>
@@ -68,7 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-xl-4">
+                    <div class="col-md-4">
                         <div class="card bg-c-yellow order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Revenue</h6>
