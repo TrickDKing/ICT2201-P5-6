@@ -14,7 +14,6 @@ from apps.authentication.util import hash_pass
 def get_segment(request):
 
     try:
-
         segment = request.path.split('/')[-1]
 
         if segment == '':
@@ -26,17 +25,11 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index')
+@blueprint.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-
-    return render_template('home/index.html', segment='index')
-
-
-@blueprint.route('/game', methods=['GET', 'POST'])
-def game():
     if request.method == "GET":
-        return render_template('game/game.html')
+        return render_template('home/index.html')
     elif request.method == "POST":
         if(request.is_json):
             print(request.data)
