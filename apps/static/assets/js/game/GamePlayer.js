@@ -113,7 +113,7 @@ class GamePlayer {
     }
 
     display() {
-        clear();
+        
         fill(0);
 
         ellipse(this.x, this.y, this.diameter, this.diameter);

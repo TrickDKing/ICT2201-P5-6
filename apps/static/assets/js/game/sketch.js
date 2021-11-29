@@ -17,10 +17,6 @@ function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
   createCanvas(1520, 700).parent('canvasHolder');
   background('white');
-  //console.log("A" + windowHeight);
-  //createCanvas(1200, 600).parent('canvasHolder');
-  //Height 754
-  //Width 1536
 
   gameBackground = new GameBackground();
   gameMenu = new GameMenu();
@@ -31,10 +27,10 @@ function setup() {
   gameCommands = new GameCommands();
   gameData = new GameData();
   gameHP = new GameHP();
-  gameBlocks = new GameBlocks();
+
   gamePauseMenu = new GamePauseMenu();
-  Gameleaderboard = new GameLeaderboard();
-  shape1 = new Draggable(700, 100, 50, 50);
+  gameLeaderboard = new GameLeaderboard();
+  //shape1 = new Draggable(700, 100, 50, 50);
 
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
   /*httpPost(url, 'json', postData,  function(result) {console.log(result)}
@@ -47,43 +43,34 @@ function windowResized() {
 }
 
 function draw() {
-  
+
   //print(mouseX, mouseY);
   //In game Menu
-  if (gameState.getGameState() == 3) {
-    gameBackground.display();
+  if (gameState.getGameState() == 2) {
+    //gameBackground.display();
     gameMenu.display();
-    //gameData.postGameData({ userId: 1, score: 21, body: 'This game is garbage' });
+
   }
 
   if (gameState.getGameState() == 1) {
-   
-
+    clear();
     gameMap.spawnMap(); // Render map
     gameScore.display(); // Render Score
     gameHP.display(); //Render Health bar
+    gamePlayer.update(); //Update player movements
+    gamePlayer.display(); // Renders updated player movements
+    gameCommands.display(); // Renders Games queue
 
+    /*
     gamePlayer.keyPressed();
-    /*let v = gameBlocks.mouseClicked();
-    console.log(v);
-    if (v == "move forward"){
-      gamePlayer.move(0, -50);
-    }*/
+
+    */
 
 
-    /*if(this.gameBlocks){
-
-    }*/
-    gamePlayer.update();
-    gamePlayer.display();
-    shape1.over();
-    shape1.update();
-    shape1.show();
-    gameCommands.display();
-
-    gameBlocks.display();
     //gamePlayer.move(0,0);
-
+    /*shape1.over();
+        shape1.update();
+        shape1.show();*/
   }
 
   if (gameState.getGameState() == 2) {
@@ -93,7 +80,7 @@ function draw() {
 
   if (gameState.getGameState() == 0) {
     //Game end state
-    Gameleaderboard.display();
+    gameLeaderboard.display();
   }
 
 
@@ -103,8 +90,8 @@ function draw() {
 function mouseClicked() {
 
   if (gameState.getGameState() == 0 && gameMenu.getOption() == 0) {
-    if (mouseX < 630 && mouseX > 460) {
-      if (mouseY < 100 && mouseY > 55) {
+    if (mouseX < 820 && mouseX > 460) {
+      if (mouseY < 100 && mouseY > 50) {
 
         gameMenu.setOption(1);
       }
@@ -122,12 +109,12 @@ function mouseClicked() {
   if (gameState.getGameState() == 1) {
     if (mouseX < 655 && mouseX > 550) {
       if (mouseY < 525 && mouseY > 500) {
-      
-        for (let i = 0; i < gameBlocks.getArraySize(); i++) {
+        
+        /*for (let i = 0; i < gameBlocks.getArraySize(); i++) {
          
-          gamePlayer.move(gameBlocks.getCommands(i));
+          //gamePlayer.move(gameBlocks.getCommands(i));
           
-        }
+        }*/
 
       }
     }
@@ -147,7 +134,7 @@ function keyPressed() {
   }
 }
 
-function mousePressed() {
+/*function mousePressed() {
   shape1.pressed();
 
 }
@@ -155,7 +142,7 @@ function mousePressed() {
 function mouseReleased() {
   shape1.released();
 
-}
+}*/
 
 class Game {
   //Class to render Game

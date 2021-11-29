@@ -40,7 +40,7 @@ def gameLeaderboard():
 
                {"id": 5, "name": "Nadya McBeath", "slack_name": "Nadya",
                    "email": "nmcbeath2@google.it", "score": 25}]
-        return jsonify(str), 200
+        return jsonify(str)
     elif request.method == "POST":
         return jsonify({"msg": "Missing JSON in request"}), 400
 

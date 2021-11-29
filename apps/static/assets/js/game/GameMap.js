@@ -42,7 +42,6 @@ class GameMap {
     }
   
     spawnMap() {
-      clear();
       
       for (let i = 0; i < this.cols; i++) {
         for (let j = 0; j < this.rows; j++) {

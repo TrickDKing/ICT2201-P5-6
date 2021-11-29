@@ -19,7 +19,7 @@ class GameHP {
     }
 
     display() {
-        clear();
+     
         fill('red');
         rect(100, 560, 200, 55, 20);
         

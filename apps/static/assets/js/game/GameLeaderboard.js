@@ -1,7 +1,7 @@
 class GameLeaderboard {
     constructor() {
 
-        this.topGameScores;
+        this.topGameScores = [];
         this.url = "http://127.0.0.1:5000/gameData";
         this.checkGetSuccess = 0;
     }
@@ -11,8 +11,9 @@ class GameLeaderboard {
         
         httpGet(url, 'json', function (response) {
             // when the HTTP request completes
+            console.log(typeof(response));
             console.log(response);
-            this.topGameScores = response;
+            this.topGameScores;
            // let id, name, score;
             /*for (let i = 0; i < response.length; i++) {
                 id = response[i].id;

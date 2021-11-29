@@ -13,7 +13,7 @@ class GameScore {
     }
   
     display() {
-      clear();
+     
       fill(255, 255, 255);
       //Set outline to black
       stroke(255);
