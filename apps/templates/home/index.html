@@ -1,6 +1,31 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Dashboard {% endblock %}
+{% block title %} Index {% endblock %}
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+
+<script src="https://unpkg.com/blockly/blockly.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameBackgroundParticle.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameBackground.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/sketch.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameMenu.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameState.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameScore.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameMap.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GamePlayer.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameCommands.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameData.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameHP.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GamePauseMenu.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameLeaderboard.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/draggable.js') }}"></script>
+
+{% endblock javascripts %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -30,44 +55,14 @@
         <!-- [ Main Content ] start -->
         <div class="row">
             <!-- [ sample-page ] start -->
-            <div class="col-md-6 col-xl-9">
+            <div class="col-md-12 col-xl-12">
                 <div class="card">
 
                     <div class="card-header">
-                        <h5>Hello card</h5>
-                        <div class="card-header-right">
-                            <div class="btn-group card-option">
-                                <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="feather icon-more-horizontal"></i>
-                                </button>
-                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                    <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                    class="feather icon-maximize"></i> maximize</span><span
-                                                style="display:none"><i class="feather icon-minimize"></i>
-                                                Restore</span></a></li>
-                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                    class="feather icon-minus"></i> collapse</span><span
-                                                style="display:none"><i class="feather icon-plus"></i> expand</span></a>
-                                    </li>
-                                    <li class="dropdown-item reload-card"><a href="#!"><i
-                                                class="feather icon-refresh-cw"></i> reload</a></li>
-                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i>
-                                            remove</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <h5>Game</h5>
+                        <div id="canvasHolder" align="center"></div>
                     </div>
-                    <div class="card-body">
-                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui
-                            officia deserunt mollit anim id est laborum."
-                        </p>
-                    </div>
+                 
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-xl-4">
@@ -102,46 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="card">
-
-                    <div class="card-header">
-                        <h5>Hello card</h5>
-                        <div class="card-header-right">
-                            <div class="btn-group card-option">
-                                <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="feather icon-more-horizontal"></i>
-                                </button>
-                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                    <li class="dropdown-item full-card"><a href="#!"><span><i
-                                                    class="feather icon-maximize"></i> maximize</span><span
-                                                style="display:none"><i class="feather icon-minimize"></i>
-                                                Restore</span></a></li>
-                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                                    class="feather icon-minus"></i> collapse</span><span
-                                                style="display:none"><i class="feather icon-plus"></i> expand</span></a>
-                                    </li>
-                                    <li class="dropdown-item reload-card"><a href="#!"><i
-                                                class="feather icon-refresh-cw"></i> reload</a></li>
-                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i>
-                                            remove</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut
-                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                            sunt in culpa qui
-                            officia deserunt mollit anim id est laborum."
-                        </p>
-                    </div>
-                </div>
-            </div>
+            
             <!-- [ sample-page ] end -->
         </div>
         <div class="row">

@@ -11,6 +11,8 @@ from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 
 # Helper - Extract current page name from request
+
+
 def get_segment(request):
 
     try:
@@ -29,8 +31,16 @@ def get_segment(request):
 @blueprint.route('/index')
 @login_required
 def index():
-
-    return render_template('home/index.html', segment='index')
+    if request.method == "GET":
+        return render_template('game/game.html', segment='index')
+    elif request.method == "POST":
+        if(request.is_json):
+            print(request.data)
+            some = request.get_json()
+            print(some)
+            return jsonify({"msg": "Success"}), 200
+        else:
+            return jsonify({"msg": "Missing JSON in request"}), 400
 
 
 @blueprint.route('/game', methods=['GET', 'POST'])
@@ -60,7 +70,7 @@ def gameLeaderboard():
 
                {"id": 5, "name": "Nadya McBeath", "slack_name": "Nadya",
                    "email": "nmcbeath2@google.it", "score": 25}]
-        
+
         return jsonify(str)
     elif request.method == "POST":
         return jsonify({"msg": "Missing JSON in request"}), 400
@@ -76,10 +86,11 @@ def route_template(template):
             template += '.html'
 
         if template == 'profile.html':
-            data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
-        
-        elif template == 'scoreboard.html':                    #MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
-            data = select_all_columns_with_condition("highScore","totalScore")
+            data = select_data(table_name="users", filterBy=[
+                               'username'], filterVal=[str(current_user)])
+
+        elif template == 'scoreboard.html':  # MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
+            data = select_all_columns_with_condition("highScore", "totalScore")
 
         # Detect the current page
         segment = get_segment(request)
@@ -94,14 +105,14 @@ def route_template(template):
         return render_template('home/page-500.html'), 500
 
 
-
 @blueprint.route('/updateprofile', methods=['POST'])
 @login_required
 def saveDetails():
     print("Updating profile...")
     if request.method == 'POST':
 
-        userexist = Users.query.filter_by(username=request.form['username']).first()
+        userexist = Users.query.filter_by(
+            username=request.form['username']).first()
 
         data = {
             "name": str(request.form['name'])
@@ -115,8 +126,9 @@ def saveDetails():
 
                 data["password"] = passhash
 
-            update_data(table_name="users", data=data, identifier="username", identifier_value=str(current_user))
-            
+            update_data(table_name="users", data=data,
+                        identifier="username", identifier_value=str(current_user))
+
             result = "Profile updated successfully!"
 
         elif not userexist:
@@ -129,16 +141,19 @@ def saveDetails():
 
                 data["password"] = passhash
 
-            update_data(table_name="users", data=data, identifier="username", identifier_value=str(current_user))
-            
+            update_data(table_name="users", data=data,
+                        identifier="username", identifier_value=str(current_user))
+
             result = "Profile updated successfully!"
 
-            data = select_data(table_name="users", filterBy=['username'], filterVal=[str(request.form['username'])])
+            data = select_data(table_name="users", filterBy=['username'], filterVal=[
+                               str(request.form['username'])])
             return render_template('home/profile.html', data=data)
 
         else:
             result = "Username exists"
 
         print(result)
-        data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
+        data = select_data(table_name="users", filterBy=[
+                           'username'], filterVal=[str(current_user)])
         return render_template('home/profile.html', data=data)
