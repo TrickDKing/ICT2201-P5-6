@@ -29,6 +29,7 @@ function setup() {
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
   gameLeaderboard = new GameLeaderboard();
+  console.log("A");
   //shape1 = new Draggable(700, 100, 50, 50);
   
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
