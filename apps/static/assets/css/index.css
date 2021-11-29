@@ -1,0 +1,19 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    overflow: hidden;
+    display: block;
+}
+
+#canvasHolder {
+    width: 100%;
+    min-width: 1121px;
+    height: 68vh;
+    margin: 0;
+    border: 0;
+    /* overflow: hidden; */
+    display: block;
+}
