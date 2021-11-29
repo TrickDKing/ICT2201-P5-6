@@ -1,5 +1,5 @@
 from apps.home import blueprint
-from flask import render_template, request, jsonify
+from flask import json, render_template, request, jsonify
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 from flask_login import (
@@ -9,7 +9,7 @@ from flask_login import (
 from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
-
+import requests
 # Helper - Extract current page name from request
 
 
@@ -56,7 +56,6 @@ def game():
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
-
 @blueprint.route('/gameData', methods=['GET', 'POST'])
 def gameLeaderboard():
     if request.method == "GET":
@@ -75,6 +74,17 @@ def gameLeaderboard():
     elif request.method == "POST":
         return jsonify({"msg": "Missing JSON in request"}), 400
 
+
+@blueprint.route('/commands', methods=['GET', 'POST'])
+def sendCommands():
+    if request.method == "GET":
+        return render_template('home/page-404.html')
+    if request.method == "POST":
+        sampleString = "move forward"
+        ss = jsonify(sampleString)
+        print(sampleString)
+        res = requests.post('http://192.168.128.111:5000/commands', json=ss)
+        return jsonify(sampleString)
 
 @blueprint.route('/<template>')
 @login_required

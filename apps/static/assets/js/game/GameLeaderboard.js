@@ -1,41 +1,15 @@
 class GameLeaderboard {
     constructor() {
-
-        this.topGameScores;
         this.url = "http://127.0.0.1:5000/gameData";
         this.checkGetSuccess = 0;
     }
 
-    getScore(){
+    getScore() {
         return this.topGameScores;
     }
 
-    getLeaderboard() {
-        let url = "http://127.0.0.1:5000/gameData";
-        
-        httpGet(url, 'json', function (response) {
-            // when the HTTP request completes
-            console.log(typeof(response));
-            console.log(response[0].score);
-            console.log(typeof(response[0].score));
-            this.topGameScores = loadJSON(response);
-            console.log(this.topGameScores);
-           // let id, name, score;
-            /*for (let i = 0; i < response.length; i++) {
-                id = response[i].id;
-                name = response[i].name;
-                score = response[i].score;
-                console.log(typeof(score));
-               console.log(id + " " + name + " " + score);
-               this.TopGameScores.push(num.toString(name) + " ");
-            }*/
-
-
-        }, function(error){
-            console.log("ERROR");
-        });
-        this.checkGetSuccess = 1;
-        
+    setSuccess(value) {
+        return this.checkGetSuccess = value;
     }
 
     postGameScore() {
@@ -43,27 +17,33 @@ class GameLeaderboard {
     }
 
     display() {
-        if(!this.topGameScores){
-            return;
-        }
-
-       /* if(!this.topGameScores){
-            this.getLeaderboard();
-        }*/
 
         if (this.checkGetSuccess == 0) {
-            this.getLeaderboard();
-            console.log("A");
+
+            httpGet(this.url, 'json', function (response) {
+                //this.setSuccess(1);
+        
+                // when the HTTP request completes
+                let id, name, score;
+                let height = 150;
+                for (let i = 0; i < response.length; i++) {
+                    response[i].id;
+                    response[i].name;
+                    response[i].score;
+                    textSize(30)
+                    text(response[i].name + " " + response[i].score, (windowWidth / 3) - 150, height);
+                    height += 50;
+                }
+
+            }, function (error) {
+                console.log("ERROR");
+            });
+            this.checkGetSuccess = 1;
         }
 
         textSize(50)
         text('LEADERBOARD', (windowWidth / 3) - 50, 100);
         textSize(30)
-        text('#1 ' + this.topGameScores, (windowWidth / 3) - 150, 150);
-        text('#2', (windowWidth / 3) - 150, 200);
-        text('#3', (windowWidth / 3) - 150, 250);
-        text('#4', (windowWidth / 3) - 150, 300);
-        text('#5', (windowWidth / 3) - 150, 350);
         color('black');
         noFill();
         rect(540, 500, 200, 25);

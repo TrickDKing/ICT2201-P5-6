@@ -17,6 +17,7 @@ class GameMap {
           
         }
       }
+
       //Ensure no objects are spawned at the start and end of the map
       this.grid[0][0] = 1;
       this.grid[this.rows-1][this.cols-1] = 1;
@@ -50,9 +51,9 @@ class GameMap {
           let y = 50 + (j * this.resolution);
           if (this.grid[i][j] == 1) {
             //normal path
-            fill('white');
+            fill('white'); //Spawns the object
             stroke(0);
-            rect(x, y, this.resolution, this.resolution);
+            rect(x, y, this.resolution, this.resolution); 
           }
           else if (this.grid[i][j] == 2){
             //trap

@@ -17,7 +17,7 @@ function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
   createCanvas(1520, 700).parent('canvasHolder');
   background('white');
-
+  gameLeaderboard = new GameLeaderboard();
   gameBackground = new GameBackground();
   gameMenu = new GameMenu();
   gameState = new GameState();
@@ -28,8 +28,8 @@ function setup() {
   gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
-  gameLeaderboard = new GameLeaderboard();
-  console.log("A");
+  
+  
   //shape1 = new Draggable(700, 100, 50, 50);
   
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
@@ -46,7 +46,7 @@ function draw() {
 
   //print(mouseX, mouseY);
   //In game Menu
-  if (gameState.getGameState() == 0) {
+  if (gameState.getGameState() == 2) {
     //gameBackground.display();
     gameMenu.display();
 
@@ -78,7 +78,7 @@ function draw() {
     gamePauseMenu.displayPauseMenu();
   }
 
-  if (gameState.getGameState() == 3) {
+  if (gameState.getGameState() == 0) {
     //Game end state
     gameLeaderboard.display();
   }
