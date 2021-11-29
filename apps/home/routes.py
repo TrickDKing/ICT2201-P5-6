@@ -9,14 +9,13 @@ from flask_login import (
 from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
-import requests
+
 # Helper - Extract current page name from request
 
 
 def get_segment(request):
 
     try:
-
         segment = request.path.split('/')[-1]
 
         if segment == '':
@@ -28,7 +27,7 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index')
+@blueprint.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
     if request.method == "GET":
@@ -46,7 +45,7 @@ def index():
 @blueprint.route('/game', methods=['GET', 'POST'])
 def game():
     if request.method == "GET":
-        return render_template('game/game.html')
+        return render_template('home/index.html')
     elif request.method == "POST":
         if(request.is_json):
             print(request.data)
@@ -83,7 +82,7 @@ def sendCommands():
         sampleString = "move forward"
         ss = jsonify(sampleString)
         print(sampleString)
-        res = requests.post('http://192.168.128.111:5000/commands', json=ss)
+       
         return jsonify(sampleString)
 
 @blueprint.route('/<template>')
