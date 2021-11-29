@@ -44,7 +44,7 @@ function windowResized() {
 
 function draw() {
 
-  //print(mouseX, mouseY);
+  print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 0) {
     //gameBackground.display();
@@ -109,12 +109,8 @@ function mouseClicked() {
   if (gameState.getGameState() == 1) {
     if (mouseX < 655 && mouseX > 550) {
       if (mouseY < 525 && mouseY > 500) {
+        gamePlayer.movePlayerPosition(["move forwards", "move backwards"]);
         
-        /*for (let i = 0; i < gameBlocks.getArraySize(); i++) {
-         
-          //gamePlayer.move(gameBlocks.getCommands(i));
-          
-        }*/
 
       }
     }

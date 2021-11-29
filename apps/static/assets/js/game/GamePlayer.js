@@ -15,6 +15,22 @@ class GamePlayer {
         this.currentPosition = [row, column];
     }
 
+    movePlayerPosition(commands) {
+        for (let i = 0; i < commands.length; i++) {
+            console.log(commands[i]);
+            switch (commands[i]) {
+                case "move forwards":
+                    this.y -= 50;
+                  
+
+                case "move backwards":
+                    this.y += 50;
+            }
+
+            
+        }
+    }
+
     getPlayerPosition() {
         //Function to get current player position
         return this.currentPosition;
@@ -52,14 +68,14 @@ class GamePlayer {
 
             this.speed = -1;
             this.moving = 1;
-           
-        }
-      /*  if (command == "move backwards") {
-            this.temp = this.y;
-            //console.log("A" + this.temp);
 
-            this.speed = 1;
-        }*/
+        }
+        /*  if (command == "move backwards") {
+              this.temp = this.y;
+              //console.log("A" + this.temp);
+  
+              this.speed = 1;
+          }*/
         /* if(command == "move backwards"){
              this.y += 10;
          }*/
@@ -72,7 +88,7 @@ class GamePlayer {
 
     }
 
-    polling(){
+    polling() {
         return;
     }
 
@@ -86,16 +102,16 @@ class GamePlayer {
             this.temp = 0;
             this.currentCommand = "";
         }
-      /*  if (this.y == this.temp + 50 && this.currentCommand == "move backwards") {
-            console.log("B" + this.temp);
-            this.yspeed = 0;
-            this.temp = 0;
-        }
-        if (this.x == this.temp - 50 && this.currentCommand == "move left") {
-            console.log("B" + this.temp);
-            this.speed = 0;
-            this.temp = 0;
-        }*/
+        /*  if (this.y == this.temp + 50 && this.currentCommand == "move backwards") {
+              console.log("B" + this.temp);
+              this.yspeed = 0;
+              this.temp = 0;
+          }
+          if (this.x == this.temp - 50 && this.currentCommand == "move left") {
+              console.log("B" + this.temp);
+              this.speed = 0;
+              this.temp = 0;
+          }*/
 
 
         if (this.x < 0 + (this.diameter / 2)) {
@@ -113,9 +129,9 @@ class GamePlayer {
     }
 
     display() {
-        
-        fill(0);
+        this.update();
 
+        fill(0);
         ellipse(this.x, this.y, this.diameter, this.diameter);
 
     }
