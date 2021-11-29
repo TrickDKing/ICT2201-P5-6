@@ -12,7 +12,9 @@ from apps.authentication.util import hash_pass
 from apps.home.commands import Commands
 # Helper - Extract current page name from request
 
-commands = Commands() #Initializes a new commands object to handle post and get requests between game and car
+# Initializes a new commands object to handle post and get requests between game and car
+commands = Commands()
+
 
 def get_segment(request):
 
@@ -56,6 +58,7 @@ def game():
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
+
 @blueprint.route('/gameData', methods=['GET', 'POST'])
 def gameLeaderboard():
     if request.method == "GET":
@@ -77,15 +80,17 @@ def gameLeaderboard():
 
 @blueprint.route('/commands', methods=['GET', 'POST'])
 def sendCommands():
+    print(request.headers['Sec-Ch-Ua-Platform'])
+   # if(request.headers['Sec-Ch-Ua-Platform'] == "Windows"):
+   #     print("GARBAGW")
     if request.method == "GET":
         return commands.getCommands()
-    #return jsonify("A")
     if request.method == "POST":
-        #sampleString = "move forward"
-       # ss = jsonify(sampleString)
-        #print(sampleString)
-       
-        return jsonify("A")
+        if(request.is_json):
+            print(request.data)
+            commands.setCommands(request.data)
+        return jsonify("Returnign garbage to you")
+
 
 @blueprint.route('/<template>')
 @login_required

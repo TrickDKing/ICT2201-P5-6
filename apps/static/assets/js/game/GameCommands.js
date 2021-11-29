@@ -1,6 +1,10 @@
 class GameCommands {
   constructor() {
-      this.commands = ["move forward", "move backwards", "move left"];
+      this.commands = {
+           "Commands" : ["move forward", "move backward"]
+        };
+      this.trash = 0
+      this.url = 'http://127.0.0.1:5000/commands'; // Target URL
   }
 
   removeAllCommands(){
@@ -15,6 +19,10 @@ class GameCommands {
       return this.commands[index];
   }
 
+  postCommands(postData){
+    httpPost(this.url, 'json', postData, function (success) { console.log(success) } , function(error) {console.log(error)});
+  }
+
   /*mouseClicked(){
       if (mouseX < 650 && mouseX > 550) {
           if (mouseY < 520 && mouseY > 500) {
@@ -24,7 +32,10 @@ class GameCommands {
   }*/
   
   display() {
-      
+      if(this.trash == 0){
+        this.postCommands(this.commands)
+        this.trash = 1
+      }
       fill(0, 0, 0, 0);
       //Set outline to black
       stroke(0);

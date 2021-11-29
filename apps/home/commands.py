@@ -2,10 +2,10 @@ import json
 
 class Commands:
     def __init__(self):
-        self.commands = dict()
-        self.commands = {
-            "Commands" : ["move forward", "move backward"]
-        }
+        self.commands = dict() #Type must be a string, dict, tuple, Response instance, or WSGI callable, not a list
+        #self.commands = {
+        #   "Commands" : ["move forward", "move backward"]
+        #}
 
     def setCommands(self, jsonstring):
         try:
@@ -16,6 +16,7 @@ class Commands:
     def getCommands(self):
         if not self.commands:
             return "Empty"
-            
         else:
-            return self.commands
+            temp = self.commands.copy()
+            self.commands.clear()
+            return temp

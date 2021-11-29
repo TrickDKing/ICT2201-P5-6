@@ -46,7 +46,7 @@ function draw() {
 
   //print(mouseX, mouseY);
   //In game Menu
-  if (gameState.getGameState() == 2) {
+  if (gameState.getGameState() == 0) {
     //gameBackground.display();
     gameMenu.display();
 
@@ -78,7 +78,7 @@ function draw() {
     gamePauseMenu.displayPauseMenu();
   }
 
-  if (gameState.getGameState() == 0) {
+  if (gameState.getGameState() == 3) {
     //Game end state
     gameLeaderboard.display();
   }
