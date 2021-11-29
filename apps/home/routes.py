@@ -9,9 +9,10 @@ from flask_login import (
 from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
-
+from apps.home.commands import Commands
 # Helper - Extract current page name from request
 
+commands = Commands() #Initializes a new commands object to handle post and get requests between game and car
 
 def get_segment(request):
 
@@ -77,13 +78,14 @@ def gameLeaderboard():
 @blueprint.route('/commands', methods=['GET', 'POST'])
 def sendCommands():
     if request.method == "GET":
-        return render_template('home/page-404.html')
+        return commands.getCommands()
+    #return jsonify("A")
     if request.method == "POST":
-        sampleString = "move forward"
-        ss = jsonify(sampleString)
-        print(sampleString)
+        #sampleString = "move forward"
+       # ss = jsonify(sampleString)
+        #print(sampleString)
        
-        return jsonify(sampleString)
+        return jsonify("A")
 
 @blueprint.route('/<template>')
 @login_required
