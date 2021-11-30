@@ -21,8 +21,6 @@ class GamePlayer {
             switch (commands[i]) {
                 case "move forwards":
                     this.y -= 50;
-                  
-
                 case "move backwards":
                     this.y += 50;
             }
