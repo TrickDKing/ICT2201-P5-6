@@ -5,7 +5,7 @@ class GameScore {
     }
   
     setScore(score) {
-      this.score = score;
+      this.score += score;
     }
   
     getScore() {

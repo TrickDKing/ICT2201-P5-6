@@ -19,12 +19,14 @@ class GamePlayer {
         for (let i = 0; i < commands.length; i++) {
             console.log(commands[i]);
             switch (commands[i]) {
+               /* case "move left":
+                    this.x -= 50;*/
                 case "move forwards":
                     this.y -= 50;
-                case "move backwards":
-                    this.y += 50;
+                case "move left":
+                    this.x -= 50;
+                    // setTimeout(() => {  console.log("World!"); }, 2000);
             }
-
             
         }
     }
@@ -94,35 +96,25 @@ class GamePlayer {
         this.x += this.xspeed;
         this.y += this.yspeed;
 
-        if (this.y == this.temp - 50 && this.currentCommand == "move forward") {
+       /* if (this.y == this.temp - 50 && this.currentCommand == "move forward") {
             console.log("B" + this.temp);
             this.yspeed = 0;
             this.temp = 0;
             this.currentCommand = "";
-        }
-        /*  if (this.y == this.temp + 50 && this.currentCommand == "move backwards") {
-              console.log("B" + this.temp);
-              this.yspeed = 0;
-              this.temp = 0;
-          }
-          if (this.x == this.temp - 50 && this.currentCommand == "move left") {
-              console.log("B" + this.temp);
-              this.speed = 0;
-              this.temp = 0;
-          }*/
+        }*/
 
 
         if (this.x < 0 + (this.diameter / 2)) {
-            this.x = 10;
+            this.x = 25;
         }
         if (this.y < 50 + (this.diameter / 2)) {
-            this.y = 60;
+            this.y = 75;
         }
         if (this.x > 500 - (this.diameter / 2)) {
-            this.x = 490;
+            this.x = 475;
         }
         if (this.y > 550 - (this.diameter / 2)) {
-            this.y = 540;
+            this.y = 525;
         }
     }
 

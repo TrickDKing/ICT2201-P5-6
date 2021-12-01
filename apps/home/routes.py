@@ -58,7 +58,6 @@ def game():
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
-
 @blueprint.route('/gameData', methods=['GET', 'POST'])
 def gameLeaderboard():
     if request.method == "GET":

@@ -13,7 +13,7 @@ class GameHP {
         }
 
         if (this.health >= 0) {
-            this.health = health;
+            this.health -= health;
 
         }
     }

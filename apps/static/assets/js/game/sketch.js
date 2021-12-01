@@ -109,9 +109,9 @@ function mouseClicked() {
   if (gameState.getGameState() == 1) {
     if (mouseX < 655 && mouseX > 550) {
       if (mouseY < 525 && mouseY > 500) {
-        gamePlayer.movePlayerPosition(["move forwards", "move backwards"]);
-        
-
+        gamePlayer.movePlayerPosition(["move left", "move forwards"]);
+        gameHP.setHealth(1);
+        gameScore.setScore(1);
       }
     }
 
