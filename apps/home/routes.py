@@ -45,7 +45,13 @@ def route_template(template):
             data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
         
         elif template == 'scoreboard.html':                    #MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
-            data = select_all_columns_with_condition("highScore","totalScore")
+            #data = select_all_columns_with_condition("highScore","totalScore")
+            data = select_all_columns_with_condition("attempts","score")
+            segment = get_segment(request)
+            return render_template("home/" + template, segment=segment, data=data)
+
+        elif template == 'instructions.html':
+             data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
 
         # Detect the current page
         segment = get_segment(request)
