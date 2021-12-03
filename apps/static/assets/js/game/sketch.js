@@ -108,17 +108,23 @@ function mouseClicked() {
 
   if (gameState.getGameState() == 1) {
 
-    
+
 
     if (mouseY < 430 && mouseY > 400) {
-      //Move left
-      gameCommands.addCommands(1);
+      if (mouseX < 815 && mouseX > 700) {
+        //Move Up
+        gameCommands.addCommands(0);
+      }
+
     }
 
     if (mouseY < 480 && mouseY > 450) {
       if (mouseX < 745 && mouseX > 630) {
         //Move left
         gameCommands.addCommands(1);
+      }
+      if(mouseX < 860 && mouseX > 750){
+        gameCommands.addCommands(2);
       }
     }
 
@@ -134,7 +140,7 @@ function mouseClicked() {
       }
 
       if (mouseX < 1075 && mouseX > 960) {
-        if(gamePlayer.getMoving() == 0){
+        if (gamePlayer.getMoving() == 0) {
           gamePlayer.reset();
           gameScore.resetScore();
           gameHP.reset();
