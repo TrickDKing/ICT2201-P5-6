@@ -149,9 +149,9 @@ function mouseClicked() {
           gamePlayer.reset();
           gameScore.resetScore();
           gameHP.reset();
+          gameCommands.clearAllCommands();
         }
       }
-
     }
 
 

@@ -4,9 +4,10 @@ class GameCommands {
     this.url = 'http://127.0.0.1:5000/commands'; // Target URL
   }
 
-  removeAllCommands() {
-
+  clearAllCommands() {
+    this.commands = [];
   }
+
   getAllCommands(){
     return this.commands;
   }
