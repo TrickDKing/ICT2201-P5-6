@@ -28,14 +28,14 @@ function setup() {
   gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
-  
-  
+
+
   //shape1 = new Draggable(700, 100, 50, 50);
-  
+
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
   /*httpPost(url, 'json', postData,  function(result) {console.log(result)}
   );*/
-  console.log("POSTION " + gamePlayer.getPlayerPosition());
+  console.log("POSITION " + gamePlayer.getPlayerPosition());
 }
 
 function windowResized() {
@@ -107,13 +107,47 @@ function mouseClicked() {
   }
 
   if (gameState.getGameState() == 1) {
-    if (mouseX < 655 && mouseX > 550) {
-      if (mouseY < 525 && mouseY > 500) {
-        gamePlayer.movePlayerPosition(["move left", "move forwards"]);
-        gameHP.setHealth(1);
-        gameScore.setScore(1);
+
+    
+
+    if (mouseY < 430 && mouseY > 400) {
+      //Move left
+      gameCommands.addCommands(1);
+    }
+
+    if (mouseY < 480 && mouseY > 450) {
+      if (mouseX < 745 && mouseX > 630) {
+        //Move left
+        gameCommands.addCommands(1);
       }
     }
+
+    if (mouseY < 520 && mouseY > 500) {
+      if (mouseX < 655 && mouseX > 500) {
+        console.log("EXECUTE");
+        gamePlayer.movePlayerPosition();
+      }
+
+      if (mouseX < 815 && mouseX > 700) {
+        //Move left
+        gameCommands.addCommands(1);
+      }
+
+      if (mouseX < 1075 && mouseX > 960) {
+        if(gamePlayer.getMoving() == 0){
+          gamePlayer.reset();
+          gameScore.resetScore();
+          gameHP.reset();
+        }
+      }
+
+    }
+
+
+    /* if (mouseX < ) {
+       console.log("B");
+ 
+     }*/
 
   }
 }
@@ -121,7 +155,6 @@ function mouseClicked() {
 function keyPressed() {
   if (gameState.getGameState() == 1 && keyIsDown(ESCAPE)) {
     gameState.setGameState(2);
-
     clear();
   }
   else if (gameState.getGameState() == 2 && keyIsDown(ESCAPE)) {

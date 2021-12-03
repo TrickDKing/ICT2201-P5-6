@@ -35,18 +35,7 @@ class GameMenu {
   }
 
   displayGameMenu() {
-    /* noStroke();
-     fill(255);
- 
-     for (var i = 0; i < this.points.length; i++) {
-       var r = map(this.points[i].x, 0, width, 50, 255);
-       var g = map(this.points[i].x, 0, height, 50, 255);
-       var b = map(this.points[i].x, 0, height, 50, 255);
-       
-       var angle = map(noise(this.points[i].x * this.mult, this.points[i].y * this.mult), 0, 1, 0, 720);
-       this.points[i].add(createVector(cos(angle), sin(angle)));
-       ellipse(this.points[i].x, this.points[i].y, 1);
-     }*/
+   
     //Create Start rect
     //rect(windowWidth/2, windowHeight/2,0,0);
     fill(255, 0, 0);

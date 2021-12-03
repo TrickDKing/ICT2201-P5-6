@@ -1,5 +1,7 @@
 class GamePlayer {
     constructor(width, height) {
+        this.width = width;
+        this.height = height;
         this.x = width;
         this.y = height;
         this.diameter = 20;
@@ -15,20 +17,56 @@ class GamePlayer {
         this.currentPosition = [row, column];
     }
 
-    movePlayerPosition(commands) {
-        for (let i = 0; i < commands.length; i++) {
-            console.log(commands[i]);
-            switch (commands[i]) {
-               /* case "move left":
-                    this.x -= 50;*/
-                case "move forwards":
-                    this.y -= 50;
-                case "move left":
-                    this.x -= 50;
-                    // setTimeout(() => {  console.log("World!"); }, 2000);
-            }
-            
+    reset() {
+        this.x = this.width;
+        this.y = this.height;
+    }
+
+    setMoving() {
+
+        if (this.moving == 1) {
+            this.moving = 0;
         }
+        else if (this.moving == 0) {
+            this.moving = 1;
+        }
+
+    }
+
+    getMoving() {
+        return this.moving;
+    }
+
+    async movePlayerPosition(commands) {
+        var delay = ms => new Promise(res => setTimeout(res, ms));
+        this.setMoving();
+        for (const command of commands) {
+            await delay(1000);
+            this.movePosition(command);
+            gameHP.setHealth(1);
+            gameScore.setScore(1);
+        }
+        this.setMoving();
+    };
+
+    movePosition(command) {
+
+        if (command == 0) {
+            this.y -= 50;
+        }
+
+        if (command == 1) {
+            this.x -= 50;
+        }
+
+        if (command == 2) {
+            this.x += 50;
+        }
+
+        /*if (command == "move back") {
+            this.y += 50;
+        }*/
+
     }
 
     getPlayerPosition() {
@@ -95,14 +133,6 @@ class GamePlayer {
     update() {
         this.x += this.xspeed;
         this.y += this.yspeed;
-
-       /* if (this.y == this.temp - 50 && this.currentCommand == "move forward") {
-            console.log("B" + this.temp);
-            this.yspeed = 0;
-            this.temp = 0;
-            this.currentCommand = "";
-        }*/
-
 
         if (this.x < 0 + (this.diameter / 2)) {
             this.x = 25;

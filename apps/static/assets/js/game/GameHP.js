@@ -18,6 +18,10 @@ class GameHP {
         }
     }
 
+    reset(){
+        this.health = 100;
+    }
+
     display() {
      
         fill('red');
