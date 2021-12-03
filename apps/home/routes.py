@@ -1,5 +1,6 @@
+from flask.blueprints import Blueprint
 from apps.home import blueprint
-from flask import render_template, request, jsonify
+from flask import json, render_template, request, jsonify
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
@@ -9,6 +10,7 @@ from apps.home import dbfuncs
 from flask_login import (
     current_user
 )
+
 
 @blueprint.route('/index')
 @login_required
@@ -60,6 +62,7 @@ def get_segment(request):
 def game():
     if request.method == "GET":
         return render_template('game/game.html')
+    
     elif request.method == "POST":
         if(request.is_json):
             print(request.data)
@@ -80,29 +83,29 @@ def custom_levels():
     return render_template('home/customlevels.html')
 
 
-@blueprint.route('/attempt_history', methods=['GET','POST'])
+@blueprint.route('/attempt_history', methods=['GET', 'POST'])
 def attempt_history():
     if request.method == "POST":
         level_id = request.form['level_id']
         level_type = request.form['level_type']
-        
+
         mycursor = dbfuncs.mydb.cursor()
         print(level_id)
         if (level_id == "0"):
             sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = '{level_type}' AND a.uid = '{current_user.id}'"
         else:
             sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = '{level_type}' AND a.level_id = '{level_id}' AND a.uid = {current_user.id}"
-        
+
         mycursor.execute(sql)
         level_attempts = mycursor.fetchall()
-        
+
         return jsonify({'attempts': level_attempts})
     else:
         mycursor = dbfuncs.mydb.cursor()
         sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = 'custom' AND a.uid = {current_user.id}"
         mycursor.execute(sql)
         custom_level_attempts = mycursor.fetchall()
-        
+
         sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = 'default' AND a.uid = {current_user.id}"
         mycursor.execute(sql)
         default_level_attempts = mycursor.fetchall()
@@ -114,13 +117,40 @@ def attempt_history():
 def get_level_attempts():
     if request.method == "POST":
         level_type = request.form['level_type']
-        
+
         mycursor = dbfuncs.mydb.cursor()
         sql = f"SELECT name, level_id FROM levels where level_type = '{level_type}'"
         mycursor.execute(sql)
         levels = mycursor.fetchall()
-        
+
         return jsonify({'levels': levels})
 
+
+@blueprint.route('/send_commands', methods=['GET'])
+def send_commands():
+    if request.method == "GET":        
+        # 1=RED
+        # 2=GREEN
+        # 3=BLUE
+        # 4=PURPLE
+        return "1,2,3,4" + "\0"
+        # return "2,3,2,3" + "\0"
         
+        
+@blueprint.route('/update_car_data', methods=['GET'])
+def update_car_data():
+    if request.method == "GET":        
+        speed = request.args.get('speed')
+        
+        dbfuncs.update_data("car_data", "id", 1, "speed", speed)
+
+        return f"Data received: {speed}\r\n"
     
+
+@blueprint.route('/display_car_data', methods=['GET'])
+def display_car_data():
+    if request.method == "GET":
+        
+        speed = dbfuncs.select_certain_columns("car_data", "speed")
+
+        return jsonify({"car_speed": speed})
