@@ -74,8 +74,6 @@ class GamePlayer {
         return this.currentPosition;
     }
 
-
-
     keyPressed() {
 
         /*if (keyIsDown(LEFT_ARROW)) {
@@ -94,40 +92,6 @@ class GamePlayer {
         }*/
 
 
-    }
-
-
-
-    move(command) {
-        this.currentCommand = command;
-        if (command == "move forward") {
-            this.temp = this.y;
-            console.log("A" + this.temp);
-
-            this.speed = -1;
-            this.moving = 1;
-
-        }
-        /*  if (command == "move backwards") {
-              this.temp = this.y;
-              //console.log("A" + this.temp);
-  
-              this.speed = 1;
-          }*/
-        /* if(command == "move backwards"){
-             this.y += 10;
-         }*/
-        /*if(command == "move left"){
-            this.x -= 10;
-        }*/
-
-        /*this.x += x;
-        this.y += y;*/
-
-    }
-
-    polling() {
-        return;
     }
 
     update() {

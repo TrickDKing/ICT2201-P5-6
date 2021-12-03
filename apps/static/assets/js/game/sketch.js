@@ -12,7 +12,6 @@ let gameHP;
 let Gameleaderboard;
 let pg;
 
-
 function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
   createCanvas(window.innerWidth, window.innerHeight).parent('canvasHolder');
@@ -120,18 +119,24 @@ function mouseClicked() {
 
     if (mouseY < 480 && mouseY > 450) {
       if (mouseX < 745 && mouseX > 630) {
-        //Move left
+        //Move Left
         gameCommands.addCommands(1);
       }
-      if(mouseX < 860 && mouseX > 750){
+      else if (mouseX < 860 && mouseX > 750) {
+        //Move Right
         gameCommands.addCommands(2);
       }
     }
 
     if (mouseY < 520 && mouseY > 500) {
       if (mouseX < 655 && mouseX > 500) {
-        console.log("EXECUTE");
-        gamePlayer.movePlayerPosition();
+        if (gamePlayer.getMoving() == 0) {
+          gamePlayer.reset();
+          gameScore.resetScore();
+          gameHP.reset();
+          gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
+        }
+        
       }
 
       if (mouseX < 815 && mouseX > 700) {

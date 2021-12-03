@@ -7,7 +7,10 @@ class GameCommands {
   removeAllCommands() {
 
   }
-
+  getAllCommands(){
+    return this.commands;
+  }
+  
   addCommands(value) {
     this.commands.push(value);
   }
