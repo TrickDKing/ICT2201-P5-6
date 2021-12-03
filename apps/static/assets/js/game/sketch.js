@@ -28,13 +28,8 @@ function setup() {
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
 
-
-  //shape1 = new Draggable(700, 100, 50, 50);
-
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
-  /*httpPost(url, 'json', postData,  function(result) {console.log(result)}
-  );*/
-  console.log("POSITION " + gamePlayer.getPlayerPosition());
+
 }
 
 function windowResized() {
@@ -47,7 +42,7 @@ function draw() {
   //In game Menu
   if (gameState.getGameState() == 0) {
     //gameBackground.display();
-    gameMenu.display();
+    gameMenu.display(); //GameMenu display
 
   }
 
@@ -62,14 +57,8 @@ function draw() {
 
     /*
     gamePlayer.keyPressed();
-
     */
-
-
-    //gamePlayer.move(0,0);
-    /*shape1.over();
-        shape1.update();
-        shape1.show();*/
+  
   }
 
   if (gameState.getGameState() == 2) {
@@ -81,8 +70,6 @@ function draw() {
     //Game end state
     gameLeaderboard.display();
   }
-
-
 
 }
 
@@ -107,8 +94,6 @@ function mouseClicked() {
 
   if (gameState.getGameState() == 1) {
 
-
-
     if (mouseY < 430 && mouseY > 400) {
       if (mouseX < 815 && mouseX > 700) {
         //Move Up
@@ -129,6 +114,7 @@ function mouseClicked() {
     }
 
     if (mouseY < 520 && mouseY > 500) {
+
       if (mouseX < 655 && mouseX > 500) {
         if (gamePlayer.getMoving() == 0) {
           gamePlayer.reset();
@@ -136,7 +122,6 @@ function mouseClicked() {
           gameHP.reset();
           gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
         }
-        
       }
 
       if (mouseX < 815 && mouseX > 700) {

@@ -33,6 +33,13 @@ class GameMap {
       return arr;
     }
   
+    retrieve(col, row){
+      if(col <= this.grid.cols && row <= this.grid.rows){
+        return this.grid[col][row];
+      }
+      return;
+    }
+
 
     getMapRows(){
       return this.rows;
@@ -53,7 +60,7 @@ class GameMap {
             //normal path
             fill('white'); //Spawns the object
             stroke(0);
-            rect(x, y, this.resolution, this.resolution); 
+            rect(x, y, this.resolution, this.resolution);
           }
           else if (this.grid[i][j] == 2){
             //trap

@@ -18,6 +18,7 @@ class GamePlayer {
     }
 
     reset() {
+        //Resets the player object to original position
         this.x = this.width;
         this.y = this.height;
     }
