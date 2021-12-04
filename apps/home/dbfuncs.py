@@ -11,6 +11,7 @@ mydb = mysql.connector.connect(
 
 cursor = mydb.cursor(buffered=True, dictionary=True)
 
+
 def listToStr(listOfData):
     """Convert list to a string with coma separated"""
     return ",".join(listOfData)
@@ -90,18 +91,31 @@ def update_data(table_name: str, data: dict, identifier: str, identifier_value: 
 
 
 # SQL = SELECT * FROM "table_name" order by "table_column"  EN DING PART
-def select_all_columns_with_condition(table_name,table_column):
+def select_all_columns_with_condition(table_name, table_column):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} ORDER BY {} DESC".format(table_name,table_column))
+    mycursor.execute(
+        "SELECT * FROM {} ORDER BY {} DESC".format(table_name, table_column))
 
     myresult = mycursor.fetchall()
 
     #print("selected all columns from {} table.".format(table_name))
     return myresult
 
+
+def get_best_score_by_level(table_name, table_column, table_column2):
+    print(table_name)
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(
+        table_name, table_column, table_column2))
+
+    myresult = mycursor.fetchall()
+
+    return myresult
+
 # Retrieves data from specified columns "column_names" from "table_name"
 # SQL = SELECT "column_names" FROM "table_name"
+
 
 def select_certain_columns(table_name, column_names):
     mycursor = mydb.cursor()

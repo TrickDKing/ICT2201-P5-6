@@ -10,20 +10,11 @@ from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 
-from apps.home.dbfuncs import select_all_columns
 from apps.home import dbfuncs
 
-from flask_login import (
-    current_user
-)
-
 # Helper - Extract current page name from request
-
-
 def get_segment(request):
-
     try:
-
         segment = request.path.split('/')[-1]
 
         if segment == '':
@@ -45,15 +36,12 @@ def index():
 @blueprint.route('/<template>')
 @login_required
 def route_template(template):
-
     try:
-
         if not template.endswith('.html'):
             template += '.html'
 
         if template == 'profile.html':
-            data = select_data(table_name="users", filterBy=[
-                               'username'], filterVal=[str(current_user)])
+            data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
 
         elif template == 'scoreboard.html':  # MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
             # data = select_all_columns_with_condition("highScore","totalScore")
@@ -107,8 +95,7 @@ def saveDetails():
 
                 data["password"] = passhash
 
-            update_data(table_name="users", data=data,
-                        identifier="username", identifier_value=str(current_user))
+            update_data(table_name="users", data=data, identifier="username", identifier_value=str(current_user))
 
             result = "Profile updated successfully!"
 
@@ -122,21 +109,18 @@ def saveDetails():
 
                 data["password"] = passhash
 
-            update_data(table_name="users", data=data,
-                        identifier="username", identifier_value=str(current_user))
+            update_data(table_name="users", data=data, identifier="username", identifier_value=str(current_user))
 
             result = "Profile updated successfully!"
 
-            data = select_data(table_name="users", filterBy=['username'], filterVal=[
-                               str(request.form['username'])])
+            data = select_data(table_name="users", filterBy=['username'], filterVal=[str(request.form['username'])])
             return render_template('home/profile.html', data=data)
 
         else:
             result = "Username exists"
 
         print(result)
-        data = select_data(table_name="users", filterBy=[
-                           'username'], filterVal=[str(current_user)])
+        data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
         return render_template('home/profile.html', data=data)
 
 
