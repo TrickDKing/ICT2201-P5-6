@@ -62,6 +62,11 @@ def route_template(template):
             data = get_best_score_by_level("attempts","level_id","level_id")
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
+        
+        # Detect the current page
+        segment = get_segment(request)
+        # Serve the file (if exists) from app/templates/home/FILE.html
+        return render_template("home/" + template, segment=segment, data=data)
 
     except TemplateNotFound:
         return render_template('home/page-404.html'), 404
