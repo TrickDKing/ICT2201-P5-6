@@ -16,7 +16,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Level Select</h5>
+                                <h5 class="mb-3">Level Select</h5>
                             </div>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
@@ -41,30 +41,27 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>Name   </th>
+                                            <th>Cleared</th>
+                                            <th>Score</th>
+                                            <th>Time</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                    <tbody> 
+                                    {% set count = namespace(value=1) %}  
+                                    {% for item in data %}
+                                    {% if item.uid == 1 %}
+                                    <tr>
+                                    
+                                        <td>{{count.value}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.level_status}}</td>
+                                        <td>{{item.score}}</td>
+                                        <td>{{item.time_taken}}</td>
+                                    </tr> 
+                                    {% set count.value = count.value + 1 %}
+                                    {%endif%}
+                                    {% endfor %}
                                     </tbody>
                                 </table>
                             </div>

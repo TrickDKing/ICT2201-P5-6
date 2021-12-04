@@ -96,3 +96,14 @@ def select_all_columns_with_condition(table_name,table_column):
 
     #print("selected all columns from {} table.".format(table_name))
     return myresult
+
+
+def get_best_score_by_level(table_name,table_column,table_column2):
+    print(table_name)
+    mycursor = mydb.cursor(dictionary=True)
+    mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
+
+    myresult = mycursor.fetchall()
+
+    return myresult
+
