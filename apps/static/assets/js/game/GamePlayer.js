@@ -51,22 +51,26 @@ class GamePlayer {
     };
 
     movePosition(command) {
-
+        //Function to move player
         if (command == 0) {
+            //Move forward
             this.y -= 50;
         }
 
         if (command == 1) {
+            //Move left
             this.x -= 50;
         }
 
         if (command == 2) {
+            //Move right
             this.x += 50;
         }
 
-        /*if (command == "move back") {
+        if (command == 3) {
+            //Move right
             this.y += 50;
-        }*/
+        }
 
     }
 

@@ -14,8 +14,8 @@ let pg;
 
 function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
-  createCanvas(window.innerWidth, window.innerHeight).parent('canvasHolder');
-  background('white');
+  createCanvas(1600, 660).parent('canvasHolder');
+  background('orange');
   gameLeaderboard = new GameLeaderboard();
   gameBackground = new GameBackground();
   gameMenu = new GameMenu();
@@ -48,6 +48,7 @@ function draw() {
 
   if (gameState.getGameState() == 1) {
     clear();
+    background('orange');
     gameMap.spawnMap(); // Render map
     gameScore.display(); // Render Score
     gameHP.display(); //Render Health bar
@@ -104,11 +105,11 @@ function mouseClicked() {
 
     if (mouseY < 480 && mouseY > 450) {
       if (mouseX < 745 && mouseX > 630) {
-        //Move Left
+        //Move Left button
         gameCommands.addCommands(1);
       }
       else if (mouseX < 860 && mouseX > 750) {
-        //Move Right
+        //Move Right button
         gameCommands.addCommands(2);
       }
     }
@@ -117,6 +118,7 @@ function mouseClicked() {
 
       if (mouseX < 655 && mouseX > 500) {
         if (gamePlayer.getMoving() == 0) {
+          //Execute button
           gamePlayer.reset();
           gameScore.resetScore();
           gameHP.reset();
@@ -125,12 +127,13 @@ function mouseClicked() {
       }
 
       if (mouseX < 815 && mouseX > 700) {
-        //Move left
-        gameCommands.addCommands(1);
+        //Move Down button
+        gameCommands.addCommands(3);
       }
 
       if (mouseX < 1075 && mouseX > 960) {
         if (gamePlayer.getMoving() == 0) {
+          //Reset button
           gamePlayer.reset();
           gameScore.resetScore();
           gameHP.reset();
@@ -140,10 +143,7 @@ function mouseClicked() {
     }
 
 
-    /* if (mouseX < ) {
-       console.log("B");
- 
-     }*/
+    
 
   }
 }

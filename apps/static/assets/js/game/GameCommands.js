@@ -44,6 +44,8 @@ class GameCommands {
         return "Move Left";
       case 2:
         return "Move Right";
+      case 3:
+        return "Move Down";
     }
   }
 
