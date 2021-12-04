@@ -6,7 +6,7 @@ from flask_login import (
     current_user,
     login_required
 )
-from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition
+from apps.home.dbfuncs import select_data, select_level, update_data, select_all_columns_with_condition
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 from apps.home.commands import Commands
@@ -58,7 +58,7 @@ def game():
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
 
-@blueprint.route('/gameData', methods=['GET', 'POST'])
+@blueprint.route('/gameLeaderboard', methods=['GET', 'POST'])
 def gameLeaderboard():
     if request.method == "GET":
         str = [{"id": 1, "name": "Sloane", "email": "sloveridge0@aol.com", "score": 22},
@@ -76,19 +76,28 @@ def gameLeaderboard():
     elif request.method == "POST":
         return jsonify({"msg": "Missing JSON in request"}), 400
 
+@blueprint.route('/gameMaps', methods=['GET', 'POST'])
+def maps():
+    '''Route to get game maps from database'''
+    if request.method == "GET":
+        mapData = select_level(1)
+        print(mapData)
+        return jsonify(mapData)
+    if request.method == "POST":
+        return 
 
 @blueprint.route('/commands', methods=['GET', 'POST'])
 def sendCommands():
     print(request.headers['Sec-Ch-Ua-Platform'])
    # if(request.headers['Sec-Ch-Ua-Platform'] == "Windows"):
-   #     print("GARBAGW")
+ 
     if request.method == "GET":
         return commands.getCommands()
     if request.method == "POST":
         if(request.is_json):
             print(request.data)
             commands.setCommands(request.data)
-        return jsonify("Returnign garbage to you")
+        return jsonify("Something")
 
 
 @blueprint.route('/<template>')
