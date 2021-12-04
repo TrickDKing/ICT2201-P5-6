@@ -35,14 +35,48 @@
                     <div class="card-body">
                         <h5 class="mb-3">Level Type</h5>
                         <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                            <!--
                             <li class="nav-item">
                                 <a class="nav-link active text-uppercase" id="original-tab" data-toggle="tab"
                                     href="#original" role="tab" aria-controls="original"
-                                    aria-selected="true">Original</a>
+                                    aria-selected="false">Original</a>
+                            </li>
+                            -->
+                            <li class="nav-item">
+                                <a class="nav-link active text-uppercase" id="custom-tab" data-toggle="tab" href="#level1"
+                                    role="tab" aria-controls="custom" aria-selected="true">Level 1</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#custom"
-                                    role="tab" aria-controls="custom" aria-selected="false">Custom</a>
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level2"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level3"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 3</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level4"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 4</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level5"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 5</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level6"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 6</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level7"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 7</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level8"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 8</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#level9"
+                                    role="tab" aria-controls="custom" aria-selected="false">Level 9</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -54,66 +88,322 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Name</th>
+                                                    <th>Total Levels Cleared</th>
+                                                    <th>Total Score (pts)</th>
+                                                    <th>Total Time (mins)</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                </tr>
+                                            <tbody>   
+                                            {% for item in data %}
+                                            {% if item.name=="xianfu" %}
+                                            <tr>
+                                            
+                                                <td>{{loop.index}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.numberOfLevels}}</td>
+                                                <td>{{item.totalScore}}</td>
+                                                <td>{{item.totalTime}}</td>
+                                            </tr> 
+                                            {%endif%}
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="custom" role="tabpanel" aria-labelledby="custom-tab">
+                            <div class="tab-pane fade" id="level1" role="tabpanel" aria-labelledby="custom-tab">
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 1 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level2" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
                                                 </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 2 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level3" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
                                                 </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 3 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level4" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
                                                 <tr>
-                                                    <td>3</td>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
                                                 </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 4 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level5" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 5 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level6" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 6 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level7" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 7 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level8" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 8 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="level9" role="tabpanel" aria-labelledby="custom-tab">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Score</th>
+                                                    <th>Energy Left</th>
+                                                    <th>Time taken</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody> 
+                                            {% set count = namespace(value=1) %}  
+                                            {% for item in data %}
+                                            {% if item.level_id == 9 %}
+                                            <tr>
+                                            
+                                                <td>{{count.value}}</td>
+                                                <td>{{item.score}}</td>
+                                                <td>{{item.energy_left}}</td>
+                                                <td>{{item.time_taken}}</td>
+                                                <td>{{item.level_status}}</td>
+                                            </tr> 
+                                            {% set count.value = count.value + 1 %}
+                                            {%endif%}
+                                            {% endfor %}
                                             </tbody>
                                         </table>
                                     </div>
