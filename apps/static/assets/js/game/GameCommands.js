@@ -59,36 +59,45 @@ class GameCommands {
     //Defines text size
     textSize(15);
     fill(0);
-    let y = 150;
+    let y = 130;
+    let x = 540
     for (let i = 0; i < this.commands.length; i++) {
-      text((i + 1) + " " + this.checkCommands(this.commands[i]), 560, y);
+      if(i%20==0 && i!=0){
+        x += 150
+        y = 130;
+      }
+      if(i == 80){
+        //Stops at the 
+        break;
+      }
+      text((i + 1) + " " + this.checkCommands(this.commands[i]), x, y);
       y += 20;
     }
 
     //Defines text size
     textSize(50);
     fill(0);
-    text('COMMANDS ', 560, 100);
+    text('COMMANDS ', 670, 100);
 
     textSize(20);
     noFill();
     rect(290, 610, 114, 25); //Execute box
     rect(420, 610, 85, 25); //Reset box
-    rect(700, 400, 115, 25);  //Up box
-    rect(700, 500, 115, 25); // Down box
+    rect(580, 560, 115, 25);  //Up box
+    rect(580, 620, 115, 25); // Down box
     rect(540, 590, 90, 25);  //Left box
     rect(640, 590, 90, 25); // Right box
-    rect(540, 400, 114, 25); // Rotate 90 deg box
+    rect(740, 590, 114, 25); // Rotate box
 
     fill(0);
     textSize(20);
     text('EXECUTE ', 300, 630);
     text('RESET', 430, 630);
-    text('UP ', 740, 420);
-    text('DOWN ', 720, 520);
+    text('UP ', 620, 580);
+    text('DOWN ', 608, 640);
     text('LEFT ', 560, 610);
     text('RIGHT ', 650, 610);
-    text('ROTATE', 550, 420);
+    text('ROTATE', 760, 610);
 
   }
 }
