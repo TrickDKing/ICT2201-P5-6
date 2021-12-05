@@ -30,7 +30,7 @@ class GameConsole {
 
         //Defines text size
         textSize(15);
-        let x = 1300;
+        let x = 1200;
         let y = 130;
         for (let i = 0; i < this.log.length; i++) {
             text(this.log[i], x, y);

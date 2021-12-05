@@ -56,14 +56,16 @@ class GameMenu {
 
 
   displayHelpManual() {
-    background(0)
-    textSize(20)
-    text('BACKSPACE to return to MENU', 500, 30)
+    clear();
+    textSize(20);
+    text('Press BACKSPACE to return to MENU!', 50, 600);
+    textSize(50);
+    text('Objectives', 50, 70);
     textSize(30)
-    text('1. Move your characeter using arrow keys.', 50, 150)
-    text('2. Move your character using arrow keys', 50, 200)
-    text('<- Avoid movement.', 80, 240)
-    text('3. The game is over when your battery is zero.', 50, 290)
+    text('1. Use commands to bring your character to the end point!', 50, 150)
+    text('2. Move your character based on directional instructions', 50, 200)
+    text('3. Buffs and traps are laid along the way to buff or prevent you from reaching the end point!', 50, 250)
+    text('4. The game is over when your HP Bar is zero.', 50, 300)
     if (keyIsDown(BACKSPACE)) {
       this.gameMenu = 0;
     }

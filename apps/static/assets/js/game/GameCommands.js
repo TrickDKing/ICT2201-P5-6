@@ -13,7 +13,13 @@ class GameCommands {
   }
 
   removeLastCommand(){
-    this.commands.pop();
+    if (this.commands.length != 0){
+      this.commands.pop();
+      gameConsole.insertLog("Popping last command from stack...");
+    }else{
+      gameConsole.insertLog("ERROR ! STACK IS EMPTY!");
+    }
+    
   }
 
   getAllCommands(){

@@ -21,7 +21,6 @@ class GameLeaderboard {
         if (this.checkGetSuccess == 0) {
 
             httpGet(this.url, 'json', function (response) {
-                //this.setSuccess(1);
         
                 // when the HTTP request completes
                 let id, name, score;

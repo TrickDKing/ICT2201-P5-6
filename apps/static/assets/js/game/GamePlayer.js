@@ -49,7 +49,7 @@ class GamePlayer {
             
         }
         this.setMoving();
-        gameConsole.insertLog("Execution ended");
+        gameConsole.insertLog("EXECUTION ENDED");
     };
 
     movePosition(command) {

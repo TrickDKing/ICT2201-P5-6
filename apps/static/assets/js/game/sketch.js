@@ -83,15 +83,15 @@ function mouseClicked() {
   if (gameState.getGameState() == 0 && gameMenu.getOption() == 0) {
     if (mouseX < 820 && mouseX > 460) {
       if (mouseY < 100 && mouseY > 50) {
-
+        //Start game
         gameMenu.setOption(1);
       }
       if (mouseY < 275 && mouseY > 200) {
-
+        //Instructions
         gameMenu.setOption(2);
       }
       if (mouseY < 425 && mouseY > 350) {
-
+        //Settings
         gameMenu.setOption(3);
       }
     }
@@ -117,7 +117,7 @@ function mouseClicked() {
         gameCommands.addCommands(2);
       }
       else if (mouseX < 985 && mouseX > 735){
-        gameCommands.removeLast();
+        gameCommands.removeLastCommand();
       }
     }
 
@@ -138,7 +138,7 @@ function mouseClicked() {
           gameScore.resetScore();
           gameHP.reset();
           gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
-          gameConsole.insertLog("Executing instructions...");
+          gameConsole.insertLog("EXECUTING INSTRUCTIONS...");
         }
       }
 
@@ -149,7 +149,7 @@ function mouseClicked() {
           gameScore.resetScore();
           gameHP.reset();
           gameCommands.clearAllCommands();
-          gameConsole.insertLog("Resetting...");
+          gameConsole.insertLog("RESETTING...");
         }
 
       }
