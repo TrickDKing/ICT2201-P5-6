@@ -13,9 +13,10 @@ class GameMap {
     let mapData;
     let sendData = { level_id: data };
     console.log(JSON.stringify(sendData));
-    httpPost(this.url, 'json', sendData, mapData = function (success) { return success }, function (error) { console.log(error) });
-    console.log("A");
-    console.log(mapData);
+    httpPost(this.url, 'json', sendData, mapData = function (success) { 
+      console.log(success);
+      return success }, function (error) { console.log(error) });
+ 
   }
 
   setObjects() {
