@@ -89,6 +89,7 @@ function mouseClicked() {
       if (mouseY < 275 && mouseY > 200) {
         //Instructions
         gameMenu.setOption(2);
+        
       }
       if (mouseY < 425 && mouseY > 350) {
         //Settings

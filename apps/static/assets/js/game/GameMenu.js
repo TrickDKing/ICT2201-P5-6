@@ -33,7 +33,7 @@ class GameMenu {
   }
 
   displayGameMenu() {
-   
+    
     //Create Start rect
     //rect(windowWidth/2, windowHeight/2,0,0);
     fill(255, 0, 0);
@@ -68,6 +68,7 @@ class GameMenu {
     text('4. The game is over when your HP Bar is zero.', 50, 300)
     if (keyIsDown(BACKSPACE)) {
       this.gameMenu = 0;
+      clear();
     }
   }
 
