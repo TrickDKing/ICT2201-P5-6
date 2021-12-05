@@ -52,6 +52,7 @@ class GamePlayer {
             await delay(1000);
             this.movePosition(command);
             gameHP.setHealth(1);
+            gameScore.setScore(1);
             gameConsole.insertLog("Moving One Grid: HP --");
 
         }
