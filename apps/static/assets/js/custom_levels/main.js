@@ -19,7 +19,7 @@ function buffBlock() {
     }
 }
 
-function debuffBlock() {
+function wallBlock() {
     return {
         r: 255,
         g: 0,
@@ -27,11 +27,11 @@ function debuffBlock() {
     }
 }
 
-function wallBlock() {
+function debuffBlock() {
     return {
-        r: 0,
-        g: 0,
-        b: 255
+        r: 255,
+        g: 255,
+        b: 0
     }
 }
 
@@ -149,10 +149,10 @@ $("#saveBtn").click(function() {
         "b": 0
     }
 
-    var blue = {
-        "r": 0,
-        "g": 0,
-        "b": 255
+    var yellow = {
+        "r": 255,
+        "g": 255,
+        "b": 0
     }
     console.log(grid);
 
@@ -162,13 +162,13 @@ $("#saveBtn").click(function() {
         console.log(newGrid[i])
         for (var j = 0; j < newGrid.length; j++) {
             if (JSON.stringify(newGrid[i][j]) === JSON.stringify(red)) {
-                newGrid[i][j] = "R";
+                newGrid[i][j] = 4;
             } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(green)) {
-                newGrid[i][j] = "G";
-            } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(blue)) {
-                newGrid[i][j] = "B";
+                newGrid[i][j] = 3;
+            } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(yellow)) {
+                newGrid[i][j] = 2;
             } else {
-                newGrid[i][j] = "W";
+                newGrid[i][j] = 1;
             }
         }
     }
