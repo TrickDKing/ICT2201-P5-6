@@ -21,7 +21,6 @@ class GamePlayer {
     setPlayerPosition(col, row) {
 
         this.currentPosition = [col, row];
-        console.log(this.currentPosition);
     }
 
     reset() {
