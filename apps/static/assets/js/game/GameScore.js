@@ -23,9 +23,9 @@ class GameScore {
     stroke(255);
     //rect(10, 600, 350, 75);
     //Defines text size
-    textSize(50)
+    textSize(40);
     //Fill here defines text color
     fill(0);
-    text('SCORE = ' + this.score, 10, 670);
+    text('SCORE = ' + this.score, 10, 640);
   }
 }

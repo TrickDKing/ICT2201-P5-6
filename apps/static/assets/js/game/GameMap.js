@@ -9,24 +9,17 @@ class GameMap {
     this.url = "http://127.0.0.1:5000/gameMaps";
   }
 
+  getMapData(data) {
+    let mapData;
+    let sendData = {level_id: data};
+    console.log(JSON.stringify(sendData));
+    httpPost(this.url, 'json', sendData, mapData = function (success) { return success } , function(error) {console.log(error)} );
+    console.log("A");
+    console.log(mapData);
+  }
+
   setObjects() {
     this.grid = this.create2DArray(this.cols, this.rows);
-
-    httpGet(this.url, 'json', function (response) {
-      // when the HTTP request is successful
-      let id, name, score;
-      let height = 150;
-      console.log(response);
-      /*for (let i = 0; i < response.length; i++) {
-          
-          textSize(30)
-          //text(response[i].name + " " + response[i].score, (windowWidth / 3) - 150, height);
-          height += 50;
-      }*/
-
-    }, function (error) {
-      console.log(error);
-    });
 
     for (let i = 0; i < this.cols; i++) {
       for (let j = 0; j < this.rows; j++) {
@@ -56,6 +49,7 @@ class GameMap {
     }
     return;
   }
+
 
 
   getMapRows() {

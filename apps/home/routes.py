@@ -51,12 +51,13 @@ def game():
         return render_template('home/index.html')
     elif request.method == "POST":
         if(request.is_json):
-            print(request.data)
+            # print(request.data)
             some = request.get_json()
-            print(some)
+            # print(some)
             return jsonify({"msg": "Success"}), 200
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
+
 
 @blueprint.route('/gameLeaderboard', methods=['GET', 'POST'])
 def gameLeaderboard():
@@ -76,21 +77,25 @@ def gameLeaderboard():
     elif request.method == "POST":
         return jsonify({"msg": "Missing JSON in request"}), 400
 
+
 @blueprint.route('/gameMaps', methods=['GET', 'POST'])
 def maps():
     '''Route to get game maps from database'''
     if request.method == "GET":
+        return jsonify("A")
+    if request.method == "POST":
+
+        print(type(request.data))
         mapData = select_level(1)
         print(mapData)
         return jsonify(mapData)
-    if request.method == "POST":
-        return 
+    return jsonify("A")
 
 @blueprint.route('/commands', methods=['GET', 'POST'])
 def sendCommands():
     print(request.headers['Sec-Ch-Ua-Platform'])
    # if(request.headers['Sec-Ch-Ua-Platform'] == "Windows"):
- 
+
     if request.method == "GET":
         return commands.getCommands()
     if request.method == "POST":
@@ -110,16 +115,18 @@ def route_template(template):
             template += '.html'
 
         if template == 'profile.html':
-            data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
-        
-        elif template == 'scoreboard.html':                    #MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
-            #data = select_all_columns_with_condition("highScore","totalScore")
-            data = select_all_columns_with_condition("attempts","score")
+            data = select_data(table_name="users", filterBy=[
+                               'username'], filterVal=[str(current_user)])
+
+        elif template == 'scoreboard.html':  # MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
+            # data = select_all_columns_with_condition("highScore","totalScore")
+            data = select_all_columns_with_condition("attempts", "score")
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
 
         elif template == 'instructions.html':
-             data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
+            data = select_data(table_name="users", filterBy=[
+                               'username'], filterVal=[str(current_user)])
 
         # Detect the current page
         segment = get_segment(request)

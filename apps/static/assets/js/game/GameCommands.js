@@ -72,22 +72,22 @@ class GameCommands {
 
     textSize(20);
     noFill();
-    rect(540, 500, 114, 25); //Execute box
-    rect(960, 500, 114, 25); //Reset box
+    rect(290, 610, 114, 25); //Execute box
+    rect(420, 610, 85, 25); //Reset box
     rect(700, 400, 115, 25);  //Up box
     rect(700, 500, 115, 25); // Down box
-    rect(630, 450, 115, 25);  //Left box
-    rect(750, 450, 115, 25); // Right box
+    rect(540, 590, 90, 25);  //Left box
+    rect(640, 590, 90, 25); // Right box
     rect(540, 400, 114, 25); // Rotate 90 deg box
 
     fill(0);
     textSize(20);
-    text('EXECUTE ', 550, 520);
-    text('RESET', 980, 520)
+    text('EXECUTE ', 300, 630);
+    text('RESET', 430, 630);
     text('UP ', 740, 420);
     text('DOWN ', 720, 520);
-    text('LEFT ', 660, 470);
-    text('RIGHT ', 780, 470);
+    text('LEFT ', 560, 610);
+    text('RIGHT ', 650, 610);
     text('ROTATE', 550, 420);
 
   }

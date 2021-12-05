@@ -27,7 +27,7 @@ function setup() {
   gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
-
+  gameMap.getMapData(1);
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
 
 }
@@ -59,7 +59,7 @@ function draw() {
     /*
     gamePlayer.keyPressed();
     */
-  
+
   }
 
   if (gameState.getGameState() == 2) {
@@ -116,7 +116,15 @@ function mouseClicked() {
 
     if (mouseY < 520 && mouseY > 500) {
 
-      if (mouseX < 655 && mouseX > 500) {
+      if (mouseX < 815 && mouseX > 700) {
+        //Move Down button
+        gameCommands.addCommands(3);
+      }
+
+    }
+
+    if (mouseY < 640 && mouseY > 600) {
+      if (mouseX < 410 && mouseX > 285) {
         if (gamePlayer.getMoving() == 0) {
           //Execute button
           gamePlayer.reset();
@@ -126,12 +134,7 @@ function mouseClicked() {
         }
       }
 
-      if (mouseX < 815 && mouseX > 700) {
-        //Move Down button
-        gameCommands.addCommands(3);
-      }
-
-      if (mouseX < 1075 && mouseX > 960) {
+      if (mouseX < 510 && mouseX > 420) {
         if (gamePlayer.getMoving() == 0) {
           //Reset button
           gamePlayer.reset();
@@ -139,11 +142,13 @@ function mouseClicked() {
           gameHP.reset();
           gameCommands.clearAllCommands();
         }
+        
       }
+
+
     }
 
 
-    
 
   }
 }

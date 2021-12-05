@@ -15,8 +15,6 @@ class GameMenu {
     this.gameMenu = gameMenu;
   }
 
-  
-
   displayMenuBG() {
 
 
