@@ -30,7 +30,7 @@ function setup() {
   gameConsole = new GameConsole();
   gameMap.getMapData(1);
 
-  gamePlayer.setPlayerPosition(gameMap.getMapRows()-1, gameMap.getMapColumns()-1); //Initialise player position to be at the start
+  gamePlayer.setPlayerPosition(gameMap.getMapRows() - 1, gameMap.getMapColumns() - 1); //Initialise player position to be at the start
 
 }
 
@@ -50,7 +50,7 @@ function draw() {
 
   if (gameState.getGameState() == 1) {
     clear();
-    
+
     gameMap.spawnMap(); // Render map
     gameScore.display(); // Render Score
     gameHP.display(); //Render Health bar
@@ -66,7 +66,7 @@ function draw() {
 
   if (gameState.getGameState() == 2) {
     //Game paused state
-    
+
     gamePauseMenu.displayPauseMenu();
     gameBackground.display();
   }
@@ -89,7 +89,7 @@ function mouseClicked() {
       if (mouseY < 275 && mouseY > 200) {
         //Instructions
         gameMenu.setOption(2);
-        
+
       }
       if (mouseY < 425 && mouseY > 350) {
         //Settings
@@ -117,7 +117,7 @@ function mouseClicked() {
         //Move Right button
         gameCommands.addCommands(2);
       }
-      else if (mouseX < 985 && mouseX > 735){
+      else if (mouseX < 985 && mouseX > 735) {
         gameCommands.removeLastCommand();
       }
     }
@@ -135,13 +135,18 @@ function mouseClicked() {
       if (mouseX < 410 && mouseX > 285) {
         if (gamePlayer.getMoving() == 0) {
           //Execute button
-          gamePlayer.reset();
-          gameScore.resetScore();
-          gameHP.reset();
-          gamePlayer.setPlayerPosition(gameMap.getMapColumns()-1, gameMap.getMapRows()-1);
-          gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
-          gameConsole.insertLog("STARTING SIMULATION ...");
-          gameConsole.insertLog("EXECUTING INSTRUCTIONS ...");
+          if (gameCommands.getAllCommands().length == 0) {
+            //If there are no commands do not execute
+            gameConsole.insertLog("ERROR: THERE ARE NO COMMANDS TO EXECUTE");
+          } else {
+            gamePlayer.reset();
+            gameScore.resetScore();
+            gameHP.reset();
+            gamePlayer.setPlayerPosition(gameMap.getMapColumns() - 1, gameMap.getMapRows() - 1);
+            gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
+            gameConsole.insertLog("STARTING SIMULATION ...");
+            gameConsole.insertLog("EXECUTING INSTRUCTIONS ...");
+          }
         }
       }
 

@@ -21,6 +21,7 @@ class GamePlayer {
     setPlayerPosition(col, row) {
 
         this.currentPosition = [col, row];
+        console.log(this.currentPosition);
     }
 
     reset() {
@@ -53,10 +54,14 @@ class GamePlayer {
             gameHP.setHealth(1);
             gameConsole.insertLog("Moving One Grid: HP --");
 
-
         }
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
+        console.log(this.getPlayerPosition());
+        if(this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0){
+            clear();
+            gameState.setGameState(3);
+        }
     };
 
     checkObstacle() {
@@ -75,10 +80,14 @@ class GamePlayer {
             else if (checkFront >= 1 && checkFront <= 3) {
 
                 if (checkFront == 2) {
-                    gameConsole.insertLog("TRAP HIT!");
-                    gameConsole.insertLog("HP --");
+                    gameConsole.insertLog("TRAP HIT! HP --");
                     gameHP.setHealth(5);
                     gameScore.setScore(-1);
+                }
+                else if (checkFront == 3) {
+                    gameConsole.insertLog("BUFF ENCOUNTERED! RESTORING HP");
+                    gameConsole.insertLog("HP ++");
+                    gameHP.setHealth(-5);
                 }
 
                 gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0], gamePlayer.getPlayerPosition()[1] - 1);
@@ -98,11 +107,16 @@ class GamePlayer {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkLeft >= 1 && checkLeft <= 3) {
                 if (checkLeft == 2) {
-                    gameConsole.insertLog("TRAP HIT!");
-                    gameConsole.insertLog("HP --");
+                    gameConsole.insertLog("TRAP HIT! HP --");
                     gameHP.setHealth(5);
                     gameScore.setScore(-1);
                 }
+                else if (checkLeft == 3) {
+                    gameConsole.insertLog("BUFF ENCOUNTERED! RESTORING HP");
+                    gameConsole.insertLog("HP ++");
+                    gameHP.setHealth(-5);
+                }
+
                 gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] - 1, gamePlayer.getPlayerPosition()[1]);
                 this.x -= 50;
                 gameConsole.insertLog("MOVING LEFT");
@@ -117,10 +131,14 @@ class GamePlayer {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkRight >= 1 && checkRight <= 3) {
                 if (checkRight == 2) {
-                    gameConsole.insertLog("TRAP HIT!");
-                    gameConsole.insertLog("HP --");
+                    gameConsole.insertLog("TRAP HIT! HP --");
                     gameHP.setHealth(5);
                     gameScore.setScore(-1);
+                }
+                else if (checkRight == 3) {
+                    gameConsole.insertLog("BUFF ENCOUNTERED! RESTORING HP");
+                    gameConsole.insertLog("HP ++");
+                    gameHP.setHealth(-5);
                 }
                 gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] + 1, gamePlayer.getPlayerPosition()[1]);
                 this.x += 50;
@@ -141,6 +159,11 @@ class GamePlayer {
                     gameConsole.insertLog("HP --");
                     gameHP.setHealth(5);
                     gameScore.setScore(-1);
+                }
+                else if (checkDown == 3) {
+                    gameConsole.insertLog("BUFF ENCOUNTERED! RESTORING HP");
+                    gameConsole.insertLog("HP ++");
+                    gameHP.setHealth(-5);
                 }
 
                 gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0], gamePlayer.getPlayerPosition()[1] + 1);
