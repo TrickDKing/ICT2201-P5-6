@@ -98,6 +98,13 @@ def select_all_columns_with_condition(table_name,table_column):
     return myresult
 
 
+def select_level(level):
+    table_name = "levels"
+    cursor.execute("SELECT * FROM {} where level_id= {}".format(table_name, level))
+    result = cursor.fetchall()
+    print(result)
+    return result
+    
 def get_best_score_by_level(table_name,table_column,table_column2):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
