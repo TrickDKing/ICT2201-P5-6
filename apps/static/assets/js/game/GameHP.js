@@ -10,19 +10,13 @@ class GameHP {
     setHealth(health) {
         if (this.health >= 1) {
 
-            if (health == 0 || health >= 100) {
-                return;
-            }
-            else if (this.health + health >= 100) {
-                this.health = 100;
-            }
-            else if (this.health + health < 0) {
-                this.health = 0;
-            }
-            else if (this.health >= 0) {
+            if (this.health >= 0) {
                 this.health -= health;
             }
-            
+            if(this.health > 100){
+                this.health = 100;
+            } 
+
         }
 
 

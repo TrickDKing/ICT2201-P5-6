@@ -57,7 +57,7 @@ class GamePlayer {
         }
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
-        console.log(this.getPlayerPosition());
+        
         if(this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0){
             clear();
             gameState.setGameState(3);

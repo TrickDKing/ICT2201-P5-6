@@ -96,7 +96,7 @@ function mouseClicked() {
         gameMenu.setOption(3);
       }
     }
-  }
+  } // End of game state 0
 
   if (gameState.getGameState() == 1) {
 
@@ -165,7 +165,10 @@ function mouseClicked() {
 
     }
 
+  } //End of gamestate 1
 
+
+  if (gameState.getGameState() == 3) {
 
   }
 }
