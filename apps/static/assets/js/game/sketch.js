@@ -27,6 +27,7 @@ function setup() {
   gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
+  gameOver = new GameOver();
   gameConsole = new GameConsole();
   gameMap.getMapData(1);
 
@@ -74,6 +75,10 @@ function draw() {
   if (gameState.getGameState() == 3) {
     //Game end state
     gameLeaderboard.display();
+  }
+  if (gameState.getGameState() == 4) {
+    //Game end state
+    gameOver.displayGameOver();
   }
 
 }

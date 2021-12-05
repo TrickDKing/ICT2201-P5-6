@@ -14,7 +14,7 @@ class GameHP {
             if (this.health >= 0) {
                 this.health -= health;
             }
-            if(this.health > 100){
+            else if (this.health + health > 101) {
                 this.health = 100;
             }
 

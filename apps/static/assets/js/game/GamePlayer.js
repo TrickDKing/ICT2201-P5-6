@@ -49,11 +49,24 @@ class GamePlayer {
         var delay = ms => new Promise(res => setTimeout(res, ms));
         this.setMoving();
         for (const command of commands) {
-            await delay(1000);
-            this.movePosition(command);
-            gameHP.setHealth(1);
-            gameScore.setScore(1);
-            gameConsole.insertLog("Moving One Grid: HP --");
+           
+
+            if(gameHP.getHealth() > 96)
+            {
+                await delay(1000);
+                this.movePosition(command);
+                gameHP.setHealth(1);
+                gameScore.setScore(1);
+                gameConsole.insertLog("Moving One Grid: HP --");
+            }
+            else
+            {
+                gameState.setGameState(4);
+                clear();
+              
+                //gameMenu.display();
+                
+            }
 
         }
         this.setMoving();
