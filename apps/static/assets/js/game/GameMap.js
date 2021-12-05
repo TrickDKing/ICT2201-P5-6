@@ -30,7 +30,7 @@ class GameMap {
 
     //Ensure no objects are spawned at the start and end of the map
     this.grid[0][0] = 1;
-    this.grid[this.rows - 1][this.cols - 1] = 1;
+    this.grid[this.cols - 1][this.rows - 1] = 1;
   }
 
   create2DArray(cols, rows) {
@@ -43,14 +43,17 @@ class GameMap {
     return arr;
   }
 
-  retrieve(col, row) {
-    if (col <= this.grid.cols && row <= this.grid.rows) {
-      return this.grid[col][row];
-    }
-    return;
+  checkGrid(position) {
+    let col = position[0];
+    let row = position[1];
+    /*if (col <= this.grid.cols && row <= this.grid.rows) {
+      
+    }*/
+    return this.grid[col][row];
+    //return;
   }
 
-
+  
 
   getMapRows() {
     return this.rows;

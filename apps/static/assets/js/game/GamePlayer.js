@@ -13,8 +13,14 @@ class GamePlayer {
         this.moving = 0;
     }
 
-    setPlayerPosition(row, column) {
-        this.currentPosition = [row, column];
+    getPlayerPosition() {
+        //Function to get current player position
+        return this.currentPosition;
+    }
+
+    setPlayerPosition(col, row) {
+       
+        this.currentPosition = [col, row];
     }
 
     reset() {
@@ -45,6 +51,7 @@ class GamePlayer {
             await delay(1000);
             this.movePosition(command);
             gameHP.setHealth(1);
+            gameConsole.insertLog("Moving One Grid: HP --");
             gameScore.setScore(1);
             
         }
@@ -52,12 +59,27 @@ class GamePlayer {
         gameConsole.insertLog("EXECUTION ENDED");
     };
 
+    checkObstacle(){
+        gameMap.checkGrid(gamePlayer.getPlayerPosition());
+    }
+
     movePosition(command) {
         //Function to move player
+        
         if (command == 0) {
             //Move forward
+            
+            
+            if(gameMap.checkGrid(gamePlayer.getPlayerPosition()) == 2){
+                gameConsole.insertLog("TRAP HIT!");
+                gameConsole.insertLog("HP --");
+            }
+            
+            gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] - 1, gamePlayer.getPlayerPosition()[0]);
             this.y -= 50;
             gameConsole.insertLog("Moving Forward");
+           
+            
         }
 
         if (command == 1) {
@@ -80,10 +102,7 @@ class GamePlayer {
 
     }
 
-    getPlayerPosition() {
-        //Function to get current player position
-        return this.currentPosition;
-    }
+    
 
     keyPressed() {
 

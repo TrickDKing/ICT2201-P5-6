@@ -9,7 +9,13 @@ class GameCommands {
   }
 
   addCommands(value) {
-    this.commands.push(value);
+    if(this.commands.length != 80){
+      this.commands.push(value);
+    }else{
+      gameConsole.insertLog("ERROR ! STACK IS FULL! ");
+      gameConsole.insertLog("THIS IS TO PREVENT STACK OVERFLOW!");
+    }
+    
   }
 
   removeLastCommand(){

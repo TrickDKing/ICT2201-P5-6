@@ -30,7 +30,7 @@ function setup() {
   gameConsole = new GameConsole();
   gameMap.getMapData(1);
 
-  gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
+  gamePlayer.setPlayerPosition(gameMap.getMapRows()-1, gameMap.getMapColumns()-1); //Initialise player position to be at the start
 
 }
 
@@ -139,7 +139,8 @@ function mouseClicked() {
           gameScore.resetScore();
           gameHP.reset();
           gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
-          gameConsole.insertLog("EXECUTING INSTRUCTIONS...");
+          gameConsole.insertLog("STARTING SIMULATION ...");
+          gameConsole.insertLog("EXECUTING INSTRUCTIONS ...");
         }
       }
 
