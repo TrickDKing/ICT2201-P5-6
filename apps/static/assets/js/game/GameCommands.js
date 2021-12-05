@@ -8,14 +8,18 @@ class GameCommands {
     this.commands = [];
   }
 
-  getAllCommands(){
-    return this.commands;
-  }
-  
   addCommands(value) {
     this.commands.push(value);
   }
 
+  removeLastCommand(){
+    this.commands.pop();
+  }
+
+  getAllCommands(){
+    return this.commands;
+  }
+  
   getArraySize() {
     return this.commands.length;
   }
@@ -87,7 +91,7 @@ class GameCommands {
     rect(580, 620, 115, 25); // Down box
     rect(540, 590, 90, 25);  //Left box
     rect(640, 590, 90, 25); // Right box
-    rect(740, 590, 114, 25); // Rotate box
+    rect(740, 590, 240, 25); // Remove last command box
 
     fill(0);
     textSize(20);
@@ -97,7 +101,7 @@ class GameCommands {
     text('DOWN ', 608, 640);
     text('LEFT ', 560, 610);
     text('RIGHT ', 650, 610);
-    text('ROTATE', 760, 610);
+    text('POP LAST COMMAND', 760, 610);
 
   }
 }

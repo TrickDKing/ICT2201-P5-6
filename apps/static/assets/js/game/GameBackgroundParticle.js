@@ -12,7 +12,6 @@ class GameBackgroundParticle {
         this.colour = color(0, 0, 0, 5);
     }
 
-
     update() {
         this.vel.add(this.acc);
         this.vel.limit(this.maxspeed);

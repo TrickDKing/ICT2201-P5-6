@@ -46,8 +46,10 @@ class GamePlayer {
             this.movePosition(command);
             gameHP.setHealth(1);
             gameScore.setScore(1);
+            
         }
         this.setMoving();
+        gameConsole.insertLog("Execution ended");
     };
 
     movePosition(command) {
@@ -55,21 +57,25 @@ class GamePlayer {
         if (command == 0) {
             //Move forward
             this.y -= 50;
+            gameConsole.insertLog("Moving Forward");
         }
 
         if (command == 1) {
             //Move left
             this.x -= 50;
+            gameConsole.insertLog("Moving Left");
         }
 
         if (command == 2) {
             //Move right
             this.x += 50;
+            gameConsole.insertLog("Moving Right");
         }
 
         if (command == 3) {
-            //Move right
+            //Move Down
             this.y += 50;
+            gameConsole.insertLog("Moving Down");
         }
 
     }

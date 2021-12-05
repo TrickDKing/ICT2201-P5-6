@@ -5,17 +5,17 @@ let gameScore;
 let gamePlayer;
 let gameMap;
 let grid;
-let shape1;
 let gameCommands;
 let gameData;
 let gameHP;
 let Gameleaderboard;
 let pg;
+let gameConsole;
 
 function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
   createCanvas(1600, 660).parent('canvasHolder');
-  background('orange');
+  background('white');
   gameLeaderboard = new GameLeaderboard();
   gameBackground = new GameBackground();
   gameMenu = new GameMenu();
@@ -27,7 +27,9 @@ function setup() {
   gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
+  gameConsole = new GameConsole();
   gameMap.getMapData(1);
+
   gamePlayer.setPlayerPosition(gameMap.getMapRows(), gameMap.getMapColumns()); //Initialise player position to be at the start
 
 }
@@ -41,21 +43,21 @@ function draw() {
   print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 0) {
-    //gameBackground.display();
+    gameBackground.display();
     gameMenu.display(); //GameMenu display
 
   }
 
   if (gameState.getGameState() == 1) {
     clear();
-    background('orange');
+    
     gameMap.spawnMap(); // Render map
     gameScore.display(); // Render Score
     gameHP.display(); //Render Health bar
     gamePlayer.update(); //Update player movements
     gamePlayer.display(); // Renders updated player movements
     gameCommands.display(); // Renders Games queue
-
+    gameConsole.display();
     /*
     gamePlayer.keyPressed();
     */
@@ -64,7 +66,9 @@ function draw() {
 
   if (gameState.getGameState() == 2) {
     //Game paused state
+    
     gamePauseMenu.displayPauseMenu();
+    gameBackground.display();
   }
 
   if (gameState.getGameState() == 3) {
@@ -112,6 +116,9 @@ function mouseClicked() {
         //Move Right button
         gameCommands.addCommands(2);
       }
+      else if (mouseX < 985 && mouseX > 735){
+        gameCommands.removeLast();
+      }
     }
 
     if (mouseY < 640 && mouseY > 620) {
@@ -131,6 +138,7 @@ function mouseClicked() {
           gameScore.resetScore();
           gameHP.reset();
           gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
+          gameConsole.insertLog("Executing instructions...");
         }
       }
 
@@ -141,6 +149,7 @@ function mouseClicked() {
           gameScore.resetScore();
           gameHP.reset();
           gameCommands.clearAllCommands();
+          gameConsole.insertLog("Resetting...");
         }
 
       }
