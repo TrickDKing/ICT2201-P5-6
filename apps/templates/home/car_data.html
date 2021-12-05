@@ -26,10 +26,9 @@
         <!-- [ Main Content ] start -->
         <div class="row">
             <!-- [ sample-page ] start -->
-            <div class="col-md-6 col-xl-12">
+            <div class="col-xl-12">
                 <div class="row">
-                    <div class="col-md-12 col-xl-3"></div>
-                    <div class="col-md-12 col-xl-3">
+                    <div class="col-md-4 col-xl-3">
                         <div class="card bg-c-green order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Car Speed</h6>
@@ -38,7 +37,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-xl-3">
+                    <!-- <div class="col-md-4 col-xl-3">
                         <div class="card bg-c-yellow order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Distance Travelled</h6>
@@ -46,8 +45,7 @@
                                 <p class="m-b-0">Last Updated<span class="float-right" id="distanceTravelledTimeUpdate">9:34pm</span></p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-xl-3"></div>
+                    </div> -->
                 </div>
             </div>
             <!-- [ sample-page ] end -->
@@ -84,6 +82,39 @@
         });
     });
 
+    $(document).keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        var commandVal;
+
+        if (keycode == '87') {
+            commandVal = "1";
+            console.log('FORWARD!');
+        }
+        if (keycode == '65') {
+            commandVal = "2";
+            console.log('LEFT!');
+        }
+        if (keycode == '68') {
+            commandVal = "3";
+            console.log('RIGHT!');
+        }
+        if (keycode == '83') {
+            commandVal = "4";
+            console.log('STOP!');
+        }
+
+        $.ajax({
+            url: '/send_a_command',
+            type: 'POST',
+            data: {
+                command_value: commandVal
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+
     setInterval(function() {
         $.ajax({
             url: '/display_car_data',
@@ -99,7 +130,7 @@
                 $("#distanceTravelledTimeUpdate").text(today.toLocaleDateString('en-GB') + " " + time);
             }
         });
-    }, 12000); //time in milliseconds
+    }, 10000); //time in milliseconds
 </script>
 
 {% endblock javascripts %}

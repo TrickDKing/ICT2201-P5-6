@@ -14,8 +14,6 @@ from apps.authentication.util import hash_pass
 from apps.home import dbfuncs
 
 # Helper - Extract current page name from request
-
-
 def get_segment(request):
     try:
         segment = request.path.split('/')[-1]
@@ -152,10 +150,29 @@ def instructions():
     return render_template('home/instructions.html')
 
 
-@blueprint.route('/custom_levels')
+@blueprint.route('/custom_levels', methods=['GET', 'POST'])
 def custom_levels():
-    return render_template('home/customlevels.html')
+    if request.method == "GET":
+        return render_template('home/customlevels.html')
+    else:
+        name = request.form['level_name']
+        grid = request.form['grid']
+        level_type = "custom"
+        energy_level = request.form['energy_level']
+        
+        level = [
+            (
+                name,
+                grid, 
+                level_type, 
+                energy_level
+            )
+        ]
 
+        dbfuncs.insert_data(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
+        
+        return jsonify({"msg":"Level saved!"})
+            
 
 @blueprint.route('/attempt_history', methods=['GET', 'POST'])
 def attempt_history():
@@ -215,8 +232,12 @@ def send_commands():
 def update_car_data():
     if request.method == "GET":
         speed = request.args.get('speed')
+        
+        data = {
+            "speed": speed
+        }
 
-        dbfuncs.update_data("car_data", "id", 1, "speed", speed)
+        dbfuncs.update_data(table_name="car_data", data=data, identifier="id", identifier_value=1)
 
         return f"Data received: {speed}\r\n"
 
@@ -226,6 +247,7 @@ def display_car_data():
     if request.method == "GET":
 
         speed = dbfuncs.select_certain_columns("car_data", "speed")
+        print(speed)
 
         return jsonify({"car_speed": speed})
    

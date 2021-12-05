@@ -20,7 +20,7 @@ $(document).ready(function() {
         url: '/get_levels',
         type: 'POST',
         data: {
-            level_type: currentTab
+            "level_type": currentTab
         },
         success: function(data) {
             data = data.levels

@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %} {% block title %} UI Tables {% endblock %}
+{% extends "layouts/base.html" %} {% block title %} Custom Levels {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
@@ -40,9 +40,6 @@
             <!-- [ sample-page ] start -->
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h5>Custom Levels</h5>
-                    </div>
                     <div class="card-body">
                         <div class="card-body table-border-style">
                             <div>
@@ -58,17 +55,34 @@
                             <br>
                             <div id="canvasHolder"></div>
                             <br>
-                            <div class="form-group form-inline">
+                            <!-- <div class="form-group form-inline">
                                 <label for="usr">Level Name:</label>
                                 <input type="text" class="form-control m-l-10" id="usr">
                                 <button id="saveBtn" type="button" class="btn btn-success m-l-10">Save</button>
-                            </div>
-                            <!-- <div class="form-inline">
-                                <div class="col-md-12 form-group">
-                                    <label class="col-sm-2 col-form-label" for="name">Name</label>
-                                    <input type="text" class="form-control" name="name" id="name" [(ngModel)]="person.name" disabled/>
-                                </div>
                             </div> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label for="levelName" class="col-sm-3 col-form-label">Level Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="levelName" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="energyLevel" class="col-sm-3 col-form-label">Energy Level</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="energyLevel" placeholder="Energy Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <button id="saveBtn" type="button" class="btn btn-success">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

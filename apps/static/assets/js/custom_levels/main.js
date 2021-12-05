@@ -56,7 +56,6 @@ function changeTileColor(event) {
     const y = Math.floor(layerY / tileSize);
 
     tile = grid[x][y];
-    console.log(grid);
 
     start_block = startBlock();
 
@@ -135,5 +134,56 @@ $("#clearBtn").click(function() {
 });
 
 $("#saveBtn").click(function() {
+    var level_name = $("#levelName").val();
+    var energy_level = $("#energyLevel").val();
+
+    var red = {
+        "r": 255,
+        "g": 0,
+        "b": 0
+    }
+
+    var green = {
+        "r": 0,
+        "g": 255,
+        "b": 0
+    }
+
+    var blue = {
+        "r": 0,
+        "g": 0,
+        "b": 255
+    }
     console.log(grid);
+
+    var newGrid = JSON.parse(JSON.stringify(grid));
+
+    for (var i = 0; i < newGrid.length; i++) {
+        console.log(newGrid[i])
+        for (var j = 0; j < newGrid.length; j++) {
+            if (JSON.stringify(newGrid[i][j]) === JSON.stringify(red)) {
+                newGrid[i][j] = "R";
+            } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(green)) {
+                newGrid[i][j] = "G";
+            } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(blue)) {
+                newGrid[i][j] = "B";
+            } else {
+                newGrid[i][j] = "W";
+            }
+        }
+    }
+
+    $.ajax({
+        url: '/custom_levels',
+        type: 'POST',
+        data: {
+            "grid": JSON.stringify(newGrid),
+            "level_name": level_name,
+            "energy_level": energy_level
+        },
+        success: function(data) {
+            alert(data.msg);
+            location.reload();
+        }
+    });
 });
