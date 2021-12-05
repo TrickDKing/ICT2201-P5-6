@@ -8,20 +8,17 @@ class GameHP {
     }
 
     setHealth(health) {
-        
+
         if (this.health >= 1) {
 
             if (this.health >= 0) {
                 this.health -= health;
             }
-            else if (this.health + health > 101) {
+            else if (this.health > 100) {
                 this.health = 100;
             }
 
         }
-
-
-
 
     }
 
