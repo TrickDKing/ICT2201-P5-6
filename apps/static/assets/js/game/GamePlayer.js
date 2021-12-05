@@ -68,13 +68,27 @@ class GamePlayer {
         
         if (command == 0) {
             //Move forward
+            console.log("Checking");
+            let checkFront = gameMap.checkGrid(this.getPlayerPosition()[0]-1, this.getPlayerPosition()[1]); 
+            console.log(checkFront);
+            if(checkFront == 3){
+                console.log("Triggered");
+                return;
+            }
+            else if(checkFront > 0 && checkFront <= 3){
+                if(checkFront == 2){
+                    gameConsole.insertLog("TRAP HIT!");
+                    gameConsole.insertLog("HP --");
+                }
+            }
+
             
             
-            if(gameMap.checkGrid(gamePlayer.getPlayerPosition()) == 2){
+          /*  if(gameMap.checkGrid(gamePlayer.getPlayerPosition()) == 2){
                 gameConsole.insertLog("TRAP HIT!");
                 gameConsole.insertLog("HP --");
-            }
-            
+            }*/
+
             gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] - 1, gamePlayer.getPlayerPosition()[0]);
             this.y -= 50;
             gameConsole.insertLog("Moving Forward");

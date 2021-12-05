@@ -40,7 +40,7 @@ function windowResized() {
 
 function draw() {
 
-  print(mouseX, mouseY);
+  //print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 0) {
     gameBackground.display();

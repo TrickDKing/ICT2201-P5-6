@@ -11,9 +11,9 @@ class GameMap {
 
   getMapData(data) {
     let mapData;
-    let sendData = {level_id: data};
+    let sendData = { level_id: data };
     console.log(JSON.stringify(sendData));
-    httpPost(this.url, 'json', sendData, mapData = function (success) { return success } , function(error) {console.log(error)} );
+    httpPost(this.url, 'json', sendData, mapData = function (success) { return success }, function (error) { console.log(error) });
     console.log("A");
     console.log(mapData);
   }
@@ -21,16 +21,18 @@ class GameMap {
   setObjects() {
     this.grid = this.create2DArray(this.cols, this.rows);
 
-    for (let i = 0; i < this.cols; i++) {
-      for (let j = 0; j < this.rows; j++) {
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
         this.grid[i][j] = floor(random(4));
 
       }
+      
     }
 
     //Ensure no objects are spawned at the start and end of the map
     this.grid[0][0] = 1;
     this.grid[this.cols - 1][this.rows - 1] = 1;
+    console.log(this.grid);
   }
 
   create2DArray(cols, rows) {
@@ -43,9 +45,8 @@ class GameMap {
     return arr;
   }
 
-  checkGrid(position) {
-    let col = position[0];
-    let row = position[1];
+  checkGrid(col, row) {
+
     /*if (col <= this.grid.cols && row <= this.grid.rows) {
       
     }*/
@@ -53,7 +54,7 @@ class GameMap {
     //return;
   }
 
-  
+
 
   getMapRows() {
     return this.rows;
