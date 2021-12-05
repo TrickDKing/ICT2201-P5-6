@@ -7,7 +7,6 @@ class GameConsole {
     insertLog(logString) {
         if (this.log.length == 20) {
             this.log.shift();
-            console.log("Popping");
         }
         this.log.push(logString);
     }

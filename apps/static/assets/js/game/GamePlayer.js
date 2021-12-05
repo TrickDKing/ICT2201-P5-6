@@ -19,7 +19,7 @@ class GamePlayer {
     }
 
     setPlayerPosition(col, row) {
-       
+
         this.currentPosition = [col, row];
     }
 
@@ -52,71 +52,107 @@ class GamePlayer {
             this.movePosition(command);
             gameHP.setHealth(1);
             gameConsole.insertLog("Moving One Grid: HP --");
-            gameScore.setScore(1);
-            
+
+
         }
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
     };
 
-    checkObstacle(){
+    checkObstacle() {
         gameMap.checkGrid(gamePlayer.getPlayerPosition());
     }
 
     movePosition(command) {
         //Function to move player
-        
+
         if (command == 0) {
             //Move forward
-            console.log("Checking");
-            let checkFront = gameMap.checkGrid(this.getPlayerPosition()[0]-1, this.getPlayerPosition()[1]); 
-            console.log(checkFront);
-            if(checkFront == 3){
-                console.log("Triggered");
-                return;
+            let checkFront = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] - 1);
+            if (checkFront == 0) {
+                gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             }
-            else if(checkFront > 0 && checkFront <= 3){
-                if(checkFront == 2){
+            else if (checkFront >= 1 && checkFront <= 3) {
+
+                if (checkFront == 2) {
                     gameConsole.insertLog("TRAP HIT!");
                     gameConsole.insertLog("HP --");
+                    gameHP.setHealth(5);
+                    gameScore.setScore(-1);
                 }
+
+                gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0], gamePlayer.getPlayerPosition()[1] - 1);
+                this.y -= 50;
+                gameConsole.insertLog("MOVING FORWARD");
             }
 
-            
-            
-          /*  if(gameMap.checkGrid(gamePlayer.getPlayerPosition()) == 2){
-                gameConsole.insertLog("TRAP HIT!");
-                gameConsole.insertLog("HP --");
-            }*/
 
-            gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] - 1, gamePlayer.getPlayerPosition()[0]);
-            this.y -= 50;
-            gameConsole.insertLog("Moving Forward");
-           
-            
+
+
         }
 
         if (command == 1) {
             //Move left
-            this.x -= 50;
-            gameConsole.insertLog("Moving Left");
+            let checkLeft = gameMap.checkGrid(this.getPlayerPosition()[0] - 1, this.getPlayerPosition()[1]);;
+            if (checkLeft == 0) {
+                gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
+            } else if (checkLeft >= 1 && checkLeft <= 3) {
+                if (checkLeft == 2) {
+                    gameConsole.insertLog("TRAP HIT!");
+                    gameConsole.insertLog("HP --");
+                    gameHP.setHealth(5);
+                    gameScore.setScore(-1);
+                }
+                gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] - 1, gamePlayer.getPlayerPosition()[1]);
+                this.x -= 50;
+                gameConsole.insertLog("MOVING LEFT");
+            }
+
         }
 
         if (command == 2) {
             //Move right
-            this.x += 50;
-            gameConsole.insertLog("Moving Right");
+            let checkRight = gameMap.checkGrid(this.getPlayerPosition()[0] + 1, this.getPlayerPosition()[1]);;
+            if (checkRight == 0) {
+                gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
+            } else if (checkRight >= 1 && checkRight <= 3) {
+                if (checkRight == 2) {
+                    gameConsole.insertLog("TRAP HIT!");
+                    gameConsole.insertLog("HP --");
+                    gameHP.setHealth(5);
+                    gameScore.setScore(-1);
+                }
+                gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] + 1, gamePlayer.getPlayerPosition()[1]);
+                this.x += 50;
+                gameConsole.insertLog("MOVING RIGHT");
+            }
+
         }
 
         if (command == 3) {
             //Move Down
-            this.y += 50;
-            gameConsole.insertLog("Moving Down");
+            let checkDown = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] + 1);;
+            if (checkDown == 0) {
+                gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
+            } else if (checkDown >= 1 && checkDown <= 3) {
+
+                if (checkDown == 2) {
+                    gameConsole.insertLog("TRAP HIT!");
+                    gameConsole.insertLog("HP --");
+                    gameHP.setHealth(5);
+                    gameScore.setScore(-1);
+                }
+
+                gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0], gamePlayer.getPlayerPosition()[1] + 1);
+                this.y += 50;
+                gameConsole.insertLog("MOVING DOWN");
+            }
+
         }
 
     }
 
-    
+
 
     keyPressed() {
 

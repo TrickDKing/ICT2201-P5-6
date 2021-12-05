@@ -138,6 +138,7 @@ function mouseClicked() {
           gamePlayer.reset();
           gameScore.resetScore();
           gameHP.reset();
+          gamePlayer.setPlayerPosition(gameMap.getMapColumns()-1, gameMap.getMapRows()-1);
           gamePlayer.movePlayerPosition(gameCommands.getAllCommands());
           gameConsole.insertLog("STARTING SIMULATION ...");
           gameConsole.insertLog("EXECUTING INSTRUCTIONS ...");
