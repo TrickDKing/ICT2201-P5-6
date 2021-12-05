@@ -51,7 +51,7 @@ class GamePlayer {
         for (const command of commands) {
            
 
-            if(gameHP.getHealth() > 96)
+            if(gameHP.getHealth() > 0)
             {
                 await delay(1000);
                 this.movePosition(command);
@@ -63,8 +63,6 @@ class GamePlayer {
             {
                 gameState.setGameState(4);
                 clear();
-              
-                //gameMenu.display();
                 
             }
 
