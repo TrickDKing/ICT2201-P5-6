@@ -84,6 +84,39 @@ function draw() {
 
 }
 
+if (gameState.getGameState() == 1) {
+    clear();
+
+    gameMap.spawnMap(); // Render map
+    gameScore.display(); // Render Score
+    gameHP.display(); //Render Health bar
+    gamePlayer.update(); //Update player movements
+    gamePlayer.display(); // Renders updated player movements
+    gameCommands.display(); // Renders Games queue
+    gameConsole.display();
+    /*
+    gamePlayer.keyPressed();
+    */
+
+}
+
+if (gameState.getGameState() == 2) {
+    //Game paused state
+
+    gamePauseMenu.displayPauseMenu();
+    gameBackground.display();
+}
+
+if (gameState.getGameState() == 3) {
+    //Game end state
+    gameLeaderboard.display();
+}
+if (gameState.getGameState() == 4) {
+    //Game end state
+    clear();
+    gameOver.displayGameOver();
+}
+
 function mouseClicked() {
 
     if (gameState.getGameState() == 0 && gameMenu.getOption() == 0) {
