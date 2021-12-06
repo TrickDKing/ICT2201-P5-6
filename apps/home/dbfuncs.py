@@ -137,7 +137,21 @@ def insert_data(score, health):
 # Deletes the row from "table_name" where the "identifier" = "identifier_value"
 # SQL = DELETE FROM "table_name" WHERE "identifier" = "identifier_value"
 
+def insert_data_2(table_name: str = None, table_columns: list = None, values: list = None):
+    columns_string = listToStr(table_columns)
+    values_string = ', '.join(f"{w}" for w in values)
 
+    if "," not in values_string:
+        sql = "INSERT INTO " + table_name + " (" + columns_string + ") VALUES(" + values_string + ")"
+    else:
+        sql = "INSERT INTO " + table_name + " (" + columns_string + ") VALUES" + values_string
+        
+    cursor.execute(sql)
+    mydb.commit()
+
+    print(f"data inserted to {table_name} table successfully.")
+    
+    
 def delete_data(table_name, identifier, identifier_value):
     mycursor = mydb.cursor()
 

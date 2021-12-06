@@ -1,84 +1,97 @@
-{% extends "layouts/base.html" %}
-
-{% block title %} UI Tables {% endblock %} 
+{% extends "layouts/base.html" %} {% block title %} Custom Levels {% endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %}{% endblock stylesheets %}
-
-{% block content %}	
-
-    <!-- [ Main Content ] start -->
-    <section class="pcoded-main-container">
-        <div class="pcoded-content">
-            <!-- [ breadcrumb ] start -->
-            <div class="page-header">
-                <div class="page-block">
-                    <div class="row align-items-center">
-                        <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="m-b-10">Custom Levels</h5>
-                            </div>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Custom Levels</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- [ breadcrumb ] end -->
-            <!-- [ Main Content ] start -->
-            <div class="row">
-                <!-- [ stiped-table ] start -->
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Custom Levels</h5>
-                        </div>
-                        <div class="card-body table-border-style">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- [ stiped-table ] end -->
-            </div>
-            <!-- [ Main Content ] end -->
-        </div>
-    </section>
-    <!-- [ Main Content ] end -->
-
-{% endblock content %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom_levels.css') }}"> {% endblock stylesheets %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<!-- p5.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
+<script src="https://unpkg.com/blockly/blockly.min.js"></script>
+
+<!-- Own JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/custom_levels/main.js') }}"></script>
+{% endblock javascripts %} {% block content %}
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Custom Levels</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Custom Levels</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-body table-border-style">
+                            <div>
+                                <p class="m-b-10">Please select a component to add and select which grid to add on the map.</p>
+                                <label for="btnGroup">Components</label>
+                                <div id="btnGroup" class="btn-group m-l-5" role="group" aria-label="button groups">
+                                    <button id="buffsBtn" type="button" class="btn btn-outline-primary">Batteries (Buffs)</button>
+                                    <button id="debuffsBtn" type="button" class="btn btn-outline-primary">Traps (Debuffs)</button>
+                                    <button id="wallsBtn" type="button" class="btn btn-outline-primary">Walls (Obstacles)</button>
+                                </div>
+                                <button id="clearBtn" type="button" class="btn  btn-icon btn-outline-danger">Clear</button>
+                            </div>
+                            <br>
+                            <div id="canvasHolder"></div>
+                            <br>
+                            <!-- <div class="form-group form-inline">
+                                <label for="usr">Level Name:</label>
+                                <input type="text" class="form-control m-l-10" id="usr">
+                                <button id="saveBtn" type="button" class="btn btn-success m-l-10">Save</button>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label for="levelName" class="col-sm-3 col-form-label">Level Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="levelName" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="energyLevel" class="col-sm-3 col-form-label">Energy Level</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" class="form-control" id="energyLevel" placeholder="Energy Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <button id="saveBtn" type="button" class="btn btn-success">Save</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</section>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}
