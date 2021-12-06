@@ -190,7 +190,7 @@ function mouseClicked() {
       if (mouseY < 560 && mouseY > 525)   //level complete, proceed to next level
       {
         var a = gameMap.getMapID() + 1;
-
+        
         gameState.setGameState(1);
         gamePlayer.reset();
         gameScore.resetScore();
