@@ -45,7 +45,6 @@
                                             <th>Cleared</th>
                                             <th>Score</th>
                                             <th>Time</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody> 
@@ -59,9 +58,6 @@
                                         <td>{{item.level_status}}</td>
                                         <td>{{item.score}}</td>
                                         <td>{{item.time_taken}}</td>
-                                        <td><button onclick="location.href = '/index'" type="button" class="btn disabled btn-primary">Play !</button></td>
-                                        <td>{{item.map_array}}</td>
-
                                     </tr> 
                                     {% set count.value = count.value + 1 %}
                                     {%endif%}
