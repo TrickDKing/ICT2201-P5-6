@@ -7,16 +7,27 @@ class GameMap {
     this.grid;
     this.setObjects();
     this.url = "http://127.0.0.1:5000/gameMaps";
+    this.mapData;
+    this.mapName;
+    
+    this.checkGetSuccess = 0;
   }
 
-  getMapData(data) {
-    let mapData;
-    let sendData = { level_id: data };
-    console.log(JSON.stringify(sendData));
-    httpPost(this.url, 'json', sendData, mapData = function (success) { 
-      console.log(success);
-      return success }, function (error) { console.log(error) });
- 
+  getMapName(){
+    return this.mapName;
+  }
+
+  getMapData(retrievedData) {
+    this.mapName = retrievedData.name;
+    var stringified = '[' + retrievedData.map_array.replace(/'/g, '"') + ']';
+    let mapArray = JSON.parse(stringified)[0];
+  
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        this.grid[i][j] = mapArray[i][j];
+      }
+    }
+
   }
 
   setObjects() {
@@ -26,13 +37,14 @@ class GameMap {
       for (let j = 0; j < this.cols; j++) {
         this.grid[i][j] = floor(random(4));
       }
-      
+
     }
 
     //Ensure no objects are spawned at the start and end of the map
     this.grid[0][0] = 1;
     this.grid[this.cols - 1][this.rows - 1] = 1;
     console.log(this.grid);
+
   }
 
   create2DArray(cols, rows) {
@@ -54,8 +66,6 @@ class GameMap {
     //return;
   }
 
-
-
   getMapRows() {
     return this.rows;
   }
@@ -65,6 +75,14 @@ class GameMap {
   }
 
   spawnMap() {
+    if (this.checkGetSuccess == 0) {
+
+      let sendData = { level_id: 1 };
+      httpPost(this.url, 'json', sendData, function (success) {
+        gameMap.getMapData(success);
+      }, function (error) { console.log("ERROR FETCHING GAME MAP") });
+      this.checkGetSuccess = 1;
+    }
 
     for (let i = 0; i < this.cols; i++) {
       for (let j = 0; j < this.rows; j++) {
@@ -102,6 +120,8 @@ class GameMap {
     fill("black"); //Fill here defines text color
     text('START', 452, 568); //Display text and positions
     text('END', 10, 46); //Display text and positions
+    textSize(30) //Defines text size
+    text("LEVEL: " + this.mapName, 130, 40);
   }
 
 }

@@ -29,7 +29,7 @@ function setup() {
   gamePauseMenu = new GamePauseMenu();
   gameOver = new GameOver();
   gameConsole = new GameConsole();
-  gameMap.getMapData(1);
+  
 
   gamePlayer.setPlayerPosition(gameMap.getMapRows() - 1, gameMap.getMapColumns() - 1); //Initialise player position to be at the start
 
@@ -165,6 +165,9 @@ function mouseClicked() {
           gameCommands.clearAllCommands();
           gameConsole.insertLog("RESETTING...");
         }
+        else{
+          gameConsole.insertLog("GAME EXECUTING UNABLE TO RESET");
+        }
 
       }
 
@@ -177,6 +180,7 @@ function mouseClicked() {
   if (gameState.getGameState() == 3) {
 
   }
+
   if (gameState.getGameState() == 4) {
     if (mouseY < 188 && mouseY > 125) {
       //Start game

@@ -30,7 +30,7 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index', methods=['GET', 'POST'])
+@blueprint.route('/index/', methods=['GET', 'POST'])
 @login_required
 def index():
     if request.method == "GET":
@@ -82,7 +82,10 @@ def gameLeaderboard():
 def maps():
     '''Route to get game maps from database'''
     if request.method == "GET":
-        return jsonify("A")
+        print(request.data)
+        mapData = select_level(1)
+        print(mapData)
+        return mapData
     if request.method == "POST":
 
         print(type(request.data))
