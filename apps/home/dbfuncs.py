@@ -108,7 +108,7 @@ def select_level(level):
 def get_best_score_by_level(table_name,table_column,table_column2):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
+    mycursor.execute("SELECT a.*, l.name FROM {} a, levels l WHERE score IN (SELECT max(score) FROM attempts GROUP BY {}) AND a.level_id = l.level_id ORDER BY {} ".format(table_name,table_column,table_column2))
 
     myresult = mycursor.fetchall()
 
