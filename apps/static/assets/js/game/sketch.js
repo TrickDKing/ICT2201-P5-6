@@ -182,16 +182,16 @@ function mouseClicked() {
     if (mouseX < 700 && mouseX > 575) {
       if (mouseY < 588 && mouseY > 450) {
         //Exit to main menu
-        clear();
-        loop();
-        gameState.setGameState(0);
-
+        
+        gameLeaderboard.setCheckGetSuccess(0);
+        gameState.setGameState(4);
+        gameMenu.display(); //GameMenu display
       }
     }
     else if (mouseX < 930 && mouseX > 850) {
       if (mouseY < 538 && mouseY > 450)   //level complete, proceed to next level
       {
-        loop();
+        
         gameState.setGameState(0);
       }
     }

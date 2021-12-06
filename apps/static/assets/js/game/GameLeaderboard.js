@@ -3,8 +3,20 @@ class GameLeaderboard {
         this.url = "/gameLeaderboard";
         this.checkGetSuccess = 0;
         this.id = $("#level_id").val();
-        console.log(this.id);
+        this.attempts;
+        this.attemptsLength;
         this.displayToggled = false;
+    }
+
+    getData(value) {
+
+        this.attempts = value;
+        this.attemptsLength = this.attempts.length;
+
+    }
+
+    getDataSize() {
+        return this.attempts.length;
     }
 
     getAttempts() {
@@ -20,7 +32,7 @@ class GameLeaderboard {
                 attempts = attempts.sort(function (a, b) {
                     return b.score - a.score;
                 });
-                
+
                 let height = 300;
 
 
@@ -28,16 +40,27 @@ class GameLeaderboard {
                     attempts = attempts.slice(0, 5);
                 }
 
+                gameLeaderboard.getData(attempts);
+
                 for (let i = 0; i < attempts.length; i++) {
+
                     attempts[i].id;
                     attempts[i].name;
                     attempts[i].score;
+
                     textSize(30)
                     text(attempts[i].name + " " + attempts[i].score, (710), height);
                     height += 50;
                 }
+
+
             }
         });
+        this.checkGetSuccess = 1;
+    }
+
+    setCheckGetSuccess(value) {
+        this.checkGetSuccess = value;
     }
 
     getScore() {
@@ -48,13 +71,11 @@ class GameLeaderboard {
         return this.checkGetSuccess = value;
     }
 
-    postGameScore() {
-        return;
-    }
-
     display() {
-        this.getAttempts();
-        noLoop();
+        if (this.checkGetSuccess == 0 && gameState.getGameState() == 3) {
+
+            this.getAttempts();
+        }
 
         textSize(50)
         text('LEADERBOARD', (windowWidth / 3) - 50, 100);
@@ -62,17 +83,31 @@ class GameLeaderboard {
         textSize(30)
         color('black');
         noFill();
-        rect(540, 500, 200, 25);
+        rect(540, 530, 200, 25);
         textSize(20);
         fill(0);
-        text('RETURN TO MENU', 550, 520);
+        text('RETURN TO MENU', 550, 550);
 
         color('black');
         noFill();
-        rect(830, 500, 130, 25);
+        rect(830, 530, 140, 25);
         textSize(20);
         fill(0);
-        text('NEXT LEVEL', 840, 520);
+        text('NEXT LEVEL', 840, 550);
+
+        let height = 300;
+        
+        if (this.attemptsLength != 0) {
+            for (let i = 0; i < this.attemptsLength; i++) {
+
+                textSize(30)
+                text(this.attempts[i].name + " " + this.attempts[i].score, 710, height);
+                height += 50;
+
+            }
+        }
+
+
     }
 
 }

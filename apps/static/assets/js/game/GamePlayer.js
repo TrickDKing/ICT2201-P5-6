@@ -62,6 +62,7 @@ class GamePlayer {
                 gameConsole.insertLog("Moving One Grid: HP --");
 
             } else {
+                gameConsole.insertLog("Health is zero! GAME OVER");
                 gameState.setGameState(4);
                 clear();
                 break;
@@ -71,8 +72,6 @@ class GamePlayer {
 
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
-
-        
 
     };
 
@@ -86,7 +85,7 @@ class GamePlayer {
         if (command == 0) {
             //Move forward
             let checkFront = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] - 1);
-            console.log(checkFront);
+            
             if (checkFront == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkFront >= 1 && checkFront <= 3) {
