@@ -57,6 +57,7 @@ class GamePlayer {
                 gameHP.setHealth(1);
                 gameScore.setScore(1);
                 gameConsole.insertLog("Moving One Grid: HP --");
+               
             }
             else
             {

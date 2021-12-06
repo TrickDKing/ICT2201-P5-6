@@ -17,7 +17,10 @@ class GameOver{
         
         
     }
-   
+    storeGameData()
+    {
+        
+    }
     
 
 }

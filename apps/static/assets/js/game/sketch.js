@@ -51,7 +51,7 @@ function draw() {
 
   if (gameState.getGameState() == 1) {
     clear();
-
+    
     gameMap.spawnMap(); // Render map
     gameScore.display(); // Render Score
     gameHP.display(); //Render Health bar
@@ -78,6 +78,7 @@ function draw() {
   }
   if (gameState.getGameState() == 4) {
     //Game end state
+    clear();
     gameOver.displayGameOver();
   }
 
@@ -175,6 +176,14 @@ function mouseClicked() {
 
   if (gameState.getGameState() == 3) {
 
+  }
+  if (gameState.getGameState() == 4) {
+    if (mouseY < 188 && mouseY > 125) {
+      //Start game
+      clear(); 
+      setup();
+      
+    }
   }
 }
 
