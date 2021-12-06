@@ -134,7 +134,7 @@ def route_template(template):
 
         elif template == 'levelselect.html':
             data = get_best_score_by_level("attempts","level_id","level_id")
-            attempts = select_data(table_name="attempts")
+            # attempts = select_data(table_name="attempts", current_user_id = current_user.id)
             # print(attempts)
             # attempts = sorted(attempts, key=itemgetter('level_id'))
             # Display data grouped by grade
@@ -144,7 +144,7 @@ def route_template(template):
             #     for k in value:
             #         print(k)
             segment = get_segment(request)
-            return render_template("home/" + template, segment=segment, data=data)
+            return render_template("home/" + template, segment=segment, data=data, current_user = current_user.id)
         # SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
         # Whenever the groupby or complicated sql statements fail, execute this to allow nonaggregate queries
 
