@@ -120,7 +120,23 @@ def get_best_score_by_level(table_name, table_column, table_column2):
 def select_certain_columns(table_name, column_names):
     mycursor = mydb.cursor()
     mycursor.execute("SELECT {} FROM {}".format(column_names, table_name))
+def select_level(level):
+    table_name = "levels"
+    cursor.execute(
+        "SELECT * FROM {} where level_id= {}".format(table_name, level))
+    result = cursor.fetchall()
 
+    print(result[0])
+
+    return result[0]
+
+
+def get_best_score_by_level(table_name, table_column, table_column2):
+    print(table_name)
+    mycursor = mydb.cursor(dictionary=True)
+
+    #mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
+    mycursor.execute("SELECT a.*, l.name FROM {} a, levels l WHERE score IN (SELECT max(score) FROM attempts GROUP BY {}) AND a.level_id = l.level_id ORDER BY {} ".format(table_name, table_column, table_column2))
     myresult = mycursor.fetchall()
 
     print("selected {} columns from {}.".format(column_names, table_name))
@@ -141,6 +157,22 @@ def update_data(table_name, identifier, identifier_value, column_name, value):
 
 # Deletes the row from "table_name" where the "identifier" = "identifier_value"
 # SQL = DELETE FROM "table_name" WHERE "identifier" = "identifier_value"
+def insert_data(score, health):
+    try:
+        # Adding data
+
+        sql = "INSERT INTO SIT.attempts (level_id, score,time_taken,energy_left,level_status,uid,date) VALUES (1,%s,'0:05:23',%s,'failed',1,'20211124')"
+        val = (int(score), int(health))
+        cursor.execute(sql, val)
+        # Applying changes
+        mydb.commit()
+    except:
+        print("An error has occured")
+
+# Deletes the row from "table_name" where the "identifier" = "identifier_value"
+# SQL = DELETE FROM "table_name" WHERE "identifier" = "identifier_value"
+
+
 def delete_data(table_name, identifier, identifier_value):
     mycursor = mydb.cursor()
 
@@ -186,22 +218,3 @@ def reset_index(table_name):
 #     "name": "William",
 #     "desc": "person3"
 # }
-def insert_data(table_name, data):
-    columns = []
-    values = []
-
-    for key, value in data.items():
-        columns.append(key)
-        values.append(value)
-
-    columns_string = ', '.join(f"`{w}`" for w in columns)
-    values_string = ', '.join(f"'{w}'" for w in values)
-
-    mycursor = mydb.cursor()
-    sql = "INSERT INTO " + table_name + \
-        " (" + columns_string + ") VALUES (" + values_string + ")"
-
-    mycursor.execute(sql)
-    mydb.commit()
-
-    print("data inserted to {} table successfully.".format(table_name))

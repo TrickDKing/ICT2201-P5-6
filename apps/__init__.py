@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from importlib import import_module
 
 
@@ -32,6 +33,7 @@ def configure_database(app):
 
 def create_app(config):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(config)
     register_extensions(app)
     register_blueprints(app)

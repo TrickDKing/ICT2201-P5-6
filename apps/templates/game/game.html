@@ -1,14 +1,17 @@
 {% extends "layouts/base.html" %}
 
-
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
 <title>{% block title %} Game Page {% endblock title %}</title>
 {% block javascripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+
 <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameBackgroundParticle.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameBackground.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/sketch.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameMenu.js') }}"></script>
@@ -19,8 +22,11 @@
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameCommands.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameData.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameHP.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameBlocks.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GamePauseMenu.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/GameLeaderboard.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/game/draggable.js') }}"></script>
+
 {% endblock javascripts %} {% block content %}
 
 <!-- [ Main Content ] start -->
