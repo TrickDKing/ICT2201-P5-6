@@ -93,7 +93,7 @@ class GameMap {
 
       let sendData = { level_id: 1 };
       httpPost(this.url, 'json', sendData, function (success) {
-        // gameMap.getMapData(success);
+        gameMap.getMapData(success);
       }, function (error) { console.log("ERROR FETCHING GAME MAP") });
       this.checkGetSuccess = 1;
     }
