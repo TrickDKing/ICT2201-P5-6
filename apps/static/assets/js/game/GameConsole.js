@@ -14,6 +14,10 @@ class GameConsole {
     getLogs() {
         return this.log;
     }
+    clearAllLogs()
+    {
+        this.log = [];
+    }
 
     display() {
 
