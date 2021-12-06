@@ -1,15 +1,15 @@
 # ICT2201-P5-6
 ## ICT ISxSE Collab Lab P5 Team 6
 Group Members:
-1. Jimeno Johanna Charissa Mortel
-2. Carlton Anthoni Foo
-3. Xavier Lim Gui Ming
-4. Lee Xian Fu
-5. Han En Ding
+1. Xavier Lim Gui Ming (2000952)
+2. Jimeno Johanna Charissa Mortel (2002171)
+3. Carlton Anthoni Foo (2000621)
+4. Lee Xian Fu (2001995)
+5. Han En Ding (2000512)
 
 <br />
 
-# How to Install Dependencies and Run (for windows)
+# How to install dependencies and run (for windows)
 
 Make sure you have Python 3.9 installed
 
@@ -51,6 +51,61 @@ DB_HOST=172.24.117.56
 DB_PORT=3306
 DB_USERNAME=monty
 DB_PASS=Password123!
+```
+
+<br />
+
+## Code-base structure
+
+The project is coded using blueprints, app factory pattern, dual configuration profile (development and production) and an intuitive structure presented bellow:
+
+```bash
+< PROJECT ROOT >
+   |
+   |-- apps/
+   |    |
+   |    |-- home/                           # A simple app that serve HTML files
+   |    |    |-- routes.py                  # Define app routes
+   |    |    |-- dbfuncs.py                 # Functions for database functionality
+   |    |    |-- commands.py                # Getter and setter for commands
+   |    |
+   |    |-- authentication/                 # Handles auth routes (login and register)
+   |    |    |-- routes.py                  # Define authentication routes  
+   |    |    |-- models.py                  # Defines models  
+   |    |    |-- forms.py                   # Define auth forms (login and register) 
+   |    |
+   |    |-- static/
+   |    |    |-- assets/js/game             # P5.js Game functions and classes
+   |    |    |-- <css, JS, images>          # CSS files, Javascripts files
+   |    |
+   |    |-- templates/                      # Templates used to render pages
+   |    |    |-- includes/                  # HTML chunks and components
+   |    |    |    |-- navigation.html       # Top menu component
+   |    |    |    |-- sidebar.html          # Sidebar component
+   |    |    |    |-- scripts.html          # Scripts common to all pages
+   |    |    |
+   |    |    |-- layouts/                   # Master pages
+   |    |    |    |-- base-fullscreen.html  # Used by Authentication pages
+   |    |    |    |-- base.html             # Used by common pages
+   |    |    |
+   |    |    |-- accounts/                  # Authentication pages
+   |    |    |    |-- login.html            # Login page
+   |    |    |    |-- register.html         # Register page
+   |    |    |
+   |    |    |-- home/                      # UI Kit Pages
+   |    |         |-- index.html            # Index page
+   |    |         |-- 404-page.html         # 404 page
+   |    |         |-- *.html                # All other pages
+   |    |    
+   |  config.py                             # Set up the app
+   |    __init__.py                         # Initialize the app
+   |
+   |-- requirements.txt                     # Dependency modules
+   |
+   |-- .env                                 # Inject Configuration via Environment
+   |-- run.py                               # Start the app - WSGI gateway
+   |
+   |-- ************************************************************************
 ```
 
 <br />
