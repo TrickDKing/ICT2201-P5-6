@@ -29,7 +29,7 @@ function setup() {
     gamePauseMenu = new GamePauseMenu();
     gameOver = new GameOver();
     gameConsole = new GameConsole();
-    gameMap.getMapData(1);
+    
 
     gamePlayer.setPlayerPosition(gameMap.getMapRows() - 1, gameMap.getMapColumns() - 1); //Initialise player position to be at the start
 

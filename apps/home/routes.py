@@ -34,11 +34,11 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index/<level_id>', methods=['GET', 'POST'])
+@blueprint.route('/index', methods=['GET', 'POST'])
 @login_required
-def index(level_id):
+def index():
     if request.method == "GET":
-        return render_template('home/index.html', segment='index', level_id=level_id)
+        return render_template('home/index.html', segment='index')
     elif request.method == "POST":
         if(request.is_json):
           
