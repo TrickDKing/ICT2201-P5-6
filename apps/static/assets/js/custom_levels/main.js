@@ -162,7 +162,7 @@ $("#saveBtn").click(function() {
         console.log(newGrid[i])
         for (var j = 0; j < newGrid.length; j++) {
             if (JSON.stringify(newGrid[i][j]) === JSON.stringify(red)) {
-                newGrid[i][j] = 4;
+                newGrid[i][j] = 0;
             } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(green)) {
                 newGrid[i][j] = 3;
             } else if (JSON.stringify(newGrid[i][j]) === JSON.stringify(yellow)) {
