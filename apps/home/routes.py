@@ -159,11 +159,6 @@ def route_template(template):
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
 
-        elif template == 'attempthistory.html':
-            data = select_all_columns_with_condition("attempts", "attempt_id")
-            segment = get_segment(request)
-            return render_template("home/" + template, segment=segment, data=data)
-
         # Detect the current page
         segment = get_segment(request)
         # Serve the file (if exists) from app/templates/home/FILE.html
