@@ -1,4 +1,7 @@
 const GameHP = require('./GameHP');
+const GameScore = require('./GameScore');
+const GameConsole = require('./GameConsole');
+
 class GamePlayer {
     constructor(width, height) {
         this.width = width;
@@ -18,6 +21,8 @@ class GamePlayer {
         this.checkDown = -1;
         this.unittest = 0;
         this.gameHP = new GameHP();
+        this.gameScore = new GameScore();
+        this.gameConsole = new GameConsole();
     }
 
     getPlayerPosition() {
@@ -95,22 +100,32 @@ class GamePlayer {
                 this.checkFront = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] - 1);   
             }
             if (this.checkFront == 0) {
-                gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
+                if (this.unittest == 0) {
+                    gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
+                } else {
+                    this.gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
+                }
             }
             else if (this.checkFront >= 1 && this.checkFront <= 3) {
 
                 if (this.checkFront == 2) {
-                    gameConsole.insertLog("TRAP HIT! HP --");
-                    gameHP.setHealth(5);
-                    gameScore.setScore(-1);
+                    if (this.unittest == 0) {
+                        gameConsole.insertLog("TRAP HIT! HP --");
+                        gameHP.setHealth(5);
+                        gameScore.setScore(-1);
+                    } else {
+                        this.gameHP.setHealth(5);
+                        this.gameScore.setScore(-1);
+                    }
                 }
                 else if (this.checkFront == 3) {
                     if (this.unittest == 0) {
                         gameConsole.insertLog("BUFF ENCOUNTERED! RESTORING HP");
                         gameConsole.insertLog("HP ++");
+                        gameHP.setHealth(-5);
+                    } else {
+                        this.gameHP.setHealth(-5);
                     }
-                    this.gameHP.setHealth(-5);
-                    // gameHP.setHealth(-5);
                 }
                 
                 if (this.unittest == 0) {
