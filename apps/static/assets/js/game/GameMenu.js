@@ -23,15 +23,15 @@ class GameMenu {
 
     if (this.unittest == 0) {
       
-      // var density = 10; // The number of points in each row
-      // var space = width / density;
+      var density = 10; // The number of points in each row
+      var space = width / density;
 
-      // for (var x = 0; x < width; x += space) {
-      //   for (var y = 0; y < height; y += space) {
-      //     var p = createVector(x, y)
-      //     this.points.push(p)
-      //   }
-      // }
+      for (var x = 0; x < width; x += space) {
+        for (var y = 0; y < height; y += space) {
+          var p = createVector(x, y)
+          this.points.push(p)
+        }
+      }
 
     }
 
