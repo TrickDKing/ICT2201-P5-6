@@ -37,7 +37,7 @@ function setup() {
 
 function draw() {
 
-    //print(mouseX, mouseY);
+    print(mouseX, mouseY);
     //In game Menu
     if (gameState.getGameState() == 0) {
         gameBackground.display();
@@ -63,18 +63,18 @@ function draw() {
 
     if (gameState.getGameState() == 2) {
         //Game paused state
-
         gamePauseMenu.displayPauseMenu();
         gameBackground.display();
     }
 
     if (gameState.getGameState() == 3) {
-        //Game end state
+        //Game end state display leaderboard
         clear();
         gameLeaderboard.display();
     }
+
     if (gameState.getGameState() == 4) {
-        //Game end state
+        //Game over state
         clear();
         gameOver.displayGameOver();
     }
@@ -157,6 +157,7 @@ function mouseClicked() {
                     gamePlayer.reset();
                     gameScore.resetScore();
                     gameHP.reset();
+                    gamePlayer.setPlayerPosition(gameMap.getMapColumns() - 1, gameMap.getMapRows() - 1);
                     gameCommands.clearAllCommands();
                     gameConsole.insertLog("RESETTING...");
                 } else {
@@ -175,10 +176,9 @@ function mouseClicked() {
     if (mouseY < 188 && mouseY > 125) {
       //Quit without saving
       clear();
-      setup();
-
     }
   }
+
   if (gameState.getGameState() == 3) {      //level complete, exit to main menu
     if(mouseX < 700 && mouseX > 575)
     {

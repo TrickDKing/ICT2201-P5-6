@@ -94,7 +94,7 @@ class GameLeaderboard {
         rect(830,500,120,25);
         textSize(20);
         fill(0);
-        text('Next Level', 840, 520);
+        text('NEXT LEVEL', 840, 520);
     }
 
 }

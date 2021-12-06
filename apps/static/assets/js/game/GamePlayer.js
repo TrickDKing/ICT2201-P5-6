@@ -47,9 +47,9 @@ class GamePlayer {
         var delay = ms => new Promise(res => setTimeout(res, ms));
         this.setMoving();
         for (const command of commands) {
-
+            
             if (gameHP.getHealth() > 0) {
-                await delay(0);
+                await delay(1000);
                 this.movePosition(command);
                 gameHP.setHealth(1);
                 gameScore.setScore(1);
@@ -70,6 +70,7 @@ class GamePlayer {
             clear();
             gameState.setGameState(3);
         }
+
     };
 
     checkObstacle() {
@@ -101,9 +102,6 @@ class GamePlayer {
                 this.y -= 50;
                 gameConsole.insertLog("MOVING FORWARD");
             }
-
-
-
 
         }
 
