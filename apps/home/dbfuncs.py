@@ -102,8 +102,10 @@ def select_level(level):
     table_name = "levels"
     cursor.execute("SELECT * FROM {} where level_id= {}".format(table_name, level))
     result = cursor.fetchall()
-    print(result)
-    return result
+   
+    print(result[0])
+   
+    return result[0]
     
 def get_best_score_by_level(table_name,table_column,table_column2):
     print(table_name)

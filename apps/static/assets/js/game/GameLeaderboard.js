@@ -1,6 +1,6 @@
 class GameLeaderboard {
     constructor() {
-        this.url = "http://127.0.0.1:5000/gameData";
+        this.url = "http://127.0.0.1:5000/gameLeaderboard";
         this.checkGetSuccess = 0;
     }
 
