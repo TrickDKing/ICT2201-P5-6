@@ -27,8 +27,13 @@ class GameMap {
         this.grid[i][j] = mapArray[i][j];
       }
     }
+    console.log(this.grid);
   }
+
   getMapName() {
+    if (this.mapName == undefined) {
+      return "Nameless"
+    }
     return this.mapName;
   }
 
@@ -57,8 +62,7 @@ class GameMap {
     //Ensure no objects are spawned at the start and end of the map
     this.grid[0][0] = 1;
     this.grid[this.cols - 1][this.rows - 1] = 1;
-    console.log(this.grid);
-
+    
   }
 
   create2DArray(cols, rows) {
@@ -94,6 +98,7 @@ class GameMap {
       let sendData = { level_id: 1 };
       httpPost(this.url, 'json', sendData, function (success) {
         gameMap.getMapData(success);
+        console.log("A");
       }, function (error) { console.log("ERROR FETCHING GAME MAP") });
       this.checkGetSuccess = 1;
     }
