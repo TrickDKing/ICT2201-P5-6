@@ -172,7 +172,19 @@ def custom_levels():
         dbfuncs.insert_data(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
         
         return jsonify({"msg":"Level saved!"})
-            
+    
+    
+@blueprint.route('/test_map/<level_id>')
+def test_map(level_id):    
+    mycursor = dbfuncs.cursor
+    sql = f"SELECT * FROM levels WHERE level_id = '{level_id}'"
+    mycursor.execute(sql)
+    
+    level = mycursor.fetchone()
+    print(level)
+
+    return render_template("home/test_map.html", level=level)                
+
 
 @blueprint.route('/attempt_history', methods=['GET', 'POST'])
 def attempt_history():
