@@ -274,6 +274,6 @@ def custom_levels():
             )
         ]
 
-        dbfuncs.insert_data(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
+        dbfuncs.insert_data_2(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
         
         return jsonify({"msg":"Level saved!"})
