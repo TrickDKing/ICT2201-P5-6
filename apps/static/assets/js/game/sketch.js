@@ -58,7 +58,7 @@ function draw() {
     /*
     gamePlayer.keyPressed();
     */
-
+    
   }
 
   if (gameState.getGameState() == 2) {
@@ -175,16 +175,18 @@ function mouseClicked() {
     if (mouseY < 188 && mouseY > 125) {
       //Quit without saving
       clear();
+      gameState.setGameState(0);
+      console.log(gameState.getGameState());
     }
   } // End of gamestate 2
 
-  if (gameState.getGameState() == 3) {      //level complete, exit to main menu
-    if (mouseX < 700 && mouseX > 575) {
-      if (mouseY < 588 && mouseY > 450) {
+  if (gameState.getGameState() == 3) {     //level complete, exit to main menu
+    if (mouseX < 740 && mouseX > 535) {
+      if (mouseY < 555 && mouseY > 525) {
         //Exit to main menu
         
         gameLeaderboard.setCheckGetSuccess(0);
-        gameState.setGameState(4);
+        gameState.setGameState(0);
         gameMenu.display(); //GameMenu display
       }
     }
@@ -192,7 +194,7 @@ function mouseClicked() {
       if (mouseY < 538 && mouseY > 450)   //level complete, proceed to next level
       {
         
-        gameState.setGameState(0);
+        console.log();
       }
     }
 
@@ -207,7 +209,8 @@ function mouseClicked() {
 
     }
   }
-}
+
+} // End of mouseClicked function
 
 function keyPressed() {
   if (gameState.getGameState() == 1 && keyIsDown(ESCAPE)) {

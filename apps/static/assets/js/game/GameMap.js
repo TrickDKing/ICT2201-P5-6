@@ -120,9 +120,9 @@ class GameMap {
         text('END', 10, 46); //Display text and positions
         textSize(30) //Defines text size
         text("LEVEL: " + this.mapName, 130, 40);
-        text("NEXT LEVEL", 1400, 620);
+        /*text("NEXT LEVEL", 1400, 620);
         noFill();
-        rect(1390, 582, 200, this.resolution); // Next Level Rectangle
+        rect(1390, 582, 200, this.resolution); // Next Level Rectangle*/
 
     }
 

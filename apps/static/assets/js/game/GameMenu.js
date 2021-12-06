@@ -1,10 +1,9 @@
 class GameMenu {
   //Class to render Game Menu
   constructor() {
+    
     this.gameMenu = 0;
-    this.points = [];
-    this.mult = 0.005;
-    this.displayMenuBG();
+
   }
 
   getOption() {
@@ -13,22 +12,6 @@ class GameMenu {
 
   setOption(gameMenu) {
     this.gameMenu = gameMenu;
-  }
-
-  displayMenuBG() {
-
-    var density = 10; // The number of points in each row
-    var space = width / density;
-
-    for (var x = 0; x < width; x += space) {
-      for (var y = 0; y < height; y += space) {
-        var p = createVector(x, y)
-        this.points.push(p)
-      }
-    }
-
-
-
   }
 
   displayGameMenu() {
