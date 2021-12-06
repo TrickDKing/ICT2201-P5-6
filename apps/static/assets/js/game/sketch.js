@@ -199,11 +199,11 @@ function mouseReleased() {
 
 }*/
 
-class Game {
-  //Class to render Game
-  constructor() {
-    //this.gameMenu = 0;
-  }
-}
+// class Game {
+//   //Class to render Game
+//   constructor() {
+//     //this.gameMenu = 0;
+//   }
+// }
 
-module.exports = Game;
+// module.exports = Game;

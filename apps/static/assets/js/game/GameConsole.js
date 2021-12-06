@@ -38,3 +38,5 @@ class GameConsole {
 
     }
 }
+
+module.exports = GameConsole;

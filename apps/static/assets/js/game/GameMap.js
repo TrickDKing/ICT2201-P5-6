@@ -23,7 +23,7 @@ class GameMap {
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
-        this.grid[i][j] = floor(random(4));
+        this.grid[i][j] = Math.floor(Math.random(4));
       }
       
     }
@@ -31,7 +31,7 @@ class GameMap {
     //Ensure no objects are spawned at the start and end of the map
     this.grid[0][0] = 1;
     this.grid[this.cols - 1][this.rows - 1] = 1;
-    console.log(this.grid);
+    // console.log(this.grid);
   }
 
   create2DArray(cols, rows) {
@@ -104,3 +104,5 @@ class GameMap {
   }
 
 }
+
+module.exports = GameMap;
