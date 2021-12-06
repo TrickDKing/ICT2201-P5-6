@@ -143,8 +143,19 @@ Our Git Graph is as such:
 
 ## System Test Cases
 
+[![UAT Video](https://img.youtube.com/vi/RbILrVbjYfY/0.jpg)](https://www.youtube.com/watch?v=RbILrVbjYfY)
+
 <br /> 
 
 # Whitebox Testing
 
+## Test Cases tested
 
+| Test Cases | Test Objective                                 | Cool  |
+| ---------- |------------------------------------------------|-------|
+| G-03       | Player encounters a buff on the game map.      | $1600 |
+| G-04       | Player encounters a debuff on the game map.    |   $12 |
+| G-05       | Player encounters an obstacle on the game map  |    $1 |
+| G-08       | Player attempts a level in the game            |    $1 |
+
+[![Whitebox Video](https://img.youtube.com/vi/3jGVR2CY8is/0.jpg)](https://www.youtube.com/watch?v=3jGVR2CY8is)
