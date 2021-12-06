@@ -8,36 +8,27 @@ class GameHP {
     }
 
     setHealth(health) {
-
-        if (this.health >= 1) {
-
-            if (this.health >= 0) {
-                this.health -= health;
-            } else if (this.health > 100) {
-                this.health = 100;
-            }
-
+        if (health == 0 || health >= 100) {
+            return;
         }
 
-    }
+        if (this.health >= 0) {
+            this.health = health;
 
-    reset() {
-        this.health = 100;
+        }
     }
 
     display() {
-
         fill('red');
-        rect(80, 560, 200, 35, 20);
-
+        rect(100, 560, 200, 55, 20);
+        
         if (this.health > 1) {
             fill('green');
-            rect(80, 560, this.health * 2, 35, 20);
+            rect(100, 560, this.health * 2, 55, 20);
         }
 
-        textSize(40);
         fill('black');
-        text('HP ', 10, 592);
+        text('HP ', 10, 610);
     }
 
 
