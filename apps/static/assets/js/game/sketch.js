@@ -173,14 +173,18 @@ function mouseClicked() {
   } //End of gamestate 1
 
 
-  if (gameState.getGameState() == 3) {
+  if (gameState.getGameState() == 2) {
+    if (mouseY < 188 && mouseY > 125) {
+      //Quit without saving
+      clear();
+      setup();
 
+    }
   }
 
   if (gameState.getGameState() == 4) {
     if (mouseY < 188 && mouseY > 125) {
-      //Start game
-
+      //Game Lost
       gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth())
       clear();
       setup();
