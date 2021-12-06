@@ -6,10 +6,16 @@ from flask_login import (
     current_user,
     login_required
 )
-from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
+
+from apps.home import dbfuncs
+from apps.home.dbfuncs import insert_data, select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 from apps.home.commands import Commands
+
+from operator import itemgetter
+from itertools import groupby
+
 # Helper - Extract current page name from request
 
 # Initializes a new commands object to handle post and get requests between game and car
@@ -30,16 +36,23 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index', methods=['GET', 'POST'])
+@blueprint.route('/index/<level_id>', methods=['GET', 'POST'])
 @login_required
-def index():
-    if request.method == "GET":
-        return render_template('home/index.html', segment='index')
+def index(level_id):
+    if request.method == "GET":        
+        mycursor = dbfuncs.cursor
+        sql = f"SELECT * FROM levels WHERE level_id = '{level_id}'"
+        
+        mycursor.execute(sql)
+        level = mycursor.fetchone()
+        
+        return render_template('home/index.html', segment='index', level=level)
+
     elif request.method == "POST":
         if(request.is_json):
-            print(request.data)
+
             some = request.get_json()
-            print(some)
+
             return jsonify({"msg": "Success"}), 200
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -51,9 +64,9 @@ def game():
         return render_template('home/index.html')
     elif request.method == "POST":
         if(request.is_json):
-            # print(request.data)
+          
             some = request.get_json()
-            # print(some)
+        
             return jsonify({"msg": "Success"}), 200
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -61,34 +74,38 @@ def game():
 
 @blueprint.route('/gameLeaderboard', methods=['GET', 'POST'])
 def gameLeaderboard():
-    if request.method == "GET":
-        str = [{"id": 1, "name": "Sloane", "email": "sloveridge0@aol.com", "score": 22},
-               {"id": 2, "name": "Orv Heskins", "slack_name": "Orv",
-                   "email": "oheskins1@fotki.com", "score": 2},
-               {"id": 3, "name": "Nadya McBeath", "slack_name": "Nadya",
-                   "email": "nmcbeath2@google.it", "score": 25},
-               {"id": 4, "name": "Nadya McBeath", "slack_name": "Nadya",
-                   "email": "nmcbeath2@google.it", "score": 25},
-
-               {"id": 5, "name": "Nadya McBeath", "slack_name": "Nadya",
-                   "email": "nmcbeath2@google.it", "score": 25}]
-
-        return jsonify(str)
+    if request.method == "POST":
+        level_id = request.form['level_id']
+        mycursor = dbfuncs.cursor
+        sql = f"SELECT users.name, attempts.score FROM users, attempts WHERE users.id = attempts.uid AND level_id = '{level_id}'"
+        mycursor.execute(sql)
+        
+        attempts = mycursor.fetchall()
+        return jsonify({"msg": "leaderboard loaded!", "attempts": attempts})
     elif request.method == "POST":
+        
         return jsonify({"msg": "Missing JSON in request"}), 400
 
 
-@blueprint.route('/gameMaps', methods=['GET', 'POST'])
-def maps():
+@blueprint.route('/gameMaps/<level_id>', methods=['POST'])
+def maps(level_id):
     '''Route to get game maps from database'''
-    if request.method == "GET":
-        return jsonify("A")
     if request.method == "POST":
-
-        print(type(request.data))
-        mapData = select_level(1)
-        print(mapData)
+        # print(request.data.decode('utf8').replace("'", '"'))
+        mapData = select_level(level_id)
+        # print(mapData)
         return jsonify(mapData)
+
+@blueprint.route('/gameOver', methods=['GET', 'POST'])
+def gameoverdata():
+    """ insert data to database """
+    if request.method == "POST":
+        request_data = request.get_json()
+        score = request_data['score']
+        health = request_data['energy_left']
+        insertdata = insert_data(score,health)
+        print(insertdata)
+        return jsonify(insertdata)
     return jsonify("A")
 
 @blueprint.route('/commands', methods=['GET', 'POST'])
@@ -100,7 +117,7 @@ def sendCommands():
         return commands.getCommands()
     if request.method == "POST":
         if(request.is_json):
-            print(request.data)
+           
             commands.setCommands(request.data)
         return jsonify("Something")
 
@@ -121,11 +138,14 @@ def route_template(template):
         elif template == 'scoreboard.html':  # MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
             # data = select_all_columns_with_condition("highScore","totalScore")
             data = select_all_columns_with_condition("attempts", "score")
+           
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
 
         elif template == 'instructions.html':
-             data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
+             
+             data = select_data(table_name="users", filterBy=[
+                               'username'], filterVal=[str(current_user)])
              # Detect the current page
              segment = get_segment(request)
              # Serve the file (if exists) from app/templates/home/FILE.html
@@ -134,14 +154,22 @@ def route_template(template):
 
         elif template == 'levelselect.html':                    
             data = get_best_score_by_level("attempts","level_id","level_id")
+            attempts = select_data(table_name="attempts")
+
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
-        
+
+        elif template == 'attempthistory.html':
+            data = select_all_columns_with_condition("attempts", "attempt_id")
+            segment = get_segment(request)
+            return render_template("home/" + template, segment=segment, data=data)
+
         # Detect the current page
         segment = get_segment(request)
         # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template("home/" + template, segment=segment, data=data)
 
+        
     except TemplateNotFound:
         return render_template('home/page-404.html'), 404
 
@@ -201,3 +229,27 @@ def saveDetails():
         data = select_data(table_name="users", filterBy=[
                            'username'], filterVal=[str(current_user)])
         return render_template('home/profile.html', data=data)
+
+@blueprint.route('/settings', methods=['GET', 'POST'])
+@login_required
+def saveSettings():
+    # speed = request.form['speed']
+    print("Updating profile...")
+    if request.method == 'POST':
+        data = {
+            "speed": request.form['speed']
+        }
+        print(data)
+        if request.form['speed']:
+            update_data(table_name="Settings", data=data,
+                        identifier="settings_id", identifier_value="1")
+
+            result = "Speed updated successfully!"
+        else:
+            result = "Updating failed"
+
+        settings = select_data(table_name="Settings")
+        return render_template('home/settings.html', speed=settings[0]["speed"])
+    else:
+        settings = select_data(table_name="Settings")
+        return render_template('home/settings.html', speed=settings[0]["speed"])

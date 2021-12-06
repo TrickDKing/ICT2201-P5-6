@@ -29,19 +29,15 @@ function setup() {
   gamePauseMenu = new GamePauseMenu();
   gameOver = new GameOver();
   gameConsole = new GameConsole();
-  gameMap.getMapData(1);
+
 
   gamePlayer.setPlayerPosition(gameMap.getMapRows() - 1, gameMap.getMapColumns() - 1); //Initialise player position to be at the start
 
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 function draw() {
 
-  //print(mouseX, mouseY);
+  print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 0) {
     gameBackground.display();
@@ -67,17 +63,19 @@ function draw() {
 
   if (gameState.getGameState() == 2) {
     //Game paused state
-
     gamePauseMenu.displayPauseMenu();
     gameBackground.display();
   }
 
   if (gameState.getGameState() == 3) {
-    //Game end state
+    //Game end state display leaderboard
+    clear();
     gameLeaderboard.display();
   }
+
   if (gameState.getGameState() == 4) {
-    //Game end state
+    //Game over state
+    clear();
     gameOver.displayGameOver();
   }
 
@@ -117,12 +115,10 @@ function mouseClicked() {
       if (mouseX < 635 && mouseX > 535) {
         //Move Left button
         gameCommands.addCommands(1);
-      }
-      else if (mouseX < 735 && mouseX > 640) {
+      } else if (mouseX < 735 && mouseX > 640) {
         //Move Right button
         gameCommands.addCommands(2);
-      }
-      else if (mouseX < 985 && mouseX > 735) {
+      } else if (mouseX < 985 && mouseX > 735) {
         gameCommands.removeLastCommand();
       }
     }
@@ -161,8 +157,11 @@ function mouseClicked() {
           gamePlayer.reset();
           gameScore.resetScore();
           gameHP.reset();
+          gamePlayer.setPlayerPosition(gameMap.getMapColumns() - 1, gameMap.getMapRows() - 1);
           gameCommands.clearAllCommands();
           gameConsole.insertLog("RESETTING...");
+        } else {
+          gameConsole.insertLog("GAME EXECUTING UNABLE TO RESET");
         }
 
       }
@@ -172,9 +171,41 @@ function mouseClicked() {
 
   } //End of gamestate 1
 
+  if (gameState.getGameState() == 2) {
+    if (mouseY < 188 && mouseY > 125) {
+      //Quit without saving
+      clear();
+    }
+  } // End of gamestate 2
 
-  if (gameState.getGameState() == 3) {
+  if (gameState.getGameState() == 3) {      //level complete, exit to main menu
+    if (mouseX < 700 && mouseX > 575) {
+      if (mouseY < 588 && mouseY > 450) {
+        //Exit to main menu
+        clear();
+        loop();
+        gameState.setGameState(0);
 
+      }
+    }
+    else if (mouseX < 930 && mouseX > 850) {
+      if (mouseY < 538 && mouseY > 450)   //level complete, proceed to next level
+      {
+        loop();
+        gameState.setGameState(0);
+      }
+    }
+
+  } // End of gamestate 3
+
+  if (gameState.getGameState() == 4) {
+    if (mouseY < 188 && mouseY > 125) {
+      //Game Lost
+      gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth())
+      clear();
+      gameState.setGameState(0);
+
+    }
   }
 }
 
@@ -182,28 +213,12 @@ function keyPressed() {
   if (gameState.getGameState() == 1 && keyIsDown(ESCAPE)) {
     gameState.setGameState(2);
     clear();
-  }
-  else if (gameState.getGameState() == 2 && keyIsDown(ESCAPE)) {
+  } else if (gameState.getGameState() == 2 && keyIsDown(ESCAPE)) {
     gameState.setGameState(1);
     clear();
   }
 }
 
-/*function mousePressed() {
-  shape1.pressed();
-
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
-
-function mouseReleased() {
-  shape1.released();
-
-}*/
-
-// class Game {
-//   //Class to render Game
-//   constructor() {
-//     //this.gameMenu = 0;
-//   }
-// }
-
-// module.exports = Game;

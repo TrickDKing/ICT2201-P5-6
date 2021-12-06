@@ -33,7 +33,6 @@ class GamePlayer {
     setPlayerPosition(col, row) {
 
         this.currentPosition = [col, row];
-        console.log(this.currentPosition);
     }
 
     reset() {
@@ -46,8 +45,7 @@ class GamePlayer {
 
         if (this.moving == 1) {
             this.moving = 0;
-        }
-        else if (this.moving == 0) {
+        } else if (this.moving == 0) {
             this.moving = 1;
         }
 
@@ -61,31 +59,33 @@ class GamePlayer {
         var delay = ms => new Promise(res => setTimeout(res, ms));
         this.setMoving();
         for (const command of commands) {
-           
 
-            if(gameHP.getHealth() > 0)
-            {
+            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
+                clear();
+                gameState.setGameState(3);
+                break;
+            }
+
+            if (gameHP.getHealth() > 0) {
                 await delay(1000);
                 this.movePosition(command);
                 gameHP.setHealth(1);
                 gameScore.setScore(1);
                 gameConsole.insertLog("Moving One Grid: HP --");
-            }
-            else
-            {
+
+            } else {
                 gameState.setGameState(4);
                 clear();
-                
+                break;
             }
 
         }
+
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
+
         
-        if(this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0){
-            clear();
-            gameState.setGameState(3);
-        }
+
     };
 
     checkObstacle() {
@@ -134,9 +134,6 @@ class GamePlayer {
                     gameConsole.insertLog("MOVING FORWARD");
                 }
             }
-
-
-
 
         }
 
@@ -229,7 +226,6 @@ class GamePlayer {
         /*if (keyIsDown(LEFT_ARROW)) {
             this.move(-this.speed, 0);
             gameHP.setHealth(gameHP.getHealth()-1);
-
         }
         if (keyIsDown(RIGHT_ARROW)) {
             this.move(this.speed, 0);
