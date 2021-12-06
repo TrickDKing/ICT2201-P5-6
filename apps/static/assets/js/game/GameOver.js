@@ -1,7 +1,7 @@
 class GameOver{
     
     constructor(){
-        
+        this.url = "http://127.0.0.1:5000/gameOver";
     }
 
     displayGameOver(){
@@ -16,11 +16,17 @@ class GameOver{
         rect(540, 110, 500, 50); //Return to menu box
         
         
-    }
-    storeGameData()
-    {
         
     }
-    
+
+    insertGameOverData(score,remainhealth) {
+        
+        let url = "http://127.0.0.1:5000/gameOver";
+        let data = {score:  score, energy_left: remainhealth};
+        httpPost(url, 'json',data, function (success) {
+        console.log(success);
+        return success} , function(error) {console.log(error)});
+       
+    }
 
 }

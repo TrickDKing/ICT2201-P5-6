@@ -184,6 +184,8 @@ function mouseClicked() {
   if (gameState.getGameState() == 4) {
     if (mouseY < 188 && mouseY > 125) {
       //Start game
+
+      gameOver.insertGameOverData(gameScore.getScore(),gameHP.getHealth())
       clear(); 
       setup();
       

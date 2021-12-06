@@ -6,8 +6,7 @@ from flask_login import (
     current_user,
     login_required
 )
-from apps.home import dbfuncs
-from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
+from apps.home.dbfuncs import insert_data, select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 from apps.home.commands import Commands
@@ -94,6 +93,18 @@ def maps():
         return jsonify(mapData)
     return jsonify("A")
 
+@blueprint.route('/gameOver', methods=['GET', 'POST'])
+def gameoverdata():
+    """ insert data to database """
+    if request.method == "POST":
+        request_data = request.get_json()
+        score = request_data['score']
+        health = request_data['energy_left']
+        insertdata = insert_data(score,health)
+        print(insertdata)
+        return jsonify(insertdata)
+    return jsonify("A")
+
 @blueprint.route('/commands', methods=['GET', 'POST'])
 def sendCommands():
     print(request.headers['Sec-Ch-Ua-Platform'])
@@ -124,11 +135,13 @@ def route_template(template):
         elif template == 'scoreboard.html':  # MUST INCLUDE THIS TO WORK, BECAUSE DATA IS ABSENT EN DING PART
             # data = select_all_columns_with_condition("highScore","totalScore")
             data = select_all_columns_with_condition("attempts", "score")
+           
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
 
         elif template == 'instructions.html':
              data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
+             
              # Detect the current page
              segment = get_segment(request)
              # Serve the file (if exists) from app/templates/home/FILE.html

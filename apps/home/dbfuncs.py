@@ -116,3 +116,15 @@ def get_best_score_by_level(table_name,table_column,table_column2):
 
     return myresult
 
+def insert_data(score,health):  
+  try:
+    # Adding data
+    
+    sql = "INSERT INTO SIT.attempts (level_id, score,time_taken,energy_left,level_status,uid,date) VALUES (1,%s,'0:05:23',%s,'failed',1,'20211124')"
+    val = (int(score),int(health))
+    cursor.execute(sql,val)
+    # Applying changes
+    mydb.commit()
+  except:
+    print("An error has occured")
+
