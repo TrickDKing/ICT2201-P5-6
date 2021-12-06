@@ -7,16 +7,15 @@ class GameData {
     }
 
     getGameData() {
-        
+
     }
 
     postGameData(data) {
-        
+
         this.data = data;
-        this.postData = {};
-        httpPost(this.url, 'json', data, function (success) { console.log(success) } , function(error) {console.log(error)} 
-        );
-        
+
+        httpPost(this.url, 'json', data, function(success) { console.log(success) }, function(error) { console.log(error) });
+
     }
 
 }
