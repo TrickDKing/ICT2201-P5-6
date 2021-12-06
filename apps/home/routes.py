@@ -6,10 +6,14 @@ from flask_login import (
     current_user,
     login_required
 )
+from apps.home import dbfuncs
 from apps.home.dbfuncs import select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 from apps.home.commands import Commands
+
+import operator
+
 # Helper - Extract current page name from request
 
 # Initializes a new commands object to handle post and get requests between game and car
@@ -30,11 +34,11 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index/', methods=['GET', 'POST'])
+@blueprint.route('/index/<level_id>', methods=['GET', 'POST'])
 @login_required
-def index():
+def index(level_id):
     if request.method == "GET":
-        return render_template('home/index.html', segment='index')
+        return render_template('home/index.html', segment='index', level_id=level_id)
     elif request.method == "POST":
         if(request.is_json):
           
@@ -61,20 +65,16 @@ def game():
 
 @blueprint.route('/gameLeaderboard', methods=['GET', 'POST'])
 def gameLeaderboard():
-    if request.method == "GET":
-        str = [{"id": 1, "name": "Sloane", "email": "sloveridge0@aol.com", "score": 22},
-               {"id": 2, "name": "Orv Heskins", "slack_name": "Orv",
-                   "email": "oheskins1@fotki.com", "score": 2},
-               {"id": 3, "name": "Nadya McBeath", "slack_name": "Nadya",
-                   "email": "nmcbeath2@google.it", "score": 25},
-               {"id": 4, "name": "Nadya McBeath", "slack_name": "Nadya",
-                   "email": "nmcbeath2@google.it", "score": 25},
-
-               {"id": 5, "name": "Nadya McBeath", "slack_name": "Nadya",
-                   "email": "nmcbeath2@google.it", "score": 25}]
-
-        return jsonify(str)
+    if request.method == "POST":
+        level_id = request.form['level_id']
+        mycursor = dbfuncs.cursor
+        sql = f"SELECT users.name, attempts.score FROM users, attempts WHERE users.id = attempts.uid AND level_id = '{level_id}'"
+        mycursor.execute(sql)
+        
+        attempts = mycursor.fetchall()
+        return jsonify({"msg": "leaderboard loaded!", "attempts": attempts})
     elif request.method == "POST":
+        
         return jsonify({"msg": "Missing JSON in request"}), 400
 
 
