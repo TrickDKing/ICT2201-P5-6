@@ -62,7 +62,7 @@ function draw() {
     /*
     gamePlayer.keyPressed();
     */
-
+    
   }
 
   if (gameState.getGameState() == 2) {
@@ -212,15 +212,7 @@ function mouseReleased() {
 
 }*/
 
-class Game {
-  //Class to render Game
-  constructor() {
-    //this.gameMenu = 0;
 
-  }
-
-
-}
 
 
 
