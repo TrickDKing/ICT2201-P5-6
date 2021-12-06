@@ -9,7 +9,7 @@ class GameMap {
     this.url = "http://127.0.0.1:5000/gameMaps";
     this.mapData;
     this.mapName;
-    
+    this.mapLevel;
     this.checkGetSuccess = 0;
   }
 
@@ -122,6 +122,11 @@ class GameMap {
     text('END', 10, 46); //Display text and positions
     textSize(30) //Defines text size
     text("LEVEL: " + this.mapName, 130, 40);
+    text("NEXT LEVEL", 1400, 620);
+    noFill();
+    rect(1390, 582, 200, this.resolution); // Next Level Rectangle
+    
   }
+
 
 }
