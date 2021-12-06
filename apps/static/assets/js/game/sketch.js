@@ -70,6 +70,7 @@ function draw() {
 
     if (gameState.getGameState() == 3) {
         //Game end state
+        clear();
         gameLeaderboard.display();
     }
     if (gameState.getGameState() == 4) {
@@ -177,6 +178,27 @@ function mouseClicked() {
       setup();
 
     }
+  }
+  if (gameState.getGameState() == 3) {      //level complete, exit to main menu
+    if(mouseX < 700 && mouseX > 575)
+    {
+      if (mouseY < 588 && mouseY > 450) 
+      {
+        //Exit to main menu
+        setup();
+        clear();
+       
+  
+      }
+    }
+    else if(mouseX < 930 && mouseX > 850)
+    {
+      if(mouseY < 538 && mouseY > 450)   //level complete, proceed to next level
+      {
+        
+      }
+    }
+    
   }
 
   if (gameState.getGameState() == 4) {

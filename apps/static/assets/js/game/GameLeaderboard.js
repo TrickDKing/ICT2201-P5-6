@@ -22,7 +22,8 @@ class GameLeaderboard {
                 });
                 console.log(data.msg);
                 // console.log(attempts);
-                let height = 150;
+                let height = 200;
+
 
                 if (attempts.length > 5) {
                     attempts = attempts.slice(0, 5);
@@ -33,7 +34,7 @@ class GameLeaderboard {
                     attempts[i].name;
                     attempts[i].score;
                     textSize(30)
-                    text(attempts[i].name + " " + attempts[i].score, (600) - 150, height);
+                    text(attempts[i].name + " " + attempts[i].score, (710), height);
                     height += 50;
                 }
             }
@@ -87,6 +88,13 @@ class GameLeaderboard {
         textSize(20);
         fill(0);
         text('RETURN TO MENU', 550, 520);
+        
+        color('black');
+        noFill();
+        rect(830,500,120,25);
+        textSize(20);
+        fill(0);
+        text('Next Level', 840, 520);
     }
 
 }

@@ -49,7 +49,7 @@ class GamePlayer {
         for (const command of commands) {
 
             if (gameHP.getHealth() > 0) {
-                await delay(1000);
+                await delay(0);
                 this.movePosition(command);
                 gameHP.setHealth(1);
                 gameScore.setScore(1);
@@ -186,7 +186,6 @@ class GamePlayer {
         /*if (keyIsDown(LEFT_ARROW)) {
             this.move(-this.speed, 0);
             gameHP.setHealth(gameHP.getHealth()-1);
-
         }
         if (keyIsDown(RIGHT_ARROW)) {
             this.move(this.speed, 0);
