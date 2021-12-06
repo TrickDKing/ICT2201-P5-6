@@ -11,7 +11,7 @@ class GameMap {
         this.mapLevel;
         this.checkGetSuccess = 0;
         this.level_id = $("#level_id").val();
-        this.url = "http://127.0.0.1:5000/gameMaps/" + this.level_id;
+        this.url = "/gameMaps/" + this.level_id;
     }
 
     getMapName() {
