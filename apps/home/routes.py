@@ -253,3 +253,27 @@ def saveSettings():
     else:
         settings = select_data(table_name="Settings")
         return render_template('home/settings.html', speed=settings[0]["speed"])
+    
+
+@blueprint.route('/custom_levels', methods=['GET', 'POST'])
+def custom_levels():
+    if request.method == "GET":
+        return render_template('home/customlevels.html')
+    else:
+        name = request.form['level_name']
+        grid = request.form['grid']
+        level_type = "custom"
+        energy_level = request.form['energy_level']
+        
+        level = [
+            (
+                name,
+                grid, 
+                level_type, 
+                energy_level
+            )
+        ]
+
+        dbfuncs.insert_data(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
+        
+        return jsonify({"msg":"Level saved!"})
