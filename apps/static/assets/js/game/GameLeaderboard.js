@@ -9,13 +9,13 @@ class GameLeaderboard {
     }
 
     getData(value) {
-        
+
         this.attempts = value;
         this.attemptsLength = this.attempts.length;
-        
+
     }
 
-    getDataSize(){
+    getDataSize() {
         return this.attempts.length;
     }
 
@@ -71,10 +71,6 @@ class GameLeaderboard {
         return this.checkGetSuccess = value;
     }
 
-    postGameScore() {
-        return;
-    }
-
     display() {
         if (this.checkGetSuccess == 0 && gameState.getGameState() == 3) {
 
@@ -98,14 +94,19 @@ class GameLeaderboard {
         textSize(20);
         fill(0);
         text('NEXT LEVEL', 840, 550);
-        let height = 300;
-        for (let i = 0; i < this.attemptsLength; i++) {
 
-            textSize(30)
-            text(this.attempts[i].name + " " + this.attempts[i].score, 710, height);
-            height += 50;
-            
+        let height = 300;
+        
+        if (this.attemptsLength != 0) {
+            for (let i = 0; i < this.attemptsLength; i++) {
+
+                textSize(30)
+                text(this.attempts[i].name + " " + this.attempts[i].score, 710, height);
+                height += 50;
+
+            }
         }
+
 
     }
 
