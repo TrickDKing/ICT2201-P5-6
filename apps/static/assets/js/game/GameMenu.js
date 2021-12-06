@@ -17,7 +17,6 @@ class GameMenu {
 
   displayMenuBG() {
 
-
     var density = 10; // The number of points in each row
     var space = width / density;
 

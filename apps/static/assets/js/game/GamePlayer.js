@@ -62,6 +62,7 @@ class GamePlayer {
                 gameConsole.insertLog("Moving One Grid: HP --");
 
             } else {
+                gameConsole.insertLog("Health is zero! GAME OVER");
                 gameState.setGameState(4);
                 clear();
                 break;
@@ -71,8 +72,6 @@ class GamePlayer {
 
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
-
-        
 
     };
 
