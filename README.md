@@ -105,7 +105,6 @@ The project is coded using blueprints, app factory pattern, dual configuration p
    |-- .env                                 # Inject Configuration via Environment
    |-- run.py                               # Start the app - WSGI gateway
    |
-   |-- ************************************************************************
 ```
 
 <br />
@@ -114,31 +113,31 @@ The project is coded using blueprints, app factory pattern, dual configuration p
 
 For our development workflow, we have adapted the Git Feature Branch Workflow. The gist of this workflow is that developers will create a new "feature/\<feature_name>" branch from "main" when working on a new feature, and only merge back to "main" when their feature is completed. Here is a graph to depict this workflow:
 
-![Git Feature Branch Workflow](apps\static\Feature-Branch-git-workflow-4.png)
+![Git Feature Branch Workflow](./apps/static/Feature-Branch-git-workflow-4.png)
 
 We chose to adopt this workflow as it allows us to work on different features concurrently without worrying about conflicts, as well as without waiting for other features to be done before merging to "main", and since it also allows for faster developemnt and code maintenance. We also choose it for its relative simplicity as most of us are new to Git workflows, and might be confused when using other more complex workflows.
 
 Our Git Graph is as such:
 
-![Git Feature Branch Workflow](apps\static\gitgraph.jpg )
+![Git Feature Branch Workflow](./apps/static/gitgraph.jpg )
 <br /> 
 
 # UAT
 ## Use Case Diagram
 
-![Use Case Diagra](apps\static\usecase.png)
+![Use Case Diagra](./apps/static/usecase.png)
 
 <br />
 
 ## System State Diagram
 ### Web Portal
-![System State - Web Portal](apps\static\systemstate_wp.png)
+![System State - Web Portal](./apps/static/systemstate_wp.png)
 
 ### Game
-![System State - Game](apps\static\systemstate_game.png)
+![System State - Game](./apps/static/systemstate_game.png)
 
 ### Robotic Car
-![System State - Robotic Car](apps\static\systemstate_car.png)
+![System State - Robotic Car](./apps/static/systemstate_car.png)
 
 <br />
 
