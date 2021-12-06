@@ -21,7 +21,7 @@ class GameLeaderboard {
                     return b.score - a.score;
                 });
                 console.log(data.msg);
-                console.log(attempts);
+               // console.log(attempts);
                 let height = 150;
 
                 if (attempts.length > 5) {
