@@ -4,7 +4,7 @@ class GameLeaderboard {
         this.checkGetSuccess = 0;
         this.id = $("#level_id").val();
         console.log(this.id);
-        this.getAttempts();
+        // this.getAttempts();
     }
 
     getAttempts() {

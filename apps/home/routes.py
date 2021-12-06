@@ -35,16 +35,23 @@ def get_segment(request):
         return None
 
 
-@blueprint.route('/index', methods=['GET', 'POST'])
+@blueprint.route('/index/<level_id>', methods=['GET', 'POST'])
 @login_required
-def index():
-    if request.method == "GET":
-        return render_template('home/index.html', segment='index')
+def index(level_id):
+    if request.method == "GET":        
+        mycursor = dbfuncs.cursor
+        sql = f"SELECT * FROM levels WHERE level_id = '{level_id}'"
+        
+        mycursor.execute(sql)
+        level = mycursor.fetchone()
+        
+        return render_template('home/index.html', segment='index', level=level)
+
     elif request.method == "POST":
         if(request.is_json):
-          
+
             some = request.get_json()
-          
+
             return jsonify({"msg": "Success"}), 200
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -79,21 +86,15 @@ def gameLeaderboard():
         return jsonify({"msg": "Missing JSON in request"}), 400
 
 
-@blueprint.route('/gameMaps', methods=['GET', 'POST'])
-def maps():
+@blueprint.route('/gameMaps/<level_id>', methods=['POST'])
+def maps(level_id):
     '''Route to get game maps from database'''
-    if request.method == "GET":
-       
-        mapData = select_level(1)
-      
-        return mapData
     if request.method == "POST":
-
-        print(request.data)
-        mapData = select_level(1)
-       
+        # print(request.data.decode('utf8').replace("'", '"'))
+        mapData = select_level(level_id)
+        # print(mapData)
         return jsonify(mapData)
-    return jsonify("A")
+    
 
 @blueprint.route('/gameOver', methods=['GET', 'POST'])
 def gameoverdata():
