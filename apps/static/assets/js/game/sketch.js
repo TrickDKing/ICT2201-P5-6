@@ -58,7 +58,7 @@ function draw() {
     /*
     gamePlayer.keyPressed();
     */
-    
+
   }
 
   if (gameState.getGameState() == 2) {
@@ -184,17 +184,14 @@ function mouseClicked() {
     if (mouseX < 740 && mouseX > 535) {
       if (mouseY < 555 && mouseY > 525) {
         //Exit to main menu
-        
-        gameLeaderboard.setCheckGetSuccess(0);
-        gameState.setGameState(0);
-        gameMenu.display(); //GameMenu display
+
+        setup();
       }
     }
-    else if (mouseX < 930 && mouseX > 850) {
-      if (mouseY < 538 && mouseY > 450)   //level complete, proceed to next level
+    else if (mouseX < 975 && mouseX > 825) {
+      if (mouseY < 560 && mouseY > 525)   //level complete, proceed to next level
       {
         
-        console.log();
       }
     }
 
@@ -203,7 +200,8 @@ function mouseClicked() {
   if (gameState.getGameState() == 4) {
     if (mouseY < 188 && mouseY > 125) {
       //Game Lost
-      gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth())
+      gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth());
+
       clear();
       gameState.setGameState(0);
 
