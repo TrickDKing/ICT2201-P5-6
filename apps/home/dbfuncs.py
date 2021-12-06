@@ -11,6 +11,7 @@ mydb = mysql.connector.connect(
 
 cursor = mydb.cursor(buffered=True, dictionary=True)
 
+
 def listToStr(listOfData):
     """Convert list to a string with coma separated"""
     return ",".join(listOfData)
@@ -26,9 +27,6 @@ def concatList(list1: list = None, list2: list = None, char: str = "="):
 
 # Retrieves data from all the columns from "table_name"
 # SQL = SELECT * FROM "table_name"
-
-
-# def select_all_columns(table_name):
 # def select_all_columns(table_name):
 #     print(table_name)
 #     mycursor = mydb.cursor(dictionary=True)
@@ -69,21 +67,6 @@ def select_data(getheaders: list = None, filterBy: list = None, filterVal: list 
     return result
 
 
-def insert_data(table_name: str = None, table_columns: list = None, values: list = None):
-    columns_string = listToStr(table_columns)
-    values_string = ', '.join(f"{w}" for w in values)
-
-    if "," not in values_string:
-        sql = "INSERT INTO " + table_name + " (" + columns_string + ") VALUES(" + values_string + ")"
-    else:
-        sql = "INSERT INTO " + table_name + " (" + columns_string + ") VALUES" + values_string
-        
-    cursor.execute(sql)
-    mydb.commit()
-
-    print(f"data inserted to {table_name} table successfully.")
-
-
 def update_data(table_name: str, data: dict, identifier: str, identifier_value: str):
     if table_name is None or table_name.isspace():
         raise ValueError(
@@ -104,29 +87,12 @@ def update_data(table_name: str, data: dict, identifier: str, identifier_value: 
         print(f"{table_name} table updated successfully.")
 
 
-def delete_data(table_name: str, identifier: str = None, identifier_value: str = None):
-    if table_name is None or table_name.isspace():
-        raise ValueError(
-            "Table name cannot be Null value or whitespace characters")
-
-    if identifier is None and identifier_value is None:
-        cursor.execute(f"DELETE FROM {table_name}")
-        mydb.commit()
-
-        print(f"{table_name} table deleted successfully.")
-    else:
-        cursor.execute(
-            f'DELETE FROM {table_name} WHERE {identifier}="{identifier_value}"')
-        mydb.commit()
-
-        print(f"data deleted from {table_name} table successfully.")
-
-
 # SQL = SELECT * FROM "table_name" order by "table_column"  EN DING PART
-def select_all_columns_with_condition(table_name,table_column):
+def select_all_columns_with_condition(table_name, table_column):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} ORDER BY {} DESC".format(table_name,table_column))
+    mycursor.execute(
+        "SELECT * FROM {} ORDER BY {} DESC".format(table_name, table_column))
 
     myresult = mycursor.fetchall()
 
@@ -134,107 +100,86 @@ def select_all_columns_with_condition(table_name,table_column):
     return myresult
 
 
-def get_best_score_by_level(table_name,table_column,table_column2):
+def select_level(level):
+    table_name = "levels"
+    cursor.execute(
+        "SELECT * FROM {} where level_id= {}".format(table_name, level))
+    result = cursor.fetchall()
+
+    print(result[0])
+
+    return result[0]
+
+
+def get_best_score_by_level(table_name, table_column, table_column2):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
 
+    #mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
+    mycursor.execute("SELECT a.*, l.name FROM {} a, levels l WHERE score IN (SELECT max(score) FROM attempts GROUP BY {}) AND a.level_id = l.level_id ORDER BY {} ".format(table_name, table_column, table_column2))
     myresult = mycursor.fetchall()
 
     return myresult
 
 
-# Retrieves data from specified columns "column_names" from "table_name"
-# SQL = SELECT "column_names" FROM "table_name"
-def select_certain_columns(table_name, column_names):
+def insert_data(score, health):
+    try:
+        # Adding data
+
+        sql = "INSERT INTO SIT.attempts (level_id, score,time_taken,energy_left,level_status,uid,date) VALUES (1,%s,'0:05:23',%s,'failed',1,'20211124')"
+        val = (int(score), int(health))
+        cursor.execute(sql, val)
+        # Applying changes
+        mydb.commit()
+    except:
+        print("An error has occured")
+
+# Deletes the row from "table_name" where the "identifier" = "identifier_value"
+# SQL = DELETE FROM "table_name" WHERE "identifier" = "identifier_value"
+
+
+def delete_data(table_name, identifier, identifier_value):
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT {} FROM {}".format(column_names, table_name))
 
-    myresult = mycursor.fetchall()
+    isinstance(identifier_value, str)
 
-    print("selected {} columns from {}.".format(column_names, table_name))
-    return myresult
-
-
-def get_best_score_by_level(table_name,table_column,table_column2):
-    print(table_name)
-    mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
-
-    myresult = mycursor.fetchall()
-
-    return myresult
-
-
-def delete_data(table_name: str, identifier: str = None, identifier_value: str = None):
-    if table_name is None or table_name.isspace():
-        raise ValueError(
-            "Table name cannot be Null value or whitespace characters")
-
-    if identifier is None and identifier_value is None:
-        cursor.execute(f"DELETE FROM {table_name}")
-        mydb.commit()
-
-        print(f"{table_name} table deleted successfully.")
+    if (not isinstance):
+        mycursor.execute("DELETE FROM {} WHERE {} = {}".format(
+            table_name, identifier, identifier_value))
     else:
-        cursor.execute(
-            f'DELETE FROM {table_name} WHERE {identifier}="{identifier_value}"')
-        mydb.commit()
+        mycursor.execute("DELETE FROM {} WHERE {} = '{}'".format(
+            table_name, identifier, identifier_value))
 
-        print(f"data deleted from {table_name} table successfully.")
+    mydb.commit()
 
-
-# # Deletes all data in "table_name"
-# # SQL = DELETE FROM "table_name"
-# def delete_all(table_name):
-#     mycursor = mydb.cursor()
-#     mycursor.execute("DELETE FROM {}".format(table_name))
-
-#     mydb.commit()
-
-#     reset_index(table_name)
-
-#     print("deleted all data from {} table successfully".format(table_name))
+    print("data deleted from {} table successfully.".format(table_name))
 
 
-# # Resets auto-increment index of "table_name" *Don't use (mainly for delete_all function)
-# def reset_index(table_name):
-#     mycursor = mydb.cursor()
-#     mycursor.execute("ALTER TABLE {} AUTO_INCREMENT = 1".format(table_name))
+# Deletes all data in "table_name"
+# SQL = DELETE FROM "table_name"
+def delete_all(table_name):
+    mycursor = mydb.cursor()
+    mycursor.execute("DELETE FROM {}".format(table_name))
 
-#     mydb.commit()
+    mydb.commit()
+
+    reset_index(table_name)
+
+    print("deleted all data from {} table successfully".format(table_name))
 
 
-# Usage Examples
+# Resets auto-increment index of "table_name" *Don't use (mainly for delete_all function)
+def reset_index(table_name):
+    mycursor = mydb.cursor()
+    mycursor.execute("ALTER TABLE {} AUTO_INCREMENT = 1".format(table_name))
 
+    mydb.commit()
+
+
+# Inserts data values into "table_name"
+# SQL = INSERT INTO "table_name" (columns) VALUES (values)
+# data is a dictionary for e.g.
 # data = {
-#     "food_name": "pineapple",
-#     "price": 5.00,
-#     "weight": 500,
-#     "calories": 100
+#     "name": "William",
+#     "desc": "person3"
 # }
-
-# food_item_values = [
-#     (
-#         47,
-#         "banana",
-#         4.00,
-#         100,
-#         10
-#     )
-# ]
-
-# receipts = [
-#     (
-#         1
-#     )
-# ]
-
-# print(select_data(table_name="food_item"))
-# a.insert_data(table_name="receipt", table_columns=["uid"], values=receipts)
-# a.insert_data(table_name="food_item", table_columns=["fid", "food_name", "price", "weight", "calories"], values=food_item_values)
-# a.delete_data(table_name="food_item", identifier="fid", identifier_value="47")
-# a.delete_data(table_name="test")
-# a.update_data("food_item", data=data, identifier="fid", identifier_value="47")
-
-
