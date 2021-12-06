@@ -14,7 +14,7 @@ let gameConsole;
 
 function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
-  createCanvas(1600, 660).parent('canvasHolder');
+  createCanvas(1210, 510).parent('canvasHolder');
   background('white');
   gameLeaderboard = new GameLeaderboard();
   gameBackground = new GameBackground();
@@ -35,13 +35,9 @@ function setup() {
 
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 function draw() {
 
-  //print(mouseX, mouseY);
+  print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 0) {
     gameBackground.display();
@@ -204,18 +200,6 @@ function keyPressed() {
   }
 }
 
-/*function mousePressed() {
-  shape1.pressed();
-
-}
-
-function mouseReleased() {
-  shape1.released();
-
-}*/
-
-
-
-
-
-
+/*function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }*/
