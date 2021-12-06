@@ -83,7 +83,9 @@ def update_data(table_name: str, data: dict, identifier: str, identifier_value: 
             cursor.execute(sql)
 
         mydb.commit()
-        print(f"{table_name} table updated successfully.")
+        result = f"{table_name} table updated successfully."
+        print(result)
+        return result
 
 
 # SQL = SELECT * FROM "table_name" order by "table_column"  EN DING PART

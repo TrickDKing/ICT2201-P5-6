@@ -32,15 +32,20 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="mb-3">Vertical Pills</h5>
+						<h5 class="mb-3">Settings</h5>
 						<div class="row">
 							<div class="col-md-3 col-sm-12">
 								<ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
 									aria-orientation="vertical">
 									<li><a class="nav-link text-left active" id="v-pills-home-tab" data-toggle="pill"
 											href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+<<<<<<< Updated upstream
 											aria-selected="true">Home</a></li>
 									<li><a class="nav-link text-left" id="v-pills-profile-tab" data-toggle="pill"
+=======
+											aria-selected="true">Speed Settings</a></li>
+									<!-- <li><a class="nav-link text-left" id="v-pills-profile-tab" data-toggle="pill"
+>>>>>>> Stashed changes
 											href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
 											aria-selected="false">Profile</a></li>
 									<li><a class="nav-link text-left" id="v-pills-messages-tab" data-toggle="pill"
@@ -48,13 +53,14 @@
 											aria-selected="false">Messages</a></li>
 									<li><a class="nav-link text-left" id="v-pills-settings-tab" data-toggle="pill"
 											href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
-											aria-selected="false">Settings</a></li>
+											aria-selected="false">Settings</a></li> -->
 								</ul>
 							</div>
 							<div class="col-md-9 col-sm-12">
 								<div class="tab-content" id="v-pills-tabContent">
 									<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
 										aria-labelledby="v-pills-home-tab">
+<<<<<<< Updated upstream
 										<p class="mb-0">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua
 											anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur
 											laborum qui. Id id reprehenderit sit
@@ -99,6 +105,71 @@
 											eiusmod.
 										</p>
 									</div>
+=======
+										<p class="mb-0">This allows the user to set the configuration of the speed of the Robotic Car.
+											Click on one of the switches and click "Save" to set the speed!
+										</p>
+										<form action="/settings" method="POST">
+
+											<div class="btn-group-lg btn-group-toggle" data-toggle="buttons">
+												{{speed}}
+
+												<br>
+
+												<br>
+												
+												<br>
+												
+												<br>
+												
+												<br>
+													{% if speed == "slow" -%}
+													<label class="btn btn-secondary active">
+														<input type="radio" name="speed" value="slow"> Slow</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="medium"> Medium</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="fast"> Fast</label>
+
+													{% elif speed == "medium" -%}
+														
+													<label class="btn btn-secondary">
+														<input type="radio" name="speed" value="slow" > Slow</label>
+													<label class="btn  btn-secondary active">
+														<input type="radio" name="speed" value="medium" > Medium</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="fast"> Fast</label>
+
+													{% elif speed == "fast" -%}
+														
+													<label class="btn btn-secondary">
+														<input type="radio" name="speed" value="slow"> Slow</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="medium"> Medium</label>
+													<label class="btn  btn-secondary active">
+														<input type="radio" name="speed" value="fast" > Fast</label>
+
+													{%- endif %}
+
+											</div>
+
+											<br>
+
+											<br>
+
+											<br>
+
+											<br>
+
+
+											<button type="submit" class="btn  btn-success">Save</button>
+						
+
+										</form>
+									
+									</div>
+
+>>>>>>> Stashed changes
 								</div>
 							</div>
 						</div>

@@ -201,3 +201,32 @@ def saveDetails():
         data = select_data(table_name="users", filterBy=[
                            'username'], filterVal=[str(current_user)])
         return render_template('home/profile.html', data=data)
+<<<<<<< Updated upstream
+=======
+
+
+@blueprint.route('/settings', methods=['GET', 'POST'])
+@login_required
+def saveSettings():
+    # speed = request.form['speed']
+    print("Updating speed...")
+    if request.method == 'POST':
+        data = {
+            "speed": request.form['speed']
+        }
+        print(data)
+        if request.form['speed']:
+            update_data(table_name="Settings", data=data,
+                        identifier="settings_id", identifier_value="1")
+            result = "Speed updated successfully!"
+        else:
+            result = "Updating failed"
+
+
+        settings = select_data(table_name="Settings")   
+        return render_template('home/settings.html', speed=settings[0]["speed"])
+
+    else:
+        settings = select_data(table_name="Settings")
+        return render_template('home/settings.html', speed=settings[0]["speed"])
+>>>>>>> Stashed changes
