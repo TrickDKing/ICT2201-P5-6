@@ -48,11 +48,7 @@ class GamePlayer {
         this.setMoving();
         for (const command of commands) {
 
-            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
-                clear();
-                gameState.setGameState(3);
-                break;
-            }
+            
 
             if (gameHP.getHealth() > 0) {
                 await delay(1000);
@@ -65,6 +61,12 @@ class GamePlayer {
                 gameConsole.insertLog("Health is zero! GAME OVER");
                 gameState.setGameState(4);
                 clear();
+                break;
+            }
+
+            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
+                clear();
+                gameState.setGameState(3);
                 break;
             }
 
