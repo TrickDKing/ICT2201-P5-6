@@ -39,7 +39,7 @@
 									aria-orientation="vertical">
 									<li><a class="nav-link text-left active" id="v-pills-home-tab" data-toggle="pill"
 											href="#v-pills-home" role="tab" aria-controls="v-pills-home"
-											aria-selected="true">Home</a></li>
+											aria-selected="true">Speed Settings</a></li>
 									<li><a class="nav-link text-left" id="v-pills-profile-tab" data-toggle="pill"
 											href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
 											aria-selected="false">Profile</a></li>
@@ -65,7 +65,60 @@
 											Deserunt non laborum enim et cillum eu
 											deserunt
 											excepteur ea incididunt minim occaecat.</p>
+										<form action="/settings" method="POST">
+
+											<div class="btn-group-lg btn-group-toggle" data-toggle="buttons">
+												{{speed}}
+													{% if speed == "slow" -%}
+													<label class="btn btn-secondary active">
+														<input type="radio" name="speed" value="slow"> Slow</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="medium"> Medium</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="fast"> Fast</label>
+
+													{% elif speed == "medium" -%}
+														
+													<label class="btn btn-secondary">
+														<input type="radio" name="speed" value="slow" > Slow</label>
+													<label class="btn  btn-secondary active">
+														<input type="radio" name="speed" value="medium" > Medium</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="fast"> Fast</label>
+
+													{% elif speed == "fast" -%}
+														
+													<label class="btn btn-secondary">
+														<input type="radio" name="speed" value="slow"> Slow</label>
+													<label class="btn  btn-secondary">
+														<input type="radio" name="speed" value="medium"> Medium</label>
+													<label class="btn  btn-secondary active">
+														<input type="radio" name="speed" value="fast" > Fast</label>
+
+													{%- endif %}
+
+											</div>
+
+											<p class="mb-0">Cillum ad ut irure tempor velit nostrud occaecat ullamco
+												aliqua
+												anim Lorem sint. Veniam sint duis incididunt do esse magna mollit
+												excepteur
+												laborum qui. Id id reprehenderit sit
+												est
+												eu aliqua
+												occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum
+												dolor
+												in occaecat commodo et voluptate minim reprehenderit mollit pariatur.
+												Deserunt non laborum enim et cillum eu
+												deserunt
+												excepteur ea incididunt minim occaecat.</p>
+
+
+											<button type="submit" class="btn  btn-secondary">Set the speed</button>
+
+										</form>
 									</div>
+
 									<div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
 										aria-labelledby="v-pills-profile-tab">
 										<p class="mb-0">Culpa dolor voluptate do laboris laboris irure reprehenderit id
