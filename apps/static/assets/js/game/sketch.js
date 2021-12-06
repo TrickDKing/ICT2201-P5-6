@@ -203,13 +203,7 @@ class Game {
   //Class to render Game
   constructor() {
     //this.gameMenu = 0;
-
   }
-
-
 }
 
-
-
-
-
+module.exports = Game;
