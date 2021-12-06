@@ -108,7 +108,8 @@ describe('Game tests', function() {
         done();
     });
 
-
+    
+    // Example
     it('should 0 health, after calling gameHP.setHealth(1) 100 times', function(done) {
         for (let count = 0; count < 100; count += 1) {
             gameHP.setHealth(1);

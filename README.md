@@ -147,4 +147,25 @@ Our Git Graph is as such:
 
 # Whitebox Testing
 
+The class we choose to demonstrate our whitebox testing is our "Game" class from the ```sketch.js``` file in ```apps/static/assets/js/game/```. We choose this class as it is the main basis of our game, and is meaningful, with many interactions with other classes.
+
+## Code Coverage Statistics
+
+
+## How to run the test suite
+1. cd to ```apps/static/assets/js/game/```
+2. Run the following in order:
+```
+    1. npm install
+    2. npm test
+```
+3. The output of the test suite, wih code coverage statistics, should be visible in the console.
+
+
+## Test case example
+
+
+
+### Notes
+Using this library, we could not test some lines of code due to the need to instantiate the entire project, which the test suite does not do.
 
