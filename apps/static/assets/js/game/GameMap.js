@@ -76,8 +76,8 @@ class GameMap {
     return this.cols;
   }
 
-  setMapID() {
-    this.level_id;
+  setMapID(value ) {
+    this.level_id = value;
   }
 
   getMapID() {
@@ -90,7 +90,7 @@ class GameMap {
 
   spawnMap() {
     if (this.checkGetSuccess == 0 && gameState.getGameState() == 1) {
-      console.log("B");
+      
       let sendData = { level_id: this.level_id };
       httpPost(this.url, 'json', sendData, function (success) {
         gameMap.getMapData(success);

@@ -175,7 +175,7 @@ function mouseClicked() {
     if (mouseY < 188 && mouseY > 125) {
       //Quit without saving
       setup();
-     
+
     }
   } // End of gamestate 2
 
@@ -183,14 +183,21 @@ function mouseClicked() {
     if (mouseX < 740 && mouseX > 535) {
       if (mouseY < 555 && mouseY > 525) {
         //Exit to main menu
-
         setup();
       }
     }
     else if (mouseX < 975 && mouseX > 825) {
       if (mouseY < 560 && mouseY > 525)   //level complete, proceed to next level
       {
-        
+        var a = gameMap.getMapID() + 1;
+
+        gameState.setGameState(1);
+        gamePlayer.reset();
+        gameScore.resetScore();
+        gameHP.reset();
+        gamePlayer.setPlayerPosition(gameMap.getMapColumns() - 1, gameMap.getMapRows() - 1);
+        gameCommands.clearAllCommands();
+        gameConsole.clearAllLogs();
       }
     }
 
@@ -200,7 +207,6 @@ function mouseClicked() {
     if (mouseY < 188 && mouseY > 125) {
       //Game Lost
       gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth());
-
       clear();
       gameState.setGameState(0);
 
