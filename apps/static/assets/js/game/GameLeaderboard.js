@@ -14,15 +14,14 @@ class GameLeaderboard {
             data: {
                 "level_id": this.id
             },
-            success: function(data) {
+            success: function (data) {
                 this.checkGetSuccess = 1;
                 var attempts = data.attempts;
-                attempts = attempts.sort(function(a, b) {
+                attempts = attempts.sort(function (a, b) {
                     return b.score - a.score;
                 });
-                console.log(data.msg);
-                // console.log(attempts);
-                let height = 200;
+                
+                let height = 300;
 
 
                 if (attempts.length > 5) {
@@ -57,30 +56,9 @@ class GameLeaderboard {
         this.getAttempts();
         noLoop();
 
-        // if (this.checkGetSuccess == 0) {
-
-        //     httpGet(this.url, 'json', function(response) {
-
-        //         // when the HTTP request completes
-        //         let id, name, score;
-        //         let height = 150;
-        //         for (let i = 0; i < response.length; i++) {
-        //             response[i].id;
-        //             response[i].name;
-        //             response[i].score;
-        //             textSize(30)
-        //             text(response[i].name + " " + response[i].score, (windowWidth / 3) - 150, height);
-        //             height += 50;
-        //         }
-
-        //     }, function(error) {
-        //         console.log("ERROR");
-        //     });
-
-        // }
-
         textSize(50)
         text('LEADERBOARD', (windowWidth / 3) - 50, 100);
+        text('LEVEL COMPLETE!', 600, 200);
         textSize(30)
         color('black');
         noFill();
@@ -88,10 +66,10 @@ class GameLeaderboard {
         textSize(20);
         fill(0);
         text('RETURN TO MENU', 550, 520);
-        
+
         color('black');
         noFill();
-        rect(830,500,120,25);
+        rect(830, 500, 130, 25);
         textSize(20);
         fill(0);
         text('NEXT LEVEL', 840, 520);

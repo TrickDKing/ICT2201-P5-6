@@ -3,13 +3,14 @@ import os
 
 # Database connection
 mydb = mysql.connector.connect(
-    host = os.getenv('DB_HOST'),
-    user = os.getenv('DB_USERNAME'),
-    password = os.getenv('DB_PASS'),
-    database = os.getenv('DB_NAME')
+    host=os.getenv('DB_HOST'),
+    user=os.getenv('DB_USERNAME'),
+    password=os.getenv('DB_PASS'),
+    database=os.getenv('DB_NAME')
 )
 
 cursor = mydb.cursor(buffered=True, dictionary=True)
+
 
 def listToStr(listOfData):
     """Convert list to a string with coma separated"""
@@ -87,10 +88,11 @@ def update_data(table_name: str, data: dict, identifier: str, identifier_value: 
 
 
 # SQL = SELECT * FROM "table_name" order by "table_column"  EN DING PART
-def select_all_columns_with_condition(table_name,table_column):
+def select_all_columns_with_condition(table_name, table_column):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} ORDER BY {} DESC".format(table_name,table_column))
+    mycursor.execute(
+        "SELECT * FROM {} ORDER BY {} DESC".format(table_name, table_column))
 
     myresult = mycursor.fetchall()
 
@@ -100,33 +102,37 @@ def select_all_columns_with_condition(table_name,table_column):
 
 def select_level(level):
     table_name = "levels"
-    cursor.execute("SELECT * FROM {} where level_id= {}".format(table_name, level))
+    cursor.execute(
+        "SELECT * FROM {} where level_id= {}".format(table_name, level))
     result = cursor.fetchall()
-   
+
     print(result[0])
-   
+
     return result[0]
-    
-def get_best_score_by_level(table_name,table_column,table_column2):
+
+
+def get_best_score_by_level(table_name, table_column, table_column2):
     print(table_name)
     mycursor = mydb.cursor(dictionary=True)
-    mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
 
+    #mycursor.execute("SELECT * FROM {} INNER JOIN levels ON levels.level_id=attempts.level_id GROUP BY attempts.{} ORDER BY attempts.{} ".format(table_name,table_column,table_column2))
+    mycursor.execute("SELECT a.*, l.name FROM {} a, levels l WHERE score IN (SELECT max(score) FROM attempts GROUP BY {}) AND a.level_id = l.level_id ORDER BY {} ".format(table_name, table_column, table_column2))
     myresult = mycursor.fetchall()
 
     return myresult
 
-def insert_data(score,health):  
-  try:
-    # Adding data
-    
-    sql = "INSERT INTO SIT.attempts (level_id, score,time_taken,energy_left,level_status,uid,date) VALUES (1,%s,'0:05:23',%s,'failed',1,'20211124')"
-    val = (int(score),int(health))
-    cursor.execute(sql,val)
-    # Applying changes
-    mydb.commit()
-  except:
-    print("An error has occured")
+
+def insert_data(score, health):
+    try:
+        # Adding data
+
+        sql = "INSERT INTO SIT.attempts (level_id, score,time_taken,energy_left,level_status,uid,date) VALUES (1,%s,'0:05:23',%s,'failed',1,'20211124')"
+        val = (int(score), int(health))
+        cursor.execute(sql, val)
+        # Applying changes
+        mydb.commit()
+    except:
+        print("An error has occured")
 
 # Deletes the row from "table_name" where the "identifier" = "identifier_value"
 # SQL = DELETE FROM "table_name" WHERE "identifier" = "identifier_value"
@@ -177,4 +183,3 @@ def reset_index(table_name):
 #     "name": "William",
 #     "desc": "person3"
 # }
-

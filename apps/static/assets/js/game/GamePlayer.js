@@ -47,7 +47,13 @@ class GamePlayer {
         var delay = ms => new Promise(res => setTimeout(res, ms));
         this.setMoving();
         for (const command of commands) {
-            
+
+            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
+                clear();
+                gameState.setGameState(3);
+                break;
+            }
+
             if (gameHP.getHealth() > 0) {
                 await delay(1000);
                 this.movePosition(command);
@@ -58,7 +64,7 @@ class GamePlayer {
             } else {
                 gameState.setGameState(4);
                 clear();
-
+                break;
             }
 
         }
@@ -66,10 +72,7 @@ class GamePlayer {
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
 
-        if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
-            clear();
-            gameState.setGameState(3);
-        }
+        
 
     };
 
@@ -107,7 +110,7 @@ class GamePlayer {
 
         if (command == 1) {
             //Move left
-            let checkLeft = gameMap.checkGrid(this.getPlayerPosition()[0] - 1, this.getPlayerPosition()[1]);;
+            let checkLeft = gameMap.checkGrid(this.getPlayerPosition()[0] - 1, this.getPlayerPosition()[1]);
             if (checkLeft == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkLeft >= 1 && checkLeft <= 3) {
@@ -130,7 +133,7 @@ class GamePlayer {
 
         if (command == 2) {
             //Move right
-            let checkRight = gameMap.checkGrid(this.getPlayerPosition()[0] + 1, this.getPlayerPosition()[1]);;
+            let checkRight = gameMap.checkGrid(this.getPlayerPosition()[0] + 1, this.getPlayerPosition()[1]);
             if (checkRight == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkRight >= 1 && checkRight <= 3) {
@@ -152,7 +155,7 @@ class GamePlayer {
 
         if (command == 3) {
             //Move Down
-            let checkDown = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] + 1);;
+            let checkDown = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] + 1);
             if (checkDown == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkDown >= 1 && checkDown <= 3) {

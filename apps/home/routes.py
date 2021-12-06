@@ -13,7 +13,8 @@ from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
 from apps.home.commands import Commands
 
-import operator
+from operator import itemgetter
+from itertools import groupby
 
 # Helper - Extract current page name from request
 
@@ -142,8 +143,9 @@ def route_template(template):
             return render_template("home/" + template, segment=segment, data=data)
 
         elif template == 'instructions.html':
-             data = select_data(table_name="users", filterBy=['username'], filterVal=[str(current_user)])
              
+             data = select_data(table_name="users", filterBy=[
+                               'username'], filterVal=[str(current_user)])
              # Detect the current page
              segment = get_segment(request)
              # Serve the file (if exists) from app/templates/home/FILE.html
@@ -152,14 +154,22 @@ def route_template(template):
 
         elif template == 'levelselect.html':                    
             data = get_best_score_by_level("attempts","level_id","level_id")
+            attempts = select_data(table_name="attempts")
+
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
-        
+
+        elif template == 'attempthistory.html':
+            data = select_all_columns_with_condition("attempts", "attempt_id")
+            segment = get_segment(request)
+            return render_template("home/" + template, segment=segment, data=data)
+
         # Detect the current page
         segment = get_segment(request)
         # Serve the file (if exists) from app/templates/home/FILE.html
         return render_template("home/" + template, segment=segment, data=data)
 
+        
     except TemplateNotFound:
         return render_template('home/page-404.html'), 404
 
@@ -219,3 +229,27 @@ def saveDetails():
         data = select_data(table_name="users", filterBy=[
                            'username'], filterVal=[str(current_user)])
         return render_template('home/profile.html', data=data)
+
+@blueprint.route('/settings', methods=['GET', 'POST'])
+@login_required
+def saveSettings():
+    # speed = request.form['speed']
+    print("Updating profile...")
+    if request.method == 'POST':
+        data = {
+            "speed": request.form['speed']
+        }
+        print(data)
+        if request.form['speed']:
+            update_data(table_name="Settings", data=data,
+                        identifier="settings_id", identifier_value="1")
+
+            result = "Speed updated successfully!"
+        else:
+            result = "Updating failed"
+
+        settings = select_data(table_name="Settings")
+        return render_template('home/settings.html', speed=settings[0]["speed"])
+    else:
+        settings = select_data(table_name="Settings")
+        return render_template('home/settings.html', speed=settings[0]["speed"])
