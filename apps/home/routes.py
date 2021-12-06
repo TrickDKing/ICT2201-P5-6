@@ -37,9 +37,9 @@ def index():
         return render_template('home/index.html', segment='index')
     elif request.method == "POST":
         if(request.is_json):
-            print(request.data)
+          
             some = request.get_json()
-            print(some)
+          
             return jsonify({"msg": "Success"}), 200
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -51,9 +51,9 @@ def game():
         return render_template('home/index.html')
     elif request.method == "POST":
         if(request.is_json):
-            # print(request.data)
+          
             some = request.get_json()
-            # print(some)
+        
             return jsonify({"msg": "Success"}), 200
         else:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -82,15 +82,15 @@ def gameLeaderboard():
 def maps():
     '''Route to get game maps from database'''
     if request.method == "GET":
-        print(request.data)
+       
         mapData = select_level(1)
-        print(mapData)
+      
         return mapData
     if request.method == "POST":
 
-        print(type(request.data))
+        print(request.data)
         mapData = select_level(1)
-        print(mapData)
+       
         return jsonify(mapData)
     return jsonify("A")
 
@@ -103,7 +103,7 @@ def sendCommands():
         return commands.getCommands()
     if request.method == "POST":
         if(request.is_json):
-            print(request.data)
+           
             commands.setCommands(request.data)
         return jsonify("Something")
 
