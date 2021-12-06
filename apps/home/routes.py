@@ -164,7 +164,8 @@ def saveSettings():
         else:
             result = "Updating failed"
 
-        return render_template('home/settings.html')
+        settings = select_data(table_name="Settings")
+        return render_template('home/settings.html', speed=settings[0]["speed"])
     else:
         settings = select_data(table_name="Settings")
         return render_template('home/settings.html', speed=settings[0]["speed"])
