@@ -174,9 +174,8 @@ function mouseClicked() {
   if (gameState.getGameState() == 2) {
     if (mouseY < 188 && mouseY > 125) {
       //Quit without saving
-      clear();
-      gameState.setGameState(0);
-      console.log(gameState.getGameState());
+      setup();
+     
     }
   } // End of gamestate 2
 
