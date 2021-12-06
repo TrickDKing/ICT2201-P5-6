@@ -49,12 +49,7 @@ class GamePlayer {
         this.setMoving();
         for (const command of commands) {
            
-<<<<<<< Updated upstream
-
-            if(gameHP.getHealth() > 98)
-=======
             if(gameHP.getHealth() > 0)
->>>>>>> Stashed changes
             {
                 await delay(1000);
                 this.movePosition(command);

@@ -6,6 +6,8 @@ from flask_login import (
     current_user,
     login_required
 )
+
+from apps.home import dbfuncs
 from apps.home.dbfuncs import insert_data, select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass

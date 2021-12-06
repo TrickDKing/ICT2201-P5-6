@@ -14,7 +14,7 @@ let gameConsole;
 
 function setup() {
   //createCanvas(windowWidth, windowHeight).parent('canvasHolder');
-  createCanvas(1210, 510).parent('canvasHolder');
+  createCanvas(1600, 660).parent('canvasHolder');
   background('white');
   gameLeaderboard = new GameLeaderboard();
   gameBackground = new GameBackground();
@@ -29,7 +29,7 @@ function setup() {
   gamePauseMenu = new GamePauseMenu();
   gameOver = new GameOver();
   gameConsole = new GameConsole();
-  
+
 
   gamePlayer.setPlayerPosition(gameMap.getMapRows() - 1, gameMap.getMapColumns() - 1); //Initialise player position to be at the start
 
@@ -47,7 +47,7 @@ function draw() {
 
   if (gameState.getGameState() == 1) {
     clear();
-    
+
     gameMap.spawnMap(); // Render map
     gameScore.display(); // Render Score
     gameHP.display(); //Render Health bar
@@ -58,7 +58,7 @@ function draw() {
     /*
     gamePlayer.keyPressed();
     */
-    
+
   }
 
   if (gameState.getGameState() == 2) {
@@ -161,7 +161,7 @@ function mouseClicked() {
           gameCommands.clearAllCommands();
           gameConsole.insertLog("RESETTING...");
         }
-        else{
+        else {
           gameConsole.insertLog("GAME EXECUTING UNABLE TO RESET");
         }
 
@@ -181,10 +181,10 @@ function mouseClicked() {
     if (mouseY < 188 && mouseY > 125) {
       //Start game
 
-      gameOver.insertGameOverData(gameScore.getScore(),gameHP.getHealth())
-      clear(); 
+      gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth())
+      clear();
       setup();
-      
+
     }
   }
 }
@@ -200,6 +200,6 @@ function keyPressed() {
   }
 }
 
-/*function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-  }*/
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
