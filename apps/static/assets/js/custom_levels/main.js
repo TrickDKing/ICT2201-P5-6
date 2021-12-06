@@ -136,7 +136,7 @@ $("#clearBtn").click(function() {
 $("#saveBtn").click(function() {
     var level_name = $("#levelName").val();
     var energy_level = $("#energyLevel").val();
-
+    
     var red = {
         "r": 255,
         "g": 0,
@@ -174,7 +174,7 @@ $("#saveBtn").click(function() {
     }
 
     $.ajax({
-        url: '/custom_levels',
+        url: 'custom_levels',
         type: 'POST',
         data: {
             "grid": JSON.stringify(newGrid),
