@@ -1,83 +1,82 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} UI Tables {% endblock %} 
+{% block title %} UI Tables {% endblock %}
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}{% endblock stylesheets %}
 
-{% block content %}	
+{% block content %}
 
-    <!-- [ Main Content ] start -->
-    <section class="pcoded-main-container">
-        <div class="pcoded-content">
-            <!-- [ breadcrumb ] start -->
-            <div class="page-header">
-                <div class="page-block">
-                    <div class="row align-items-center">
-                        <div class="col-md-12">
-                            <div class="page-header-title">
-                                <h5 class="mb-3">Level Select</h5>
-                            </div>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#!">Level Select</a></li>
-                            </ul>
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="mb-3">Level Select</h5>
                         </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Level Select</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <!-- [ breadcrumb ] end -->
-            <!-- [ Main Content ] start -->
-            <div class="row">
-                <!-- [ stiped-table ] start -->
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Level Select</h5>
-                        </div>
-                        <div class="card-body table-border-style">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name   </th>
-                                            <th>Cleared</th>
-                                            <th>Score</th>
-                                            <th>Time</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody> 
-                                    {% set count = namespace(value=1) %}  
-                                    {% for item in data %}
-                                    {% if item.uid == 1 %}
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ stiped-table ] start -->
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Level Select</h5>
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
                                     <tr>
-                                    
+                                        <th>#</th>
+                                        <th>Name </th>
+                                        <th>Cleared</th>
+                                        <th>Score</th>
+                                        <th>Time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set count = namespace(value=1) %}
+                                    {% for item in data %}
+                                    {% if item.uid == current_user %}
+                                    <tr>
                                         <td>{{count.value}}</td>
                                         <td>{{item.name}}</td>
                                         <td>{{item.level_status}}</td>
                                         <td>{{item.score}}</td>
                                         <td>{{item.time_taken}}</td>
-                                        <td><button onclick="location.href = '/index'" type="button" class="btn disabled btn-primary">Play !</button></td>
-                                        <td>{{item.map_array}}</td>
-
-                                    </tr> 
+                                        <td><button onclick="location.href = '/index/{{item.level_id}}'" type="button"
+                                                class="btn disabled btn-primary">Play !</button></td>
+                                        <!-- <td>{{item.map_array}}</td> -->
+                                    </tr>
                                     {% set count.value = count.value + 1 %}
                                     {%endif%}
                                     {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <!-- [ stiped-table ] end -->
             </div>
-            <!-- [ Main Content ] end -->
+            <!-- [ stiped-table ] end -->
         </div>
-    </section>
-    <!-- [ Main Content ] end -->
+        <!-- [ Main Content ] end -->
+    </div>
+</section>
+<!-- [ Main Content ] end -->
 
 {% endblock content %}
 
