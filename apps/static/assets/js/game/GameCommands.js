@@ -32,8 +32,34 @@ class GameCommands {
         return this.commands;
     }
 
-    getArraySize() {
-        return this.commands.length;
+}
+
+getAllCommands() {
+    return this.commands;
+}
+
+getArraySize() {
+    return this.commands.length;
+}
+
+getCommands(index) {
+    return this.commands[index];
+}
+
+postCommands(postData) {
+    httpPost(this.url, 'json', postData, function(success) { console.log(success) }, function(error) { console.log(error) });
+}
+
+checkCommands(command) {
+    switch (command) {
+        case 0:
+            return "Move Forward";
+        case 1:
+            return "Move Left";
+        case 2:
+            return "Move Right";
+        case 3:
+            return "Move Down";
     }
 
     getCommands(index) {
