@@ -60,7 +60,11 @@ class GamePlayer {
         this.setMoving();
         for (const command of commands) {
 
-            
+            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
+                clear();
+                gameState.setGameState(3);
+                break;
+            }
 
             if (gameHP.getHealth() > 0) {
                 await delay(1000);
@@ -73,12 +77,6 @@ class GamePlayer {
                 gameConsole.insertLog("Health is zero! GAME OVER");
                 gameState.setGameState(4);
                 clear();
-                break;
-            }
-
-            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
-                clear();
-                gameState.setGameState(3);
                 break;
             }
 
@@ -140,10 +138,6 @@ class GamePlayer {
 
         if (command == 1) {
             //Move left
-            if(this.getPlayerPosition()[0] - 1 < 0){
-                gameConsole.insertLog("MOVING LEFT");
-                return;
-            }
             if (this.checkLeft === -1) {
                 this.checkLeft = gameMap.checkGrid(this.getPlayerPosition()[0] - 1, this.getPlayerPosition()[1]);
             }
@@ -170,10 +164,6 @@ class GamePlayer {
 
         if (command == 2) {
             //Move right
-            if(this.getPlayerPosition()[0] + 1 > gameMap.getMapColumns()){
-                gameConsole.insertLog("MOVING RIGHT");
-                return;
-            }
             if (this.checkRight === -1) {
                 this.checkRight = gameMap.checkGrid(this.getPlayerPosition()[0] + 1, this.getPlayerPosition()[1]);
             }
@@ -199,10 +189,7 @@ class GamePlayer {
 
         if (command == 3) {
             //Move Down
-            if(this.getPlayerPosition()[1] + 1 > gameMap.getMapRows()){
-                gameConsole.insertLog("MOVING DOWN");
-                return;
-            }
+            
             if (this.checkDown === -1) {
                 this.checkDown = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] + 1);
             }

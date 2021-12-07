@@ -44,6 +44,14 @@ class GameCommands {
     httpPost(this.url, 'json', postData, function (success) { console.log(success) }, function (error) { console.log(error) });
   }
 
+  /*mouseClicked(){
+      if (mouseX < 650 && mouseX > 550) {
+          if (mouseY < 520 && mouseY > 500) {
+              return this.executeCommands();
+          }
+      }
+  }*/
+
   checkCommands(command) {
     switch (command) {
       case 0:
