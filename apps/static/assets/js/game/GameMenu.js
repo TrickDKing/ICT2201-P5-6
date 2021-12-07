@@ -3,12 +3,8 @@ const GameState = require('./GameState');
 class GameMenu {
   //Class to render Game Menu
   constructor() {
+    
     this.gameMenu = 0;
-    this.points = [];
-    this.mult = 0.005;
-    this.unittest = 0;
-    this.displayMenuBG();
-    this.gameState = new GameState();
   }
 
   getOption() {
@@ -17,25 +13,6 @@ class GameMenu {
 
   setOption(gameMenu) {
     this.gameMenu = gameMenu;
-  }
-
-  displayMenuBG() {
-
-    if (this.unittest == 0) {
-      
-      var density = 10; // The number of points in each row
-      var space = width / density;
-
-      for (var x = 0; x < width; x += space) {
-        for (var y = 0; y < height; y += space) {
-          var p = createVector(x, y)
-          this.points.push(p)
-        }
-      }
-
-    }
-
-
   }
 
   displayGameMenu() {
@@ -57,7 +34,7 @@ class GameMenu {
     //Display text and positions
     text('START', (windowWidth / 3) - 50, 100);
     text('INSTRUCTIONS',(windowWidth / 3) - 150, 250);
-    text('SETTINGS', (windowWidth / 3) - 100, 400);
+    text('ABOUT US', (windowWidth / 3) - 100, 400);
   }
 
 
@@ -70,8 +47,8 @@ class GameMenu {
     textSize(30)
     text('1. Use commands to bring your character to the end point!', 50, 150)
     text('2. Move your character based on directional instructions', 50, 200)
-    text('3. Buffs and traps are laid along the way to buff or prevent you from reaching the end point!', 50, 250)
-    text('4. The game is over when your HP Bar is zero.', 50, 300)
+    text('3. Buffs and traps are laid along the way to help or prevent you from reaching the end point!', 50, 250)
+    text('4. The game is over when your HP Bar is zero!', 50, 300)
     if (keyIsDown(BACKSPACE)) {
       this.gameMenu = 0;
       clear();
@@ -79,11 +56,21 @@ class GameMenu {
   }
 
   displaySettings() {
-   
+    clear();
     textSize(75)
-    text('SETTINGS!', 25, height / 2)
+    text('ABOUT US', 550, 70);
+    textSize(30)
+    text("CREATORS", 650, 150);
+    textSize(20);
+    text('Press BACKSPACE to return to MENU!', 50, 600);
+    text("Xavier", 700, 200);
+    text("Johanna", 690, 250);
+    text("Carlton", 700, 300);
+    text("En Ding", 700, 350);
+    text("Xian Fu", 700, 400);
     if (keyIsDown(BACKSPACE)) {
       this.gameMenu = 0;
+      clear();
     }
   }
 

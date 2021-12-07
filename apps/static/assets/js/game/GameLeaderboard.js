@@ -96,7 +96,7 @@ class GameLeaderboard {
         text('NEXT LEVEL', 840, 550);
 
         let height = 300;
-        
+
         if (this.attemptsLength != 0) {
             for (let i = 0; i < this.attemptsLength; i++) {
 
