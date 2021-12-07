@@ -159,6 +159,11 @@ def route_template(template):
             segment = get_segment(request)
             return render_template("home/" + template, segment=segment, data=data)
 
+        elif template == 'attempthistory.html':
+            data = select_all_columns_with_condition("attempts", "attempt_id")
+            segment = get_segment(request)
+            return render_template("home/" + template, segment=segment, data=data)
+
         # Detect the current page
         segment = get_segment(request)
         # Serve the file (if exists) from app/templates/home/FILE.html
@@ -248,70 +253,3 @@ def saveSettings():
     else:
         settings = select_data(table_name="Settings")
         return render_template('home/settings.html', speed=settings[0]["speed"])
-    
-
-@blueprint.route('/custom_levels', methods=['GET', 'POST'])
-def custom_levels():
-    if request.method == "GET":
-        return render_template('home/customlevels.html')
-    else:
-        name = request.form['level_name']
-        grid = request.form['grid']
-        level_type = "custom"
-        energy_level = request.form['energy_level']
-        
-        level = [
-            (
-                name,
-                grid, 
-                level_type, 
-                energy_level
-            )
-        ]
-
-        dbfuncs.insert_data_2(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
-        
-        return jsonify({"msg":"Level saved!"})
-    
-    
-@blueprint.route('/attempt_history', methods=['GET', 'POST'])
-def attempt_history():
-    if request.method == "POST":
-        level_id = request.form['level_id']
-        level_type = request.form['level_type']
-
-        mycursor = dbfuncs.mydb.cursor()
-        print(level_id)
-        if (level_id == "0"):
-            sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = '{level_type}' AND a.uid = '{current_user.id}'"
-        else:
-            sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = '{level_type}' AND a.level_id = '{level_id}' AND a.uid = {current_user.id}"
-
-        mycursor.execute(sql)
-        level_attempts = mycursor.fetchall()
-
-        return jsonify({'attempts': level_attempts})
-    else:
-        mycursor = dbfuncs.mydb.cursor()
-        sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = 'custom' AND a.uid = {current_user.id}"
-        mycursor.execute(sql)
-        custom_level_attempts = mycursor.fetchall()
-
-        sql = f"SELECT a.attempt_id, a.score, a.time_taken, a.energy_left, a.level_status, a.date, l.name, l.level_type, l.energy_level FROM levels l, attempts a WHERE a.level_id = l.level_id AND l.level_type = 'default' AND a.uid = {current_user.id}"
-        mycursor.execute(sql)
-        default_level_attempts = mycursor.fetchall()
-
-        return render_template('home/attempthistory.html', custom_level_attempts=custom_level_attempts, default_level_attempts=default_level_attempts)
-
-
-@blueprint.route('/get_levels', methods=['POST'])
-def get_level_attempts():
-    if request.method == "POST":
-        level_type = request.form['level_type']
-
-        mycursor = dbfuncs.mydb.cursor()
-        sql = f"SELECT name, level_id FROM levels where level_type = '{level_type}'"
-        mycursor.execute(sql)
-        levels = mycursor.fetchall()
-
-        return jsonify({'levels': levels})
