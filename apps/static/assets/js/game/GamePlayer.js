@@ -86,7 +86,7 @@ class GamePlayer {
 
         if (command == 0) {
             //Move forward
-            if(this.getPlayerPosition()[1] - 1 < 0){
+            if(this.getPlayerPosition()[1] - 1 >= gameMap.getMapRows()){
                 gameConsole.insertLog("MOVING FORWARD");
                 return;
             }
@@ -115,7 +115,7 @@ class GamePlayer {
 
         if (command == 1) {
             //Move left
-            if(this.getPlayerPosition()[0] - 1 < 0){
+            if(this.getPlayerPosition()[0] - 1 >= gameMap.getMapColumns()){
                 gameConsole.insertLog("MOVING LEFT");
                 return;
             }
@@ -142,7 +142,7 @@ class GamePlayer {
 
         if (command == 2) {
             //Move right
-            if(this.getPlayerPosition()[0] + 1 > gameMap.getMapColumns()){
+            if(this.getPlayerPosition()[0] + 1 >= gameMap.getMapColumns()){
                 gameConsole.insertLog("MOVING RIGHT");
                 return;
             }
@@ -168,7 +168,7 @@ class GamePlayer {
 
         if (command == 3) {
             //Move Down
-            if(this.getPlayerPosition()[1] + 1 > gameMap.getMapRows()){
+            if(this.getPlayerPosition()[1] + 1 >= gameMap.getMapRows()){
                 gameConsole.insertLog("MOVING DOWN");
                 return;
             }
