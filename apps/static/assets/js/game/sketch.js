@@ -36,7 +36,7 @@ function setup() {
 
 function draw() {
 
-  print(mouseX, mouseY);
+  //print(mouseX, mouseY);
   //In game Menu
   if (gameState.getGameState() == 0) {
     gameBackground.display();
@@ -189,14 +189,14 @@ function mouseClicked() {
       if (mouseY < 560 && mouseY > 525)   //level complete, proceed to next level
       {
         var a = gameMap.getMapID() + 1;
-        /*gameMap.setCheckGetSuccess(0);
+        
         gameState.setGameState(1);
         gamePlayer.reset();
         gameScore.resetScore();
         gameHP.reset();
         gamePlayer.setPlayerPosition(gameMap.getMapColumns() - 1, gameMap.getMapRows() - 1);
         gameCommands.clearAllCommands();
-        gameConsole.clearAllLogs();*/
+        gameConsole.clearAllLogs();
       }
     }
 
