@@ -4,8 +4,8 @@ class GameState {
       this.gameState = 0;
     }
   
-    setGameState(newgameState) {
-      this.gameState = newgameState;
+    setGameState(gameState) {
+      this.gameState = gameState;
     }
   
     getGameState() {

@@ -1,14 +1,10 @@
-const GameState = require('./GameState');
-
 class GameMenu {
     //Class to render Game Menu
     constructor() {
         this.gameMenu = 0;
         this.points = [];
         this.mult = 0.005;
-        this.unittest = 0;
         this.displayMenuBG();
-        this.gameState = new GameState();
     }
 
     getOption() {
@@ -21,19 +17,16 @@ class GameMenu {
 
     displayMenuBG() {
 
-        if (this.unittest == 0) {
 
-            var density = 10; // The number of points in each row
-            var space = width / density;
-
-            for (var x = 0; x < width; x += space) {
-                for (var y = 0; y < height; y += space) {
-                    var p = createVector(x, y)
-                    this.points.push(p)
-                }
+        var density = 10; // The number of points in each row
+        var space = width / density;
+        for (var x = 0; x < width; x += space) {
+            for (var y = 0; y < height; y += space) {
+                var p = createVector(x, y)
+                this.points.push(p)
             }
-
         }
+
 
 
     }
@@ -88,39 +81,18 @@ class GameMenu {
     }
 
     display() {
-
-        if (this.unittest = 0) {
-
-            if (gameState.getGameState() == 0 && this.getOption() == 0) {
-                this.displayGameMenu();
-            } else if (this.getOption() == 1) {
-                gameState.setGameState(1);
-                if (keyIsDown(BACKSPACE)) {
-                    this.gameMenu = 0;
-                }
-            } else if (this.getOption() == 2) {
-                this.displayHelpManual();
-            } else if (this.getOption() == 3) {
-                this.displaySettings();
+        if (gameState.getGameState() == 0 && this.getOption() == 0) {
+            this.displayGameMenu();
+        } else if (this.getOption() == 1) {
+            gameState.setGameState(1);
+            if (keyIsDown(BACKSPACE)) {
+                this.gameMenu = 0;
             }
-        } else {
-
-            if (this.gameState.getGameState() == 0 && this.getOption() == 0) {
-                this.displayGameMenu();
-            } else if (this.getOption() == 1) {
-                this.gameState.setGameState(1);
-                // if (keyIsDown(BACKSPACE)) {
-                //   this.gameMenu = 0;
-                // }
-            } else if (this.getOption() == 2) {
-                this.displayHelpManual();
-            } else if (this.getOption() == 3) {
-                this.displaySettings();
-            }
+        } else if (this.getOption() == 2) {
+            this.displayHelpManual();
+        } else if (this.getOption() == 3) {
+            this.displaySettings();
         }
-
     }
 
 }
-
-module.exports = GameMenu;

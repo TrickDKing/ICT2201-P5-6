@@ -48,7 +48,11 @@ class GamePlayer {
         this.setMoving();
         for (const command of commands) {
 
-
+            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
+                clear();
+                gameState.setGameState(3);
+                break;
+            }
 
             if (gameHP.getHealth() > 0) {
                 await delay(1000);
@@ -58,15 +62,8 @@ class GamePlayer {
                 gameConsole.insertLog("Moving One Grid: HP --");
 
             } else {
-                gameConsole.insertLog("Health is zero! GAME OVER");
                 gameState.setGameState(4);
                 clear();
-                break;
-            }
-
-            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
-                clear();
-                gameState.setGameState(3);
                 break;
             }
 
@@ -74,6 +71,8 @@ class GamePlayer {
 
         this.setMoving();
         gameConsole.insertLog("EXECUTION ENDED");
+
+
 
     };
 
@@ -86,12 +85,8 @@ class GamePlayer {
 
         if (command == 0) {
             //Move forward
-            if (this.getPlayerPosition()[1] - 1 < 0) {
-                gameConsole.insertLog("MOVING FORWARD");
-                return;
-            }
             let checkFront = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] - 1);
-
+            console.log(checkFront);
             if (checkFront == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
             } else if (checkFront >= 1 && checkFront <= 3) {
@@ -115,10 +110,6 @@ class GamePlayer {
 
         if (command == 1) {
             //Move left
-            if (this.getPlayerPosition()[0] - 1 < 0) {
-                gameConsole.insertLog("MOVING LEFT");
-                return;
-            }
             let checkLeft = gameMap.checkGrid(this.getPlayerPosition()[0] - 1, this.getPlayerPosition()[1]);
             if (checkLeft == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
@@ -142,10 +133,6 @@ class GamePlayer {
 
         if (command == 2) {
             //Move right
-            if (this.getPlayerPosition()[0] + 1 > gameMap.getMapColumns()) {
-                gameConsole.insertLog("MOVING RIGHT");
-                return;
-            }
             let checkRight = gameMap.checkGrid(this.getPlayerPosition()[0] + 1, this.getPlayerPosition()[1]);
             if (checkRight == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
@@ -168,10 +155,6 @@ class GamePlayer {
 
         if (command == 3) {
             //Move Down
-            if (this.getPlayerPosition()[1] + 1 > gameMap.getMapRows()) {
-                gameConsole.insertLog("MOVING DOWN");
-                return;
-            }
             let checkDown = gameMap.checkGrid(this.getPlayerPosition()[0], this.getPlayerPosition()[1] + 1);
             if (checkDown == 0) {
                 gameConsole.insertLog("ERROR OBSTACLE UNABLE TO MOVE!");
