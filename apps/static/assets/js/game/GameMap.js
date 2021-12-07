@@ -33,13 +33,13 @@ class GameMap {
     }
   }
 
-  setObjects() {
-    this.grid = this.create2DArray(this.cols, this.rows);
+    setObjects() {
+        this.grid = this.create2DArray(this.cols, this.rows);
 
-    for (let i = 0; i < this.rows; i++) {
-      for (let j = 0; j < this.cols; j++) {
-        this.grid[i][j] = floor(random(4));
-      }
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.grid[i][j] = Math.floor(Math.random(4));
+            }
 
     }
 
@@ -141,3 +141,5 @@ class GameMap {
 
 
 }
+
+module.exports = GameMap;

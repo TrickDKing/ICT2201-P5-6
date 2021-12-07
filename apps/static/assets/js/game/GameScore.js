@@ -29,3 +29,5 @@ class GameScore {
     text('SCORE = ' + this.score, 10, 640);
   }
 }
+
+module.exports = GameScore;

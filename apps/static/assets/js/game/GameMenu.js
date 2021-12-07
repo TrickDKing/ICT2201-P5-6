@@ -1,9 +1,12 @@
+const GameState = require('./GameState');
+
 class GameMenu {
   //Class to render Game Menu
   constructor() {
     
     this.gameMenu = 0;
-
+    this.unittest = 0;
+    this.gameState = new GameState();
   }
 
   getOption() {
@@ -74,19 +77,41 @@ class GameMenu {
   }
 
   display() {
-    if (gameState.getGameState() == 0 && this.getOption() == 0) {
-      this.displayGameMenu();
-    } else if (this.getOption() == 1) {
-      gameState.setGameState(1);
-      if (keyIsDown(BACKSPACE)) {
-        this.gameMenu = 0;
+
+    if (this.unittest = 0) {
+        
+      if (gameState.getGameState() == 0 && this.getOption() == 0) {
+        this.displayGameMenu();
+      } else if (this.getOption() == 1) {
+        gameState.setGameState(1);
+        if (keyIsDown(BACKSPACE)) {
+          this.gameMenu = 0;
+        }
+      } else if (this.getOption() == 2) {
+        this.displayHelpManual();
       }
-    } else if (this.getOption() == 2) {
-      this.displayHelpManual();
+      else if (this.getOption() == 3) {
+        this.displaySettings();
+      }
+    } else {
+
+      if (this.gameState.getGameState() == 0 && this.getOption() == 0) {
+        this.displayGameMenu();
+      } else if (this.getOption() == 1) {
+        this.gameState.setGameState(1);
+        // if (keyIsDown(BACKSPACE)) {
+        //   this.gameMenu = 0;
+        // }
+      } else if (this.getOption() == 2) {
+        this.displayHelpManual();
+      }
+      else if (this.getOption() == 3) {
+        this.displaySettings();
+      }
     }
-    else if (this.getOption() == 3) {
-      this.displaySettings();
-    }
+
   }
 
 }
+
+module.exports = GameMenu;

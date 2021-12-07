@@ -43,3 +43,5 @@ class GameHP {
 
 
 }
+
+module.exports = GameHP;
