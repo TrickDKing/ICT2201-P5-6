@@ -1,0 +1,136 @@
+{% extends "layouts/base.html" %} {% block title %} Dashboard {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h5 class="m-b-10">Dashboard Analytics</h5>
+                            </div>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-green order-card">
+                            <div class="card-body">
+                                <h6 class="text-white">Car Speed</h6>
+                                <h2 class="text-right text-white"><i class="feather icon-feather float-left"></i><span id="carSpeed">0</span>km/h</h2>
+                                <p class="m-b-0">Last Updated<span class="float-right" id="carSpeedTimeUpdate">9:34pm</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-yellow order-card">
+                            <div class="card-body">
+                                <h6 class="text-white">Distance Travelled</h6>
+                                <h2 class="text-right text-white"><i class="feather icon-maximize-2 float-left"></i><span id="distanceTravelled">0</span>m</h2>
+                                <p class="m-b-0">Last Updated<span class="float-right" id="distanceTravelledTimeUpdate">9:34pm</span></p>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <div class="row">
+            <!-- order-card start -->
+
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/display_car_data',
+            type: 'GET',
+            success: function(data) {
+                var today = new Date();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+                var speed = data.car_speed[0][0];
+                $("#carSpeed").text(speed);
+
+                $("#carSpeedTimeUpdate").text(today.toLocaleDateString('en-GB') + " " + time);
+                $("#distanceTravelledTimeUpdate").text(today.toLocaleDateString('en-GB') + " " + time);
+            }
+        });
+    });
+
+    $(document).keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        var commandVal;
+
+        if (keycode == '87') {
+            commandVal = "1";
+            console.log('FORWARD!');
+        }
+        if (keycode == '65') {
+            commandVal = "2";
+            console.log('LEFT!');
+        }
+        if (keycode == '68') {
+            commandVal = "3";
+            console.log('RIGHT!');
+        }
+        if (keycode == '83') {
+            commandVal = "4";
+            console.log('STOP!');
+        }
+
+        $.ajax({
+            url: '/send_a_command',
+            type: 'POST',
+            data: {
+                command_value: commandVal
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+
+    setInterval(function() {
+        $.ajax({
+            url: '/display_car_data',
+            type: 'GET',
+            success: function(data) {
+                var today = new Date();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+                var speed = data.car_speed[0][0];
+                $("#carSpeed").text(speed);
+
+                $("#carSpeedTimeUpdate").text(today.toLocaleDateString('en-GB') + " " + time);
+                $("#distanceTravelledTimeUpdate").text(today.toLocaleDateString('en-GB') + " " + time);
+            }
+        });
+    }, 10000); //time in milliseconds
+</script>
+
+{% endblock javascripts %}

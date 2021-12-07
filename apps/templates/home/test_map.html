@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %} {% block title %} Test Map {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom_levels.css') }}"> {% endblock stylesheets %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<!-- p5.js JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
+<script src="https://unpkg.com/blockly/blockly.min.js"></script>
+
+<!-- Own JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/test_map.js') }}"></script>
+{% endblock javascripts %} {% block content %}
+
+<!-- [ Main Content ] start -->
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">{{ level["level_type"] }} level: {{ level['name'] }}</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">Levels</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ sample-page ] start -->
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-body table-border-style">
+                            <input type="hidden" id="levelName" value="{{ level['name'] }}">
+                            <input type="hidden" id="mapArray" value="{{ level['map_array'] }}">
+                            <input type="hidden" id="levelType" value="{{ level['level_type'] }}">
+                            <input type="hidden" id="energyLevel" value="{{ level['energy_level'] }}">
+                            <br>
+                            <div id="canvasHolder"></div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ sample-page ] end -->
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</section>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}

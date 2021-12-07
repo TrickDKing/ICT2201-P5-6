@@ -27,9 +27,6 @@ def concatList(list1: list = None, list2: list = None, char: str = "="):
 
 # Retrieves data from all the columns from "table_name"
 # SQL = SELECT * FROM "table_name"
-
-
-# def select_all_columns(table_name):
 # def select_all_columns(table_name):
 #     print(table_name)
 #     mycursor = mydb.cursor(dictionary=True)
@@ -139,7 +136,6 @@ def get_best_score_by_level(table_name, table_column, table_column2):
     mycursor.execute("SELECT a.*, l.name FROM {} a, levels l WHERE score IN (SELECT max(score) FROM attempts GROUP BY {}) AND a.level_id = l.level_id ORDER BY {} ".format(table_name, table_column, table_column2))
     myresult = mycursor.fetchall()
 
-    print("selected {} columns from {}.".format(column_names, table_name))
     return myresult
 
 
@@ -157,6 +153,9 @@ def update_data(table_name, identifier, identifier_value, column_name, value):
 
 # Deletes the row from "table_name" where the "identifier" = "identifier_value"
 # SQL = DELETE FROM "table_name" WHERE "identifier" = "identifier_value"
+    return myresult
+
+
 def insert_data(score, health):
     try:
         # Adding data

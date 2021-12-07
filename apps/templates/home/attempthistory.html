@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %} {% block title %} UI Tables {% endblock %}
 
 <!-- Specific CSS goes HERE -->
-{% block stylesheets %} {% endblock stylesheets %} {% block content %}
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
 
 <!-- [ Main Content ] start -->
 <section class="pcoded-main-container">
@@ -32,22 +32,12 @@
                         <h5 class="mb-3">Level Type</h5>
                         <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active text-uppercase" id="original-tab" data-toggle="tab" href="#original" role="tab" aria-controls="original" aria-selected="true">Default</a>
+                                <a class="nav-link active text-uppercase" id="original-tab" data-toggle="tab" href="#original" role="tab" aria-controls="original" aria-selected="true">Original</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-uppercase" id="custom-tab" data-toggle="tab" href="#custom" role="tab" aria-controls="custom" aria-selected="false">Custom</a>
                             </li>
-                            <form class="form-inline ml-auto">
-                                <div class=" form-group">
-                                    <label style="margin-right: 10px;" id="selectLabel" for="levelSelect">Select Level</label>
-                                    <select id="levelSelect" class="form-control">
-                                    </select>
-                                </div>
-                            </form>
                         </ul>
-                        <div class="input-group input-group-button mb-3">
-                            <input type="text" id="search" class="form-control" placeholder="Search for your attempt">
-                        </div>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="original" role="tabpanel" aria-labelledby="original-tab">
                                 <div class="card-body table-border-style">
@@ -90,28 +80,30 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Name</th>
-                                                    <th>Cleared</th>
-                                                    <th>Score</th>
-                                                    <th>Time Taken</th>
-                                                    <th>Date</th>
+                                                    <th>First Name</th>
+                                                    <th>Last Name</th>
+                                                    <th>Username</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="customAttemptsTable">
-                                                {% for level in custom_level_attempts %}
+                                            <tbody>
                                                 <tr>
-                                                    <td>{{ level[0] }}</td>
-                                                    <td>{{ level[6] }}</td>
-                                                    {% if level[4] == "passed" %}
-                                                    <td><i class="feather mr-2 icon-check f-24"></i></td>
-                                                    {% else %}
-                                                    <td><i class="feather mr-2 icon-x f-24"></i></td>
-                                                    {% endif %}
-                                                    <td>{{ level[1] }} pts</td>
-                                                    <td>{{ level[2] }}</td>
-                                                    <td>{{ level[5].strftime('%d %b %Y') }}</td>
+                                                    <td>1</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
                                                 </tr>
-                                                {% endfor %}
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Larry</td>
+                                                    <td>the Bird</td>
+                                                    <td>@twitter</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -130,6 +122,4 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/attempt_history.js') }}"></script>
-{% endblock javascripts %}
+{% block javascripts %}{% endblock javascripts %}

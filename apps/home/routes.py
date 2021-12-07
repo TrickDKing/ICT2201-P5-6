@@ -11,7 +11,6 @@ from apps.home import dbfuncs
 from apps.home.dbfuncs import insert_data, select_data, update_data, select_all_columns_with_condition, get_best_score_by_level, select_level
 from apps.authentication.models import Users
 from apps.authentication.util import hash_pass
-from apps.home.commands import Commands
 
 from operator import itemgetter
 from itertools import groupby
@@ -20,8 +19,6 @@ from apps.home import dbfuncs
 
 # Helper - Extract current page name from request
 
-# Initializes a new commands object to handle post and get requests between game and car
-commands = Commands()
 
 
 def get_segment(request):
@@ -109,19 +106,6 @@ def gameoverdata():
         return jsonify(insertdata)
     return jsonify("A")
 
-@blueprint.route('/commands', methods=['GET', 'POST'])
-def sendCommands():
-    print(request.headers['Sec-Ch-Ua-Platform'])
-   # if(request.headers['Sec-Ch-Ua-Platform'] == "Windows"):
-
-    if request.method == "GET":
-        return commands.getCommands()
-    if request.method == "POST":
-        if(request.is_json):
-           
-            commands.setCommands(request.data)
-        return jsonify("Something")
-
 
 @blueprint.route('/<template>')
 @login_required
@@ -167,7 +151,7 @@ def route_template(template):
         # Detect the current page
         segment = get_segment(request)
         # Serve the file (if exists) from app/templates/home/FILE.html
-        return render_template("home/" + template, segment=segment)
+        return render_template("home/" + template, segment=segment, data=data)
 
         
     except TemplateNotFound:
@@ -239,7 +223,7 @@ def saveSettings():
         data = {
             "speed": request.form['speed']
         }
-        print(data)
+       
         if request.form['speed']:
             update_data(table_name="Settings", data=data,
                         identifier="settings_id", identifier_value="1")
@@ -296,3 +280,29 @@ def get_level_attempts():
         levels = mycursor.fetchall()
 
         return jsonify({'levels': levels})
+    
+    
+@blueprint.route('/custom_levels', methods=['GET', 'POST'])
+def custom_levels():
+    if request.method == "GET":
+        return render_template('home/customlevels.html')
+    else:
+        
+        name = request.form['level_name']
+        grid = request.form['grid']
+        level_type = "custom"
+        energy_level = request.form['energy_level']
+        
+        level = [
+            (
+                name,
+                grid, 
+                level_type, 
+                energy_level
+            )
+        ]
+        
+        dbfuncs.insert_data(table_name="levels", table_columns=["name, map_array, level_type, energy_level"], values=level)
+       
+
+        return jsonify({"msg":"Level saved!"})

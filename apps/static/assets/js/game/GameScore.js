@@ -12,10 +12,6 @@ class GameScore {
         return this.score;
     }
 
-    resetScore() {
-        this.score = 0;
-    }
-
     display() {
 
         fill(255, 255, 255);
@@ -23,9 +19,9 @@ class GameScore {
         stroke(255);
         //rect(10, 600, 350, 75);
         //Defines text size
-        textSize(40);
-        //Fill here defines text color
+        textSize(50)
+            //Fill here defines text color
         fill(0);
-        text('SCORE = ' + this.score, 10, 640);
+        text('SCORE = ' + this.score, 10, 670);
     }
 }
