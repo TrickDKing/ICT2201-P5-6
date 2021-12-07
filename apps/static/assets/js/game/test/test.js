@@ -1,8 +1,5 @@
 'use strict';
-require('jsdom-global')();
-global.window = window;
-global.$ = require('jquery');
-global.jQuery = $;
+
 
 // Import the expect library.  This is what allows us to check our code.
 // You can check out the full documentation at http://chaijs.com/api/bdd/
@@ -48,18 +45,6 @@ describe('Game tests', function() {
         gameState = new GameState();
 
     });
-
-
-    // // G-01
-    // it('should complete level (gamestate 3), after reaching end', function(done) {
-    //     gamePlayer.gameState = new GameState();
-    //     gamePlayer.unittest = 1
-    //     gamePlayer.setPlayerPosition(0,0);
-    //     gamePlayer.movePlayerPosition([0]);
-
-    //     expect(gamePlayer.gameState.getGameState()).to.equal(3)
-    //     done();
-    // });
 
 
     // G-03
@@ -114,14 +99,14 @@ describe('Game tests', function() {
     });
 
 
-    // // G-10
-    // it('should quit game, after hitting esc', function(done) {
+    // G-10
+    it('should quit game, after hitting esc', function(done) {
 
-    //     gameState.setGameState(4)
+        gameState.setGameState(4)
         
-    //     expect(gameState.getGameState()).to.equal(4)
-    //     done();
-    // });
+        expect(gameState.getGameState()).to.equal(4)
+        done();
+    });
 
     
     // Example

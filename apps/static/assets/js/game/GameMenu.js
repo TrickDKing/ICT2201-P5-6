@@ -5,8 +5,6 @@ class GameMenu {
   constructor() {
     
     this.gameMenu = 0;
-    this.unittest = 0;
-    this.gameState = new GameState();
   }
 
   getOption() {
