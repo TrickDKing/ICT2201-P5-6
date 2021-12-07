@@ -1,6 +1,7 @@
 const GameHP = require('./GameHP');
 const GameScore = require('./GameScore');
 const GameConsole = require('./GameConsole');
+const GameState = require('./GameState');
 
 class GamePlayer {
     constructor(width, height) {
@@ -23,6 +24,7 @@ class GamePlayer {
         this.gameHP = new GameHP();
         this.gameScore = new GameScore();
         this.gameConsole = new GameConsole();
+        this.gameState = new GameState();
     }
 
     getPlayerPosition() {
@@ -60,7 +62,14 @@ class GamePlayer {
         this.setMoving();
         for (const command of commands) {
 
-            
+            if (this.getPlayerPosition()[0] == 0 && this.getPlayerPosition()[1] == 0) {
+                clear();
+                if (this.unittest == 1 ) {
+                    this.gameState.setGameState(3);
+                }
+                gameState.setGameState(3);
+                break;
+            }
 
             if (gameHP.getHealth() > 0) {
                 await delay(1000);
