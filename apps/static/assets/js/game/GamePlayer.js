@@ -150,8 +150,6 @@ class GamePlayer {
                 gamePlayer.setPlayerPosition(gamePlayer.getPlayerPosition()[0] + 1, gamePlayer.getPlayerPosition()[1]);
                 this.x += 50;
                 gameConsole.insertLog("MOVING RIGHT");
-            }else{
-                console.log("B");
             }
 
         }
