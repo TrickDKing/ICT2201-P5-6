@@ -24,7 +24,6 @@ function setup() {
   gamePlayer = new GamePlayer(475, 525);
   gameMap = new GameMap(10, 10);
   gameCommands = new GameCommands();
-  gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
   gameOver = new GameOver();
@@ -174,25 +173,30 @@ function mouseClicked() {
   if (gameState.getGameState() == 2) {
     if (mouseY < 188 && mouseY > 125) {
       //Quit without saving
-      clear();
+      setup();
+
     }
   } // End of gamestate 2
 
-  if (gameState.getGameState() == 3) {      //level complete, exit to main menu
-    if (mouseX < 700 && mouseX > 575) {
-      if (mouseY < 588 && mouseY > 450) {
+  if (gameState.getGameState() == 3) {     //level complete, exit to main menu
+    if (mouseX < 740 && mouseX > 535) {
+      if (mouseY < 555 && mouseY > 525) {
         //Exit to main menu
-        
-        gameLeaderboard.setCheckGetSuccess(0);
-        gameState.setGameState(4);
-        gameMenu.display(); //GameMenu display
+        setup();
       }
     }
-    else if (mouseX < 930 && mouseX > 850) {
-      if (mouseY < 538 && mouseY > 450)   //level complete, proceed to next level
+    else if (mouseX < 975 && mouseX > 825) {
+      if (mouseY < 560 && mouseY > 525)   //level complete, proceed to next level
       {
-        
-        gameState.setGameState(0);
+        var a = gameMap.getMapID() + 1;
+        /*gameMap.setCheckGetSuccess(0);
+        gameState.setGameState(1);
+        gamePlayer.reset();
+        gameScore.resetScore();
+        gameHP.reset();
+        gamePlayer.setPlayerPosition(gameMap.getMapColumns() - 1, gameMap.getMapRows() - 1);
+        gameCommands.clearAllCommands();
+        gameConsole.clearAllLogs();*/
       }
     }
 
@@ -201,13 +205,14 @@ function mouseClicked() {
   if (gameState.getGameState() == 4) {
     if (mouseY < 188 && mouseY > 125) {
       //Game Lost
-      gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth())
+      gameOver.insertGameOverData(gameScore.getScore(), gameHP.getHealth());
       clear();
       gameState.setGameState(0);
 
     }
   }
-}
+
+} // End of mouseClicked function
 
 function keyPressed() {
   if (gameState.getGameState() == 1 && keyIsDown(ESCAPE)) {
