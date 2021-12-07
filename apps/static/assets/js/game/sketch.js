@@ -24,6 +24,7 @@ function setup() {
   gamePlayer = new GamePlayer(475, 525);
   gameMap = new GameMap(10, 10);
   gameCommands = new GameCommands();
+  gameData = new GameData();
   gameHP = new GameHP();
   gamePauseMenu = new GamePauseMenu();
   gameOver = new GameOver();
@@ -189,7 +190,7 @@ function mouseClicked() {
       if (mouseY < 560 && mouseY > 525)   //level complete, proceed to next level
       {
         var a = gameMap.getMapID() + 1;
-        gameMap.setCheckGetSuccess(0);
+        
         gameState.setGameState(1);
         gamePlayer.reset();
         gameScore.resetScore();

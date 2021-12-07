@@ -181,6 +181,27 @@ class GamePlayer {
 
     }
 
+
+
+    keyPressed() {
+
+        /*if (keyIsDown(LEFT_ARROW)) {
+            this.move(-this.speed, 0);
+            gameHP.setHealth(gameHP.getHealth()-1);
+        }
+        if (keyIsDown(RIGHT_ARROW)) {
+            this.move(this.speed, 0);
+        }
+        if (keyIsDown(UP_ARROW)) {
+            this.move(0, -this.speed);
+        }
+        if (keyIsDown(DOWN_ARROW)) {
+            this.move(0, this.speed);
+        }*/
+
+
+    }
+
     update() {
         this.x += this.xspeed;
         this.y += this.yspeed;
